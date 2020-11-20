@@ -5,7 +5,7 @@ import re
 
 # project_res_path: 需要删除的字符的文件夹路径
 # delete_string_key_list: 删除的字符，以逗号隔开，例如["example1",""example2""]
-project_res_path = r"C:\Work\ASProjects\LockScreenGridAS\app\src\main\res"
+project_res_dir = r"C:\Work\ASProjects\LockScreenGridAS\app\src\main\res"
 delete_string_key_list = ["menu"]
 
 ########################################################################################
@@ -16,15 +16,15 @@ filter_string_key_regular = """<string name="(.+?)">"""
 
 
 def delete_android_values_string():
-    for root, dirs, file_paths in os.walk(project_res_path):
+    for root, dirs, file_paths in os.walk(project_res_dir):
         if dirs:
             for res_dir in dirs:
-                if os.path.exists(project_res_path + "\\" + res_dir):
+                if os.path.exists(project_res_dir + "\\" + res_dir):
                     if res_dir != "values" and "values" in res_dir:
                         print("*" * 50)
                         print(res_dir)
                         for path in string_file_name:
-                            file_path = project_res_path + "\\" + res_dir + path
+                            file_path = project_res_dir + "\\" + res_dir + path
                             if os.path.exists(file_path):
                                 tmp_file_path = file_path + ".ijs"
                                 file = open(file_path, mode='r', encoding='utf-8')
