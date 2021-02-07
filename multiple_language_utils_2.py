@@ -16,17 +16,17 @@ def copy_multiple_language():
     log_file = open(get_desktop_path() + "\\language_log.txt", mode='w', encoding='utf-8')
 
     global translate_string
-    translate_string = str(input1.get('0.0', 'end')).replace("\n", "")
+    translate_string = str(input1.get('0.0', 'end')).strip("\n")
     log_file.write("%s\n" % translate_string)
     print("翻译字符:%s\n" % translate_string)
 
     global translate_res_dir
-    translate_res_dir = str(input2.get()).replace("\n", "")
+    translate_res_dir = str(input2.get()).strip("\n")
     log_file.write("%s\n" % translate_res_dir)
     print("翻译路径:%s\n" % translate_res_dir)
 
     global project_res_dir
-    project_res_dir = str(input3.get()).replace("\n", "")
+    project_res_dir = str(input3.get()).strip("\n")
     log_file.write("%s\n" % project_res_dir)
     print("项目路径:%s\n" % project_res_dir)
 
