@@ -10,20 +10,26 @@ filter_folder = ["large", "small", "dpi", "land", "port"]
 
 
 def copy_multiple_language():
-    global translate_string
-
-    translate_string = str(input1.get('0.0', 'end'))
-    print("翻译字符%s" % translate_string)
-
-    global translate_res_dir
-    translate_res_dir = str(input2.get())
-    print("翻译路径%s" % translate_res_dir)
-
-    global project_res_dir
-    project_res_dir = str(input3.get())
-    print("项目路径%s" % project_res_dir)
+    button['text'] = "正在拷贝中，请勿重复点击"
+    button['bg'] = "red"
 
     log_file = open(get_desktop_path() + "\\language_log.txt", mode='w', encoding='utf-8')
+
+    global translate_string
+    translate_string = str(input1.get('0.0', 'end')).replace("\n", "")
+    log_file.write("%s\n" % translate_string)
+    print("翻译字符:%s\n" % translate_string)
+
+    global translate_res_dir
+    translate_res_dir = str(input2.get()).replace("\n", "")
+    log_file.write("%s\n" % translate_res_dir)
+    print("翻译路径:%s\n" % translate_res_dir)
+
+    global project_res_dir
+    project_res_dir = str(input3.get()).replace("\n", "")
+    log_file.write("%s\n" % project_res_dir)
+    print("项目路径:%s\n" % project_res_dir)
+
     log_file.write("\n%s 解析复制开始 %s\n\n" % ("*" * 24, "*" * 24))
     print("\n%s 解析复制开始 %s\n\n" % ("*" * 24, "*" * 24))
     for root, dirs, file_paths in os.walk(translate_res_dir):
@@ -51,6 +57,9 @@ def copy_multiple_language():
     log_file.write("\n%s 解析复制结束 %s\n" % ("*" * 24, "*" * 24))
     print("\n%s 解析复制结束 %s\n" % ("*" * 24, "*" * 24))
     log_file.close()
+
+    button['text'] = "开始"
+    button['bg'] = "green"
 
 
 def analysis_equal_string(log_file):
@@ -192,34 +201,32 @@ if __name__ == '__main__':
     win.title("翻译拷贝程序-为便捷而生")  # 设置窗口标题
     win.geometry("960x560")
 
-    tile1 = tkinter.Label(win, text="""需要拷贝的字符，格式如下：\n<string name="i_joy_soft">IJoySoft</string>""",
-                          font=('Arial', 14))
-    tile1.place(x=60, y=30, width=840, height=60)
+    tile1 = tkinter.Label(win, text="""需要拷贝的字符，格式如下：<string name="i_joy_soft">IJoySoft</string>""",
+                          font=('Consolas', 14))
+    tile1.place(x=60, y=10, width=840, height=80)
 
-    input1 = tkinter.Text(win, font=('Arial', 14))
+    input1 = tkinter.Text(win, font=('Consolas', 14))
     input1.place(x=60, y=90, width=840, height=240)
 
-    tile2 = tkinter.Label(win, text="""翻译资源文件夹路径:""", font=('Courier New', 14))
+    tile2 = tkinter.Label(win, text="""翻译资源文件夹路径:""", font=('Consolas', 14))
     tile2.place(x=60, y=330, width=840, height=40)
 
-    input2 = tkinter.Entry(win, font=('Arial', 14))
+    input2 = tkinter.Entry(win, font=('Consolas', 14))
     input2.place(x=60, y=370, width=840, height=40)
 
     tile3 = tkinter.Label(win, text="""项目资源文件夹路径:""", font=('Courier New', 14))
     tile3.place(x=60, y=410, width=840, height=40)
 
-    input3 = tkinter.Entry(win, font=('Arial', 14))
+    input3 = tkinter.Entry(win, font=('Consolas', 14))
     input3.place(x=60, y=450, width=840, height=40)
 
-    button = tkinter.Button(win, text="OK", bg="green", command=copy_multiple_language_process)
+    button = tkinter.Button(win, text="开始", bg="green", command=copy_multiple_language_process)
     button.place(x=60, y=505, width=840, height=40)
 
+    if os.path.exists(get_desktop_path() + "\\language_log.txt"):
+        read_log = open(get_desktop_path() + "\\language_log.txt", mode='r', encoding='utf-8')
+        input1.insert("insert", read_log.readline().replace("\n", ""))
+        input2.insert("insert", read_log.readline().replace("\n", ""))
+        input3.insert("insert", read_log.readline().replace("\n", ""))
+        read_log.close()
     win.mainloop()
-
-    # print("""
-    #     先把需要翻译的字符手动拷贝到项目的values下
-    #
-    #     此脚本的逻辑是
-    #     1. 找到项目中values和翻译文件夹中values相同的字符
-    #     2. 拷贝1步骤中筛选出来的字符到对应的语言目录下，如果项目中对应的语言存在此字符，则跳过拷贝
-    # """)
