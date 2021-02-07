@@ -5,8 +5,8 @@ import re
 
 # project_res_path: 需要删除的字符的文件夹路径
 # delete_string_key_list: 删除的字符，以逗号隔开，例如["example1",""example2""]
-project_res_dir = r"C:\Work\ASProjects\LockScreenGridAS\app\src\main\res"
-delete_string_key_list = ["menu"]
+project_res_dir = r"C:\Work\ASProjects\LockScreenTabAS\app\src\main\res"
+delete_string_key_list = [""]
 
 ########################################################################################
 
