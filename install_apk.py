@@ -17,6 +17,7 @@ projects_details = [
     ["BarcodeTabAS", "C:\\Work\\ASProjects\\", "\\BarcodeTab", "tool.qr.scanner.barcode.scanner"],
     ["BarcodeScannerAs", "C:\\Work\\ASProjects\\", "\\BarcodeScanner", "tool.scanner.qrscan.barcodescan"],
     ["NoteAS", "C:\\Work\\ASProjects\\", "\\Note", "com.task.notes"],
+    ["WeatherAccurate", "C:\\Work\\ASProjects\\", "\\WeatherAccurate", "accurate.local.weather.forecast.channel"],
     ["WeatherForecastAS", "C:\\Work\\ASProjects\\", "\\WeatherForecast", "weather.forecast.live.weather"],
     ["LauncherIOS", "C:\\Work\\ASProjects\\", "\\app", "theme.wallpaper.smart.launcher"]
 ]
