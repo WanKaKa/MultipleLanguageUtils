@@ -2,7 +2,7 @@ import os
 import re
 import threading
 import tkinter
-import winreg
+import getpass
 
 java_string_file_name_list = ["string.xml", "strings.xml"]
 filter_string_key_regular = """<string name="(.+?)">"""
@@ -10,11 +10,14 @@ filter_folder = ["large", "small", "dpi", "land", "port"]
 
 
 def copy_multiple_language():
-    button['text'] = "正在拷贝中，请勿重复点击"
-    button['bg'] = "red"
+    button1['text'] = "正在拷贝中，请勿重复点击"
+    button1['bg'] = "red"
 
-    log_file = open(get_desktop_path() + "\\language_log.txt", mode='w', encoding='utf-8')
+    if not os.path.exists(get_log_path()):
+        os.makedirs(get_log_path())
+    log_file = open(get_log_path() + "\\language_log.txt", mode='w', encoding='utf-8')
 
+    global translate_string
     global translate_string
     translate_string = str(input1.get('0.0', 'end')).strip("\n")
     log_file.write("%s\n" % translate_string)
@@ -58,8 +61,8 @@ def copy_multiple_language():
     print("\n%s 解析复制结束 %s\n" % ("*" * 24, "*" * 24))
     log_file.close()
 
-    button['text'] = "开始"
-    button['bg'] = "green"
+    button1['text'] = "拷贝"
+    button1['bg'] = "green"
 
 
 def analysis_equal_string(log_file):
@@ -187,9 +190,8 @@ def copy_multiple_language_process():
     th.start()
 
 
-def get_desktop_path():
-    key = winreg.OpenKey(winreg.HKEY_CURRENT_USER, r'Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders')
-    return winreg.QueryValueEx(key, "Desktop")[0]
+def get_log_path():
+    return 'C:\\Users\\' + getpass.getuser() + '\\Kevin\\'
 
 
 if __name__ == '__main__':
@@ -214,19 +216,28 @@ if __name__ == '__main__':
     input2 = tkinter.Entry(win, font=('Consolas', 14))
     input2.place(x=60, y=370, width=840, height=40)
 
-    tile3 = tkinter.Label(win, text="""项目资源文件夹路径:""", font=('Courier New', 14))
+    tile3 = tkinter.Label(win, text="""项目资源文件夹路径:""", font=('Consolas', 14))
     tile3.place(x=60, y=410, width=840, height=40)
 
     input3 = tkinter.Entry(win, font=('Consolas', 14))
     input3.place(x=60, y=450, width=840, height=40)
 
-    button = tkinter.Button(win, text="开始", bg="green", command=copy_multiple_language_process)
-    button.place(x=60, y=505, width=840, height=40)
+    button1 = tkinter.Button(win, text="拷贝", bg="green",
+                             fg="white", font=('Consolas', 14), command=copy_multiple_language_process)
+    button1.place(x=60, y=505, width=300, height=40)
 
-    if os.path.exists(get_desktop_path() + "\\language_log.txt"):
-        read_log = open(get_desktop_path() + "\\language_log.txt", mode='r', encoding='utf-8')
-        input1.insert("insert", read_log.readline().replace("\n", ""))
-        input2.insert("insert", read_log.readline().replace("\n", ""))
+    button2 = tkinter.Button(win, text="删除", bg="red", fg="white", font=('Consolas', 14))
+    button2.place(x=600, y=505, width=300, height=40)
+
+    if os.path.exists(get_log_path() + "\\language_log.txt"):
+        read_log = open(get_log_path() + "\\language_log.txt", mode='r', encoding='utf-8')
+        line_log = read_log.readline()
+        while line_log:
+            if not re.findall(filter_string_key_regular, line_log):
+                break
+            input1.insert("insert", line_log)
+            line_log = read_log.readline()
+        input2.insert("insert", line_log.replace("\n", ""))
         input3.insert("insert", read_log.readline().replace("\n", ""))
         read_log.close()
     win.mainloop()
