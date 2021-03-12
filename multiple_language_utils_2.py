@@ -201,33 +201,33 @@ if __name__ == '__main__':
 
     win = tkinter.Tk()  # 创建Windows窗口对象
     win.title("翻译拷贝程序-为便捷而生")  # 设置窗口标题
-    win.geometry("960x560")
+    win.geometry("1280x560")
 
     tile1 = tkinter.Label(win, text="""需要拷贝的字符，格式如下：<string name="i_joy_soft">IJoySoft</string>""",
                           font=('Consolas', 14))
-    tile1.place(x=60, y=10, width=840, height=80)
+    tile1.place(x=60, y=10, width=1160, height=80)
 
-    input1 = tkinter.Text(win, font=('Consolas', 14))
-    input1.place(x=60, y=90, width=840, height=240)
+    input1 = tkinter.Text(win, font=('Consolas', 12))
+    input1.place(x=60, y=90, width=1160, height=240)
 
     tile2 = tkinter.Label(win, text="""翻译资源文件夹路径:""", font=('Consolas', 14))
-    tile2.place(x=60, y=330, width=840, height=40)
+    tile2.place(x=60, y=330, width=1160, height=40)
 
     input2 = tkinter.Entry(win, font=('Consolas', 14))
-    input2.place(x=60, y=370, width=840, height=40)
+    input2.place(x=60, y=370, width=1160, height=40)
 
     tile3 = tkinter.Label(win, text="""项目资源文件夹路径:""", font=('Consolas', 14))
-    tile3.place(x=60, y=410, width=840, height=40)
+    tile3.place(x=60, y=410, width=1160, height=40)
 
     input3 = tkinter.Entry(win, font=('Consolas', 14))
-    input3.place(x=60, y=450, width=840, height=40)
+    input3.place(x=60, y=450, width=1160, height=40)
 
     button1 = tkinter.Button(win, text="拷贝", bg="green",
                              fg="white", font=('Consolas', 14), command=copy_multiple_language_process)
     button1.place(x=60, y=505, width=300, height=40)
 
     button2 = tkinter.Button(win, text="删除", bg="red", fg="white", font=('Consolas', 14))
-    button2.place(x=600, y=505, width=300, height=40)
+    button2.place(x=920, y=505, width=300, height=40)
 
     if os.path.exists(get_log_path() + "\\language_log.txt"):
         read_log = open(get_log_path() + "\\language_log.txt", mode='r', encoding='utf-8')
