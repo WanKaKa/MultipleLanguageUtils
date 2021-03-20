@@ -263,7 +263,7 @@ font: 14pt &quot;微软雅黑&quot;;</string>
    </property>
    <property name="styleSheet">
     <string notr="true">background-color: rgb(255, 255, 255);
-font: 10pt &quot;微软雅黑&quot;;</string>
+font: 12pt &quot;微软雅黑&quot;;</string>
    </property>
   </widget>
  </widget>
