@@ -1,5 +1,5 @@
+import json
 import os
-import re
 import threading
 import tkinter
 import tkinter.messagebox
@@ -76,24 +76,19 @@ if __name__ == '__main__':
     button1.place(x=60, y=665, width=300, height=40)
 
     button2 = tkinter.Button(win, text="删除", bg="red", fg="white", font=('微软雅黑', 14))
-
     button2['command'] = request_delete_android_values_string
-    button2.place(x=920, y=665, width=300, height=40)
+    button2.place(x=490, y=665, width=300, height=40)
 
-    if os.path.exists(kevin_utils.get_log_path() + kevin_utils.language_log_name):
-        read_log = open(kevin_utils.get_log_path() + kevin_utils.language_log_name,
-                        mode='r', encoding='utf-8')
-        line_log = read_log.readline()
-        while line_log:
-            if (not re.findall(kevin_utils.filter_string_key_regular, line_log)) \
-                    and (not re.findall(kevin_utils.filter_explain_string_key_regular, line_log)) \
-                    and ("</string>" not in line_log) \
-                    and (line_log.replace("\n", "") != "") \
-                    and ("\\res" in line_log):
-                break
-            input1.insert("insert", line_log)
-            line_log = read_log.readline()
-        input2.insert("insert", line_log.replace("\n", ""))
-        input3.insert("insert", read_log.readline().replace("\n", ""))
-        read_log.close()
+    button3 = tkinter.Button(win, text="查看Log", bg="green", fg="white", font=('微软雅黑', 14))
+    button3['command'] = lambda: kevin_utils.open_file(
+        kevin_utils.get_log_path() + multiple_language_utils.language_log_name)
+    button3.place(x=920, y=665, width=300, height=40)
+
+    if os.path.exists(kevin_utils.get_log_path() + multiple_language_utils.database_name):
+        read_data = open(kevin_utils.get_log_path() + multiple_language_utils.database_name, mode='r', encoding='utf-8')
+        data = json.loads(read_data.read())
+        input1.insert("insert", data["translate_string"])
+        input2.insert("insert", data["translate_res_dir"].replace("\n", ""))
+        input3.insert("insert", data["project_res_dir"].replace("\n", ""))
+        read_data.close()
     win.mainloop()

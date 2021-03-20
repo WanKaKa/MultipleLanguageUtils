@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'OutFileUI.ui'
+# Form implementation generated from reading ui file 'select_dialog_ui.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.2
 #

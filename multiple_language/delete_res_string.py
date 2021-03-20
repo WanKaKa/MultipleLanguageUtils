@@ -6,7 +6,7 @@ from multiple_language import kevin_utils
 def delete_android_values_string(project_res_dir, input_strings, button1):
     if not os.path.exists(kevin_utils.get_log_path()):
         os.makedirs(kevin_utils.get_log_path())
-    log_file = open(kevin_utils.get_log_path() + "delete_string.log", mode='w', encoding='utf-8')
+    log_file = open(kevin_utils.get_log_path() + "log_delete_res_string.txt", mode='w', encoding='utf-8')
 
     button1['text'] = "正在删除中，请勿重复点击"
     delete_string_key_list = kevin_utils.analysis_equal_string(input_strings, log_file)

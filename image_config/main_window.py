@@ -7,7 +7,7 @@ from PyQt5.QtWidgets import QApplication, QMainWindow, QFileDialog, QDialog
 from PyQt5 import QtCore
 from natsort import ns, natsorted
 
-from image_config import OutFileUI
+from image_config import select_dialog_ui
 from image_config import main_ui
 
 server_name_list = [
@@ -25,7 +25,7 @@ class MainWindow(QMainWindow, main_ui.Ui_MainWindow):
         self.setupUi(self)
 
 
-class ServerWindow(QDialog, OutFileUI.Ui_Form):
+class ServerWindow(QDialog, select_dialog_ui.Ui_Form):
     def __init__(self, parent=None):
         super(ServerWindow, self).__init__(parent)
         self.setupUi(self)

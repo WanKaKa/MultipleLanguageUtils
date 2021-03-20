@@ -1,6 +1,10 @@
+import json
 import os
 import re
 from multiple_language import kevin_utils
+
+language_log_name = "log_multiple_language.txt"
+database_name = "json_multiple_language.json"
 
 # 过滤的文件夹
 filter_folder = ["large", "small", "dpi", "land", "port"]
@@ -13,7 +17,8 @@ project_res_dir = ""
 def copy_multiple_language(input1, input2, input3):
     if not os.path.exists(kevin_utils.get_log_path()):
         os.makedirs(kevin_utils.get_log_path())
-    log_file = open(kevin_utils.get_log_path() + kevin_utils.language_log_name, mode='w', encoding='utf-8')
+    log_file = open(kevin_utils.get_log_path() + language_log_name, mode='w', encoding='utf-8')
+    json_file = open(kevin_utils.get_log_path() + database_name, mode='w', encoding='utf-8')
 
     global translate_string
     translate_string = input1
@@ -27,12 +32,24 @@ def copy_multiple_language(input1, input2, input3):
     project_res_dir = input3
     kevin_utils.print_log(log_file, "%s\n" % project_res_dir)
 
+    data = {
+        'translate_string': translate_string,
+        'translate_res_dir': translate_res_dir,
+        'project_res_dir': project_res_dir
+    }
+    json.dump(data, json_file, ensure_ascii=False)
+    json_file.close()
+
     kevin_utils.print_log(log_file, "\n%s 解析复制开始 %s\n\n" % ("*" * 24, "*" * 24))
     add_string_key_list = kevin_utils.analysis_equal_string(translate_string, log_file)
     for root, dirs, file_paths in os.walk(translate_res_dir):
         if dirs:
-            kevin_utils.print_log(log_file,
-                                  "root = %s\ndirs = %s;\nfiles = %s\n%s\n" % (root, dirs, file_paths, "*" * 50))
+            kevin_utils.print_log(log_file, "\nroot = %s\n" % root)
+            kevin_utils.print_log(log_file, "dirs:\n")
+            kevin_utils.print_list_log(log_file, dirs, 6, 30)
+            kevin_utils.print_log(log_file, "files:\n")
+            kevin_utils.print_list_log(log_file, file_paths, 1, 0)
+            kevin_utils.print_log(log_file, "\n%s\n" % ("*" * 50))
             for res_dir_name in dirs:
                 isPassPath = False
                 if "values" not in res_dir_name:
@@ -62,10 +79,12 @@ def analysis_add_string(res_dir_name, add_string_key_list, log_file):
         res_dir_name : 资源文件夹名称
         add_string_key_list : 需要添加字符的Key集合
     """
+    no_string_or_strings = True
     for file_name in kevin_utils.java_string_file_name_list:
         file_path = translate_res_dir + "\\" + res_dir_name + "\\" + file_name
         add_string = ""
         if os.path.exists(file_path):
+            no_string_or_strings = False
             file = open(file_path, encoding='utf-8')
             line = file.readline()
             temp_read_str = ""
@@ -88,14 +107,18 @@ def analysis_add_string(res_dir_name, add_string_key_list, log_file):
                 # 判断项目是否存在对应的语音文件夹，不存在则创建文件夹和文件
                 if not os.path.exists(project_res_dir + "\\" + res_dir_name):
                     os.makedirs(project_res_dir + "\\" + res_dir_name)
-                    file = open(project_res_dir + "\\" + res_dir_name + "\\strings.xml", mode='w', encoding='utf-8')
-                    file.write("""<?xml version="1.0" encoding="utf-8"?>\n<resources>\n</resources>""")
-                    file.close()
+                file = open(project_res_dir + "\\" + res_dir_name + "\\strings.xml", mode='w', encoding='utf-8')
+                file.write("""<?xml version="1.0" encoding="utf-8"?>\n<resources>\n</resources>""")
+                file.close()
 
                 add_string_to_project_res(res_dir_name, add_string)
-                kevin_utils.print_log(log_file, "语言文件夹 = %s\n新增字符:\n%s\n%s\n" % (res_dir_name, add_string, "*" * 50))
-            return
-    kevin_utils.print_log(log_file, "语言文件夹 = %s\n此文件夹下没有string.xml或者strings.xml\n%s" % (res_dir_name, "*" * 50))
+                kevin_utils.print_log(log_file,
+                                      "\n语言文件夹 = %s\n新增字符:\n%s\n\n%s\n" % (res_dir_name, add_string, "*" * 50))
+            else:
+                kevin_utils.print_log(log_file, "\n语言文件夹 = %s\n新增字符:空\n\n%s\n" % (res_dir_name, "*" * 50))
+    if no_string_or_strings:
+        kevin_utils.print_log(log_file,
+                              "\n语言文件夹 = %s\n此文件夹下没有string.xml或者strings.xml\n\n%s\n" % (res_dir_name, "*" * 50))
 
 
 def string_in_project(res_dir_name, string_key):
