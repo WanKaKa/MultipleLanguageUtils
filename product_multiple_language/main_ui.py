@@ -18,7 +18,8 @@ class Ui_Form(object):
         Form.setStyleSheet("background-color: rgb(221, 221, 221);")
         self.textBrowser = QtWidgets.QTextBrowser(Form)
         self.textBrowser.setGeometry(QtCore.QRect(10, 50, 580, 660))
-        self.textBrowser.setStyleSheet("background-color: rgb(255, 255, 255);")
+        self.textBrowser.setStyleSheet("background-color: rgb(255, 255, 255);\n"
+"font: 8pt \"微软雅黑\";")
         self.textBrowser.setObjectName("textBrowser")
         self.label = QtWidgets.QLabel(Form)
         self.label.setGeometry(QtCore.QRect(10, 10, 580, 30))
@@ -64,7 +65,7 @@ class Ui_Form(object):
         self.pushButton_3.setObjectName("pushButton_3")
         self.label_7 = QtWidgets.QLabel(Form)
         self.label_7.setGeometry(QtCore.QRect(600, 50, 580, 30))
-        self.label_7.setMouseTracking(True)
+        self.label_7.setMouseTracking(False)
         self.label_7.setFocusPolicy(QtCore.Qt.NoFocus)
         self.label_7.setStyleSheet("background-color: rgb(255, 255, 255);\n"
 "font: 10pt \"微软雅黑\";")
@@ -82,8 +83,20 @@ class Ui_Form(object):
         self.lineEdit_2.setObjectName("lineEdit_2")
         self.textEdit = QtWidgets.QTextEdit(Form)
         self.textEdit.setGeometry(QtCore.QRect(600, 90, 580, 430))
-        self.textEdit.setStyleSheet("background-color: rgb(255, 255, 255);")
+        self.textEdit.setStyleSheet("background-color: rgb(255, 255, 255);\n"
+"font: 8pt \"微软雅黑\";")
         self.textEdit.setObjectName("textEdit")
+        self.label_4 = QtWidgets.QLabel(Form)
+        self.label_4.setGeometry(QtCore.QRect(1190, 10, 580, 30))
+        self.label_4.setStyleSheet("background-color: rgb(255, 255, 255);\n"
+"font: 14pt \"微软雅黑\";")
+        self.label_4.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_4.setObjectName("label_4")
+        self.textBrowser_2 = QtWidgets.QTextBrowser(Form)
+        self.textBrowser_2.setGeometry(QtCore.QRect(1190, 50, 580, 660))
+        self.textBrowser_2.setStyleSheet("background-color: rgb(255, 255, 255);\n"
+"font: 10pt \"微软雅黑\";")
+        self.textBrowser_2.setObjectName("textBrowser_2")
 
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
@@ -99,3 +112,4 @@ class Ui_Form(object):
         self.pushButton_2.setText(_translate("Form", "拷贝"))
         self.pushButton_3.setText(_translate("Form", "删除"))
         self.label_7.setText(_translate("Form", "需要拷贝的字符，格式如下：<string name=\"i_joy_soft\">IJoySoft</string>"))
+        self.label_4.setText(_translate("Form", "翻译统计区域"))

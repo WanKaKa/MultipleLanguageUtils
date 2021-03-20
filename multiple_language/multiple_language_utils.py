@@ -41,7 +41,11 @@ def copy_multiple_language(input1, input2, input3):
     json_file.close()
 
     kevin_utils.print_log(log_file, "\n%s 解析复制开始 %s\n\n" % ("*" * 24, "*" * 24))
-    add_string_key_list = kevin_utils.analysis_equal_string(translate_string, log_file)
+    if isinstance(translate_string, list):
+        add_string_key_list = translate_string
+    else:
+        add_string_key_list = kevin_utils.analysis_equal_string(translate_string, log_file)
+
     for root, dirs, file_paths in os.walk(translate_res_dir):
         if dirs:
             kevin_utils.print_log(log_file, "\nroot = %s\n" % root)
@@ -66,7 +70,7 @@ def copy_multiple_language(input1, input2, input3):
                             isPassPath = True
                 if isPassPath:
                     continue
-                if not res_dir_name == "values":
+                if res_dir_name != "values":
                     analysis_add_string(res_dir_name, add_string_key_list, log_file)
     kevin_utils.print_log(log_file, "\n%s 解析复制结束 %s\n" % ("*" * 24, "*" * 24))
     log_file.close()

@@ -34,12 +34,17 @@ def request_delete_android_values_string():
 
 
 def delete_android_values_string_process():
-    input_strings = str(input1.get('0.0', 'end')).strip("\n")
-    project_dir = str(input3.get()).strip("\n")
-    th = threading.Thread(
-        target=lambda: delete_res_string.delete_android_values_string(project_dir, input_strings, button2))
+    th = threading.Thread(target=delete_android_values_string)
     th.setDaemon(True)
     th.start()
+
+
+def delete_android_values_string():
+    input_strings = str(input1.get('0.0', 'end')).strip("\n")
+    project_dir = str(input3.get()).strip("\n")
+    button2['text'] = "正在删除中，请勿重复点击"
+    delete_res_string.delete_android_values_string(project_dir, input_strings)
+    button2['text'] = "删除"
 
 
 if __name__ == '__main__':

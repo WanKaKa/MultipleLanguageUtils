@@ -4,7 +4,6 @@ import re
 
 java_string_file_name_list = ["string.xml", "strings.xml"]
 filter_string_key_regular = """<string name="(.+?)">"""
-filter_explain_string_key_regular = """<!--.+?-->"""
 
 
 def get_log_path():

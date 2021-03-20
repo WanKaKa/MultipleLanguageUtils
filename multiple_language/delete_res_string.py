@@ -3,20 +3,18 @@ import re
 from multiple_language import kevin_utils
 
 
-def delete_android_values_string(project_res_dir, input_strings, button1):
+def delete_android_values_string(project_res_dir, input_strings):
     if not os.path.exists(kevin_utils.get_log_path()):
         os.makedirs(kevin_utils.get_log_path())
     log_file = open(kevin_utils.get_log_path() + "log_delete_res_string.txt", mode='w', encoding='utf-8')
 
-    button1['text'] = "正在删除中，请勿重复点击"
     delete_string_key_list = kevin_utils.analysis_equal_string(input_strings, log_file)
     for root, dirs, file_paths in os.walk(project_res_dir):
         if dirs:
             for res_dir in dirs:
                 if os.path.exists(project_res_dir + "\\" + res_dir):
                     if res_dir != "values" and "values" in res_dir:
-                        kevin_utils.print_log(log_file, "*" * 50)
-                        kevin_utils.print_log(log_file, res_dir)
+                        kevin_utils.print_log(log_file, "\n%s\n" % res_dir)
                         for path in kevin_utils.java_string_file_name_list:
                             file_path = project_res_dir + "\\" + res_dir + "\\" + path
                             if os.path.exists(file_path):
@@ -34,7 +32,7 @@ def delete_android_values_string(project_res_dir, input_strings, button1):
                                             for key in delete_string_key_list:
                                                 if key == key_list[0]:
                                                     delete_enable = True
-                                                    kevin_utils.print_log(log_file, "已删除%s" % key)
+                                                    kevin_utils.print_log(log_file, "已删除%s\n" % key)
                                                     break
                                         if not delete_enable:
                                             tmp_file.write(temp_read_str)
@@ -45,6 +43,5 @@ def delete_android_values_string(project_res_dir, input_strings, button1):
                                 os.remove(file_path)
                                 os.rename(tmp_file_path, file_path)
                                 break
-                        kevin_utils.print_log(log_file, "%s\n\n" % ("*" * 50))
-    button1['text'] = "删除"
+                        kevin_utils.print_log(log_file, "\n%s\n" % ("*" * 50))
     log_file.close()
