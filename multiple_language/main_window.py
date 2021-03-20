@@ -3,10 +3,9 @@ import re
 import threading
 import tkinter
 import tkinter.messagebox
-from multiple_language.kevin_utils import get_log_path
-from multiple_language.multiple_language_utils import copy_multiple_language, language_log_name
-from multiple_language.multiple_language_utils import filter_string_key_regular
-from multiple_language.delete_res_string import delete_android_values_string
+from multiple_language import kevin_utils
+from multiple_language import multiple_language_utils
+from multiple_language import delete_res_string
 
 
 def request_copy_multiple_language():
@@ -15,9 +14,18 @@ def request_copy_multiple_language():
 
 
 def copy_multiple_language_process():
-    th = threading.Thread(target=lambda: copy_multiple_language(button1, input1, input2, input3))
+    th = threading.Thread(target=copy_multiple_language)
     th.setDaemon(True)
     th.start()
+
+
+def copy_multiple_language():
+    button1['text'] = "正在拷贝中，请勿重复点击"
+    button1['bg'] = "red"
+    multiple_language_utils.copy_multiple_language(
+        str(input1.get('0.0', 'end')).strip("\n"), str(input2.get()).strip("\n"), str(input3.get()).strip("\n"))
+    button1['text'] = "拷贝"
+    button1['bg'] = "green"
 
 
 def request_delete_android_values_string():
@@ -28,7 +36,8 @@ def request_delete_android_values_string():
 def delete_android_values_string_process():
     input_strings = str(input1.get('0.0', 'end')).strip("\n")
     project_dir = str(input3.get()).strip("\n")
-    th = threading.Thread(target=lambda: delete_android_values_string(project_dir, input_strings, button2))
+    th = threading.Thread(
+        target=lambda: delete_res_string.delete_android_values_string(project_dir, input_strings, button2))
     th.setDaemon(True)
     th.start()
 
@@ -71,11 +80,16 @@ if __name__ == '__main__':
     button2['command'] = request_delete_android_values_string
     button2.place(x=920, y=665, width=300, height=40)
 
-    if os.path.exists(get_log_path() + language_log_name):
-        read_log = open(get_log_path() + language_log_name, mode='r', encoding='utf-8')
+    if os.path.exists(kevin_utils.get_log_path() + kevin_utils.language_log_name):
+        read_log = open(kevin_utils.get_log_path() + kevin_utils.language_log_name,
+                        mode='r', encoding='utf-8')
         line_log = read_log.readline()
         while line_log:
-            if not re.findall(filter_string_key_regular, line_log):
+            if (not re.findall(kevin_utils.filter_string_key_regular, line_log)) \
+                    and (not re.findall(kevin_utils.filter_explain_string_key_regular, line_log)) \
+                    and ("</string>" not in line_log) \
+                    and (line_log.replace("\n", "") != "") \
+                    and ("\\res" in line_log):
                 break
             input1.insert("insert", line_log)
             line_log = read_log.readline()
