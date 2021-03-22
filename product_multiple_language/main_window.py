@@ -32,7 +32,7 @@ def find_translate():
         if translate_string_list:
             main_window.textEdit.clear()
             main_window.textEdit.append(translate_string_list)
-        statistics.statistics_string(project_res_dir, main_window.textBrowser_2)
+        statistics_string()
 
     main_window.pushButton.setText("查重拷贝")
     main_window.pushButton.setStyleSheet(
@@ -51,7 +51,7 @@ def copy_multiple_language():
         translate_res_dir = main_window.lineEdit.text().strip("\n")
         project_res_dir = main_window.lineEdit_2.text().strip("\n")
         multiple_language_utils.copy_multiple_language(translate_string, translate_res_dir, project_res_dir)
-        statistics.statistics_string(project_res_dir, main_window.textBrowser_2)
+        statistics_string()
 
     main_window.pushButton_2.setText("拷贝")
     main_window.pushButton_2.setStyleSheet(
@@ -69,25 +69,22 @@ def delete_android_values_string():
         translate_string = main_window.textEdit.toPlainText().strip("\n")
         project_res_dir = main_window.lineEdit_2.text().strip("\n")
         delete_res_string.delete_android_values_string(project_res_dir, translate_string)
-        statistics.statistics_string(project_res_dir, main_window.textBrowser_2)
+        statistics_string()
 
     main_window.pushButton_3.setText("删除")
     main_window.pushButton_3.setStyleSheet(
         "background-color: rgb(0, 170, 255);\n""color: rgb(255, 255, 255);\n""font: 12pt \"微软雅黑\";")
 
 
+def statistics_string():
+    project_res_dir = main_window.lineEdit_2.text().strip("\n")
+    statistics.statistics_string(project_res_dir, main_window.textBrowser_2)
+
+
 def print_log(log_file, log_info):
     print(log_info)
     log_file.write(log_info)
     main_window.textBrowser.append(log_info.strip("\n"))
-
-
-def resource_path(relative_path):
-    if getattr(sys, 'frozen', False):
-        base_path = sys._MEIPASS
-    else:
-        base_path = os.path.abspath(".")
-    return os.path.join(base_path, relative_path)
 
 
 if __name__ == "__main__":
@@ -101,7 +98,7 @@ if __name__ == "__main__":
     main_window.move(int((width - 1780) / 2), int((height - 720) / 2))
     main_window.setFixedSize(main_window.width(), main_window.height())
     main_window.setWindowTitle("产品多语言工具-为便捷而生")
-    filename = resource_path(os.path.join("ico", "favicon.ico"))
+    filename = kevin_utils.resource_path(os.path.join("ico", "favicon.ico"))
     icon = QtGui.QIcon()
     icon.addPixmap(QtGui.QPixmap(filename))
     main_window.setWindowIcon(icon)
@@ -109,6 +106,7 @@ if __name__ == "__main__":
     main_window.pushButton.clicked.connect(find_translate)
     main_window.pushButton_2.clicked.connect(copy_multiple_language)
     main_window.pushButton_3.clicked.connect(delete_android_values_string)
+    main_window.pushButton_4.clicked.connect(statistics_string)
 
     if os.path.exists(kevin_utils.get_log_path() + multiple_language_utils.database_name):
         read_data = open(kevin_utils.get_log_path() + multiple_language_utils.database_name, mode='r', encoding='utf-8')

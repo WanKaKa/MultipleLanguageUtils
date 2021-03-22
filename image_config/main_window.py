@@ -4,11 +4,12 @@ import xml.dom.minidom
 
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QApplication, QMainWindow, QFileDialog, QDialog
-from PyQt5 import QtCore
+from PyQt5 import QtCore, QtGui
 from natsort import ns, natsorted
 
 from image_config import select_dialog_ui
 from image_config import main_ui
+from multiple_language import kevin_utils
 
 server_name_list = [
     "https://lockscreenres.oss-us-west-1.aliyuncs.com/",
@@ -252,7 +253,10 @@ if __name__ == "__main__":
     main_window.move(int((width - 800) / 2), int((height - 800) / 2))
     main_window.setFixedSize(main_window.width(), main_window.height())
     main_window.setWindowTitle("壁纸配置表自动修改-为便捷而生")
-    main_window.setWindowIcon(QIcon('favicon.ico'))
+    filename = kevin_utils.resource_path(os.path.join("ico", "favicon.ico"))
+    icon = QtGui.QIcon()
+    icon.addPixmap(QtGui.QPixmap(filename))
+    main_window.setWindowIcon(icon)
 
     main_window.pushButton.clicked.connect(set_root_dir)
     main_window.pushButton_2.clicked.connect(set_server)

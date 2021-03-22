@@ -93,10 +93,16 @@ class Ui_Form(object):
         self.label_4.setAlignment(QtCore.Qt.AlignCenter)
         self.label_4.setObjectName("label_4")
         self.textBrowser_2 = QtWidgets.QTextBrowser(Form)
-        self.textBrowser_2.setGeometry(QtCore.QRect(1190, 50, 580, 660))
+        self.textBrowser_2.setGeometry(QtCore.QRect(1190, 50, 580, 610))
         self.textBrowser_2.setStyleSheet("background-color: rgb(255, 255, 255);\n"
 "font: 10pt \"微软雅黑\";")
         self.textBrowser_2.setObjectName("textBrowser_2")
+        self.pushButton_4 = QtWidgets.QPushButton(Form)
+        self.pushButton_4.setGeometry(QtCore.QRect(1390, 670, 180, 40))
+        self.pushButton_4.setStyleSheet("background-color: rgb(0, 170, 255);\n"
+"color: rgb(255, 255, 255);\n"
+"font: 12pt \"微软雅黑\";")
+        self.pushButton_4.setObjectName("pushButton_4")
 
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
@@ -113,3 +119,4 @@ class Ui_Form(object):
         self.pushButton_3.setText(_translate("Form", "删除"))
         self.label_7.setText(_translate("Form", "需要拷贝的字符，格式如下：<string name=\"i_joy_soft\">IJoySoft</string>"))
         self.label_4.setText(_translate("Form", "翻译统计区域"))
+        self.pushButton_4.setText(_translate("Form", "刷新"))

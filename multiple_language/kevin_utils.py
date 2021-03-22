@@ -1,6 +1,7 @@
 import getpass
 import os
 import re
+import sys
 
 java_string_file_name_list = ["string.xml", "strings.xml"]
 filter_string_key_regular = """<string name="(.+?)">"""
@@ -45,3 +46,19 @@ def analysis_equal_string(strings, log_file):
 
 def open_file(file_path):
     os.system(file_path)
+
+
+def resource_path(relative_path):
+    if getattr(sys, 'frozen', False):
+        base_path = sys._MEIPASS
+    else:
+        base_path = os.path.abspath(".")
+    return os.path.join(base_path, relative_path)
+
+
+def text_style1(string):
+    return "<span style=\"color:#4A8FF8; font:24pt;\">%s</span>" % str(string)
+
+
+def text_style2(string):
+    return "<span style=\"color:#ff0000; font:24pt;\">%s</span>" % str(string)

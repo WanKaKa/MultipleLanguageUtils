@@ -18,9 +18,17 @@ def statistics_string(project_res_dir, text_browser):
                 if "resources" in temp_read_str or "</string>" in temp_read_str:
                     string_list = re.findall(kevin_utils.filter_string_key_regular, temp_read_str)
                     if string_list:
-                        text_browser.append(temp_read_str.strip("\n"))
-                        text_browser.append("翻译数 = %d" % statistics_count(project_res_dir, string_list[0]))
+                        text_browser.append(temp_read_str.strip("\n").strip(" "))
+                        count = statistics_count(project_res_dir, string_list[0])
+                        if count >= 20:
+                            text_browser.append("翻译数" + kevin_utils.text_style1(count))
+                        else:
+                            text_browser.append("翻译数" + kevin_utils.text_style2(count))
+                        text_browser.append("\n")
                     temp_read_str = ""
+                if "<!--" in temp_read_str and "-->" in temp_read_str:
+                    if re.findall("""<!--(.+?)-->""", temp_read_str):
+                        temp_read_str = ""
                 line = file.readline()
             file.close()
 

@@ -108,12 +108,12 @@ def analysis_add_string(res_dir_name, add_string_key_list, log_file):
 
             add_string = add_string.strip("\n")
             if add_string:
-                # 判断项目是否存在对应的语音文件夹，不存在则创建文件夹和文件
+                # 判断项目是否存在对应的语言文件夹，不存在则创建文件夹和文件
                 if not os.path.exists(project_res_dir + "\\" + res_dir_name):
                     os.makedirs(project_res_dir + "\\" + res_dir_name)
-                file = open(project_res_dir + "\\" + res_dir_name + "\\strings.xml", mode='w', encoding='utf-8')
-                file.write("""<?xml version="1.0" encoding="utf-8"?>\n<resources>\n</resources>""")
-                file.close()
+                    file = open(project_res_dir + "\\" + res_dir_name + "\\strings.xml", mode='w', encoding='utf-8')
+                    file.write("""<?xml version="1.0" encoding="utf-8"?>\n<resources>\n</resources>""")
+                    file.close()
 
                 add_string_to_project_res(res_dir_name, add_string)
                 kevin_utils.print_log(log_file,
