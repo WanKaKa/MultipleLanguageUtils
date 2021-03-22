@@ -1,11 +1,14 @@
 import json
 import os
 import sys
+
+from PyQt5 import QtGui
+
 from multiple_language import kevin_utils
 from multiple_language import multiple_language_utils
 from multiple_language import delete_res_string
 from product_multiple_language import main_ui, find_translate_copy_rename, statistics
-from PyQt5.QtGui import QIcon
+from PyQt5.QtGui import QIcon, QPixmap
 from PyQt5.QtWidgets import QApplication, QWidget, QFileDialog, QDialog, QMessageBox
 
 
@@ -79,6 +82,14 @@ def print_log(log_file, log_info):
     main_window.textBrowser.append(log_info.strip("\n"))
 
 
+def resource_path(relative_path):
+    if getattr(sys, 'frozen', False):
+        base_path = sys._MEIPASS
+    else:
+        base_path = os.path.abspath(".")
+    return os.path.join(base_path, relative_path)
+
+
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     desktop = app.desktop()
@@ -90,7 +101,10 @@ if __name__ == "__main__":
     main_window.move(int((width - 1780) / 2), int((height - 720) / 2))
     main_window.setFixedSize(main_window.width(), main_window.height())
     main_window.setWindowTitle("产品多语言工具-为便捷而生")
-    main_window.setWindowIcon(QIcon('favicon.ico'))
+    filename = resource_path(os.path.join("ico", "favicon.ico"))
+    icon = QtGui.QIcon()
+    icon.addPixmap(QtGui.QPixmap(filename))
+    main_window.setWindowIcon(icon)
 
     main_window.pushButton.clicked.connect(find_translate)
     main_window.pushButton_2.clicked.connect(copy_multiple_language)

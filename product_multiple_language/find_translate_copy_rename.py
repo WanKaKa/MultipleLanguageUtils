@@ -4,7 +4,7 @@ import re
 from multiple_language import kevin_utils, multiple_language_utils
 
 log_find_translate_copy_rename = "log_find_translate_copy_rename.txt"
-filter_string_key_regular = """<string name=".*">(.+?)</string>"""
+filter_string_value_regular = """<string name=".*">(.+?)</string>"""
 
 translate_reference_key_list = []
 translate_project_key_list = []
@@ -16,6 +16,8 @@ def find_translate(translate_res_dir, project_res_dir):
     global translate_project_key_list
     translate_project_key_list = []
 
+    if not os.path.exists(kevin_utils.get_log_path()):
+        os.makedirs(kevin_utils.get_log_path())
     log_file = open(kevin_utils.get_log_path() + log_find_translate_copy_rename, mode='w', encoding='utf-8')
 
     translate_string_list = ""
@@ -29,7 +31,7 @@ def find_translate(translate_res_dir, project_res_dir):
             while line:
                 temp_read_str += line
                 if "resources" in temp_read_str or "</string>" in temp_read_str:
-                    string_list = re.findall(filter_string_key_regular, temp_read_str)
+                    string_list = re.findall(filter_string_value_regular, temp_read_str)
                     if string_list:
                         for i in range(len(string_list)):
                             reference_key = judge_translate_exist(log_file, translate_res_dir, string_list[i])
@@ -41,16 +43,15 @@ def find_translate(translate_res_dir, project_res_dir):
                                 string = create_sting(project_key, string_list[i])
                                 translate_string_list = translate_string_list + string + "\n"
 
-                                kevin_utils.print_log(log_file,
-                                                      "竞争产品中Key: %s 项目中Key: %s\n" % (reference_key, project_key))
+                                kevin_utils.print_log(log_file, "竞争产品中Key: %s \n" % reference_key)
+                                kevin_utils.print_log(log_file, "项目中Key: %s\n" % project_key)
+
                                 kevin_utils.print_log(log_file, "%s\n" % string)
                         kevin_utils.print_log(log_file, "\n%s\n" % ("*" * 50))
                     temp_read_str = ""
                 line = file.readline()
             file.close()
     log_file.close()
-    print(translate_reference_key_list)
-    print(translate_project_key_list)
     translate_res_delete_string(translate_res_dir)
     translate_res_rename_string(translate_res_dir)
     if translate_string_list:
@@ -74,7 +75,7 @@ def judge_translate_exist(log_file, translate_res_dir, translate_str):
             while line:
                 temp_read_str += line
                 if "resources" in temp_read_str or "</string>" in temp_read_str:
-                    string_list = re.findall(filter_string_key_regular, temp_read_str)
+                    string_list = re.findall(filter_string_value_regular, temp_read_str)
                     if string_list:
                         for string in string_list:
                             if string == translate_str:
