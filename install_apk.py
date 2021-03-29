@@ -19,7 +19,8 @@ projects_details = [
     ["NoteAS", "C:\\Work\\ASProjects\\", "\\Note", "com.task.notes"],
     ["WeatherAccurate", "C:\\Work\\ASProjects\\", "\\WeatherForecast", "accurate.local.weather.forecast.channel"],
     ["WeatherForecastAS", "C:\\Work\\ASProjects\\", "\\WeatherForecast", "weather.forecast.live.weather"],
-    ["LauncherIOS", "C:\\Work\\ASProjects\\", "\\app", "theme.wallpaper.smart.launcher"]
+    ["LauncherIOS", "C:\\Work\\ASProjects\\", "\\app", "theme.wallpaper.smart.launcher"],
+    ["AdvertLibraryExampleAS", "C:\\Work\\ASProjects\\", "\\app", "com.ijoysoft.advert"],
 ]
 # 安装成功后，拷贝apk和txt的路径
 copy_files_dir = "C:/Users/wankai/Desktop/release/apk/"
