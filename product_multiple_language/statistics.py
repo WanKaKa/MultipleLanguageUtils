@@ -10,6 +10,9 @@ string_count_list = {}
 
 def statistics_string(project_res_dir, text_browser):
     text_browser.clear()
+    string_key_list.clear()
+    string_value_list.clear()
+    string_count_list.clear()
     for path in kevin_utils.java_string_file_name_list:
         file_path = project_res_dir + "\\values\\" + path
 
