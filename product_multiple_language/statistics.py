@@ -3,6 +3,10 @@ import re
 
 from multiple_language import kevin_utils
 
+string_key_list = []
+string_value_list = []
+string_count_list = {}
+
 
 def statistics_string(project_res_dir, text_browser):
     text_browser.clear()
@@ -18,13 +22,10 @@ def statistics_string(project_res_dir, text_browser):
                 if "resources" in temp_read_str or "</string>" in temp_read_str:
                     string_list = re.findall(kevin_utils.filter_string_key_regular, temp_read_str)
                     if string_list:
-                        text_browser.append(temp_read_str.strip("\n").strip(" "))
-                        count = statistics_count(project_res_dir, string_list[0])
-                        if count >= 20:
-                            text_browser.append("翻译数" + kevin_utils.text_style1(count))
-                        else:
-                            text_browser.append("翻译数" + kevin_utils.text_style2(count))
-                        text_browser.append("\n")
+                        string = temp_read_str.strip("\n").strip(" ")
+                        string_key_list.append(string_list[0])
+                        string_value_list.append(string)
+                        string_count_list[string] = 0
                     temp_read_str = ""
                 if "<!--" in temp_read_str and "-->" in temp_read_str:
                     if re.findall("""<!--(.+?)-->""", temp_read_str):
@@ -32,11 +33,20 @@ def statistics_string(project_res_dir, text_browser):
                 line = file.readline()
             file.close()
 
+            statistics_count(project_res_dir)
+            for string in string_value_list:
+                text_browser.append(string)
+                count = string_count_list[string]
+                if count >= 20:
+                    text_browser.append("翻译数" + kevin_utils.text_style1(count))
+                else:
+                    text_browser.append("翻译数" + kevin_utils.text_style2(count))
+                text_browser.append("\n")
 
-def statistics_count(project_res_dir, string_key):
+
+def statistics_count(project_res_dir):
     for root, dirs, file_paths in os.walk(project_res_dir):
         if dirs:
-            count = 0
             for res_dir_name in dirs:
                 for file_name in kevin_utils.java_string_file_name_list:
                     file_path = project_res_dir + "\\" + res_dir_name + "\\" + file_name
@@ -50,10 +60,10 @@ def statistics_count(project_res_dir, string_key):
                                 key_list = re.findall(kevin_utils.filter_string_key_regular, temp_read_str)
                                 if key_list:
                                     for key in key_list:
-                                        if key == string_key:
-                                            count += 1
+                                        if key in string_key_list:
+                                            index = string_key_list.index(key)
+                                            value = string_value_list[index]
+                                            string_count_list[value] = string_count_list[value] + 1
                                 temp_read_str = ""
                             line = file.readline()
                         file.close()
-            return count
-    return 0
