@@ -8,7 +8,7 @@ filter_string_key_regular = """<string name="(.+?)">"""
 
 
 def get_log_path():
-    return 'C:\\Users\\' + getpass.getuser() + '\\Kevin\\'
+    return 'C:\\IJoySoft\\' + 'Kevin\\'
 
 
 def print_log(log_file, log_info):
