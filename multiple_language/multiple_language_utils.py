@@ -114,6 +114,11 @@ def analysis_add_string(res_dir_name, add_string_key_list, log_file):
                     file = open(project_res_dir + "\\" + res_dir_name + "\\strings.xml", mode='w', encoding='utf-8')
                     file.write("""<?xml version="1.0" encoding="utf-8"?>\n<resources>\n</resources>""")
                     file.close()
+                else:
+                    if not os.listdir(project_res_dir + "\\" + res_dir_name):
+                        file = open(project_res_dir + "\\" + res_dir_name + "\\strings.xml", mode='w', encoding='utf-8')
+                        file.write("""<?xml version="1.0" encoding="utf-8"?>\n<resources>\n</resources>""")
+                        file.close()
 
                 add_string_to_project_res(res_dir_name, add_string)
                 kevin_utils.print_log(log_file,
@@ -132,22 +137,27 @@ def string_in_project(res_dir_name, string_key):
         res_dir_name : 资源文件夹名称
         string_key : 字符名称
     """
-    for file_name in kevin_utils.java_string_file_name_list:
+    dir_path = project_res_dir + "\\" + res_dir_name + "\\"
+    if not os.path.exists(dir_path) or os.path.isfile(dir_path):
+        return False
+    temp_file_list = os.listdir(dir_path)
+    for file_name in temp_file_list:
         file_path = project_res_dir + "\\" + res_dir_name + "\\" + file_name
-        if os.path.exists(file_path):
-            file = open(file_path, encoding='utf-8')
-            line = file.readline()
-            temp_read_str = ""
-            while line:
-                temp_read_str += line
-                if "resources" in temp_read_str or "</string>" in temp_read_str:
-                    key_list = re.findall(kevin_utils.filter_string_key_regular, temp_read_str)
-                    if key_list:
-                        if key_list[0] == string_key:
-                            return True
-                    temp_read_str = ""
+        if "string" in file_path and os.path.isfile(file_path):
+            if os.path.exists(file_path):
+                file = open(file_path, encoding='utf-8')
                 line = file.readline()
-            file.close()
+                temp_read_str = ""
+                while line:
+                    temp_read_str += line
+                    if "resources" in temp_read_str or "</string>" in temp_read_str:
+                        key_list = re.findall(kevin_utils.filter_string_key_regular, temp_read_str)
+                        if key_list:
+                            if key_list[0] == string_key:
+                                return True
+                        temp_read_str = ""
+                    line = file.readline()
+                file.close()
     return False
 
 
