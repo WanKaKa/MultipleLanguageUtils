@@ -51,6 +51,7 @@ if __name__ == '__main__':
     win = tkinter.Tk()  # 创建Windows窗口对象
     win.title("翻译拷贝程序-为便捷而生")  # 设置窗口标题
     win.geometry("1280x720")
+    win.iconbitmap(kevin_utils.resource_path(os.path.join("ico", "logo_multiple_language.ico")))
 
     hint1 = """需要拷贝的字符，格式如下：<string name="i_joy_soft">IJoySoft</string>"""
     tile1 = tkinter.Label(win, text=hint1, font=('微软雅黑', 14))

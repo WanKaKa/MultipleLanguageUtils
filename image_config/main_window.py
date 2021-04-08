@@ -253,7 +253,7 @@ if __name__ == "__main__":
     main_window.move(int((width - 800) / 2), int((height - 800) / 2))
     main_window.setFixedSize(main_window.width(), main_window.height())
     main_window.setWindowTitle("壁纸配置表自动修改-为便捷而生")
-    filename = kevin_utils.resource_path(os.path.join("ico", "favicon.ico"))
+    filename = kevin_utils.resource_path(os.path.join("ico", "logo_image_config.ico"))
     icon = QtGui.QIcon()
     icon.addPixmap(QtGui.QPixmap(filename))
     main_window.setWindowIcon(icon)
