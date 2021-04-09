@@ -1,6 +1,6 @@
 import os
 
-release_version = "多语言拷贝脚本1.1.3"
+release_version = "多语言拷贝脚本1.2.0"
 
 if __name__ == '__main__':
     os.system(
