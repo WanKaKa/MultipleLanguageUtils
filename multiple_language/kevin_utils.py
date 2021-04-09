@@ -1,9 +1,8 @@
-import getpass
 import os
 import re
 import sys
 
-java_string_file_name_list = ["string.xml", "strings.xml", "gallery_strings.xml"]
+java_string_file_name_list = ["string.xml", "strings.xml"]
 filter_string_key_regular = """<string name="(.+?)">"""
 
 
