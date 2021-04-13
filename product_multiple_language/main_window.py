@@ -1,90 +1,59 @@
-import json
 import os
 import sys
 
 from PyQt5 import QtGui
+from PyQt5.QtCore import Qt
 
+import multiple_language.main_window
 from multiple_language import kevin_utils
-from multiple_language import multiple_language_utils
-from multiple_language import delete_res_string
-from product_multiple_language import main_ui, find_translate_copy_rename, statistics
-from PyQt5.QtGui import QIcon, QPixmap
-from PyQt5.QtWidgets import QApplication, QWidget, QFileDialog, QDialog, QMessageBox
+from product_multiple_language import main_ui_2, find_translate_copy_rename, statistics
+from PyQt5.QtWidgets import QApplication, QWidget, QMessageBox, QProgressDialog
+import product_multiple_language.compete_string_view
 
 
-class MainWindow(QWidget, main_ui.Ui_Form):
+class MainWindow(QWidget, main_ui_2.Ui_Form):
     def __init__(self, parent=None):
         super(MainWindow, self).__init__(parent)
         self.setupUi(self)
 
 
-def find_translate():
-    main_window.pushButton.setText("查重拷贝中，请勿重复点击")
-    main_window.pushButton.setStyleSheet(
-        "background-color: red;\n""color: rgb(255, 255, 255);\n""font: 10pt \"微软雅黑\";")
-
-    reply = QMessageBox.question(main_window, '拷贝字符', '确认拷贝吗', QMessageBox.No | QMessageBox.Yes, QMessageBox.No)
+def find_translate(main_window: MainWindow):
+    reply = QMessageBox.question(main_window, '查重拷贝字符', '确认查重拷贝吗', QMessageBox.No | QMessageBox.Yes, QMessageBox.No)
     if reply == QMessageBox.Yes:
-        main_window.textBrowser.clear()
-        translate_res_dir = main_window.lineEdit.text().strip("\n")
-        project_res_dir = main_window.lineEdit_2.text().strip("\n")
-        translate_string_list = find_translate_copy_rename.find_translate(translate_res_dir, project_res_dir)
+        translate_res_dir = main_window.input_translate_path.toPlainText().strip("\n")
+        if translate_res_dir.startswith("file:///"):
+            translate_res_dir = translate_res_dir[len("file:///"):]
+        project_res_dir = main_window.input_project_path.toPlainText().strip("\n")
+        if project_res_dir.startswith("file:///"):
+            project_res_dir = project_res_dir[len("file:///"):]
+        try:
+            global progress_dialog
+            progress_dialog = QProgressDialog(main_window)
+            progress_dialog.setWindowTitle("查重拷贝字符")
+            progress_dialog.setCancelButtonText("取消")
+            progress_dialog.setMinimumDuration(5)
+            progress_dialog.setWindowModality(Qt.WindowModal)
+            progress_dialog.setRange(0, 100)
+        except Exception as e:
+            print(e)
+        translate_string_list = find_translate_copy_rename.find_translate(
+            translate_res_dir, project_res_dir, callback=progress_callback)
         if translate_string_list:
-            main_window.textEdit.clear()
-            main_window.textEdit.append(translate_string_list)
-        statistics_string()
-
-    main_window.pushButton.setText("查重拷贝")
-    main_window.pushButton.setStyleSheet(
-        "background-color: rgb(0, 170, 255);\n""color: rgb(255, 255, 255);\n""font: 12pt \"微软雅黑\";")
+            main_window.input_string.clear()
+            main_window.input_string.append(translate_string_list)
+        statistics_string(main_window)
 
 
-def copy_multiple_language():
-    main_window.pushButton_2.setText("正在拷贝中，请勿重复点击")
-    main_window.pushButton_2.setStyleSheet(
-        "background-color: red;\n""color: rgb(255, 255, 255);\n""font: 10pt \"微软雅黑\";")
-
-    reply = QMessageBox.question(main_window, '拷贝字符', '确认拷贝吗', QMessageBox.No | QMessageBox.Yes, QMessageBox.No)
-    if reply == QMessageBox.Yes:
-        main_window.textBrowser.clear()
-        translate_string = main_window.textEdit.toPlainText().strip("\n")
-        translate_res_dir = main_window.lineEdit.text().strip("\n")
-        project_res_dir = main_window.lineEdit_2.text().strip("\n")
-        multiple_language_utils.copy_multiple_language(translate_string, translate_res_dir, project_res_dir)
-        statistics_string()
-
-    main_window.pushButton_2.setText("拷贝")
-    main_window.pushButton_2.setStyleSheet(
-        "background-color: rgb(0, 170, 255);\n""color: rgb(255, 255, 255);\n""font: 12pt \"微软雅黑\";")
+def progress_callback(*args, **kwargs):
+    if kwargs and "label" in kwargs:
+        progress_dialog.setLabelText(kwargs["label"])
+    if progress_dialog and isinstance(progress_dialog, QProgressDialog):
+        progress_dialog.setValue(args[0] / args[1] * 100)
 
 
-def delete_android_values_string():
-    main_window.pushButton_3.setText("正在删除中，请勿重复点击")
-    main_window.pushButton_3.setStyleSheet(
-        "background-color: red;\n""color: rgb(255, 255, 255);\n""font: 10pt \"微软雅黑\";")
-
-    reply = QMessageBox.question(main_window, '删除字符', '确认删除吗', QMessageBox.No | QMessageBox.Yes, QMessageBox.No)
-    if reply == QMessageBox.Yes:
-        main_window.textBrowser.clear()
-        translate_string = main_window.textEdit.toPlainText().strip("\n")
-        project_res_dir = main_window.lineEdit_2.text().strip("\n")
-        delete_res_string.delete_android_values_string(project_res_dir, translate_string)
-        statistics_string()
-
-    main_window.pushButton_3.setText("删除")
-    main_window.pushButton_3.setStyleSheet(
-        "background-color: rgb(0, 170, 255);\n""color: rgb(255, 255, 255);\n""font: 12pt \"微软雅黑\";")
-
-
-def statistics_string():
-    project_res_dir = main_window.lineEdit_2.text().strip("\n")
-    statistics.statistics_string(project_res_dir, main_window.textBrowser_2)
-
-
-def print_log(log_file, log_info):
-    print(log_info)
-    log_file.write(log_info)
-    main_window.textBrowser.append(log_info.strip("\n"))
+def statistics_string(main_window):
+    project_res_dir = main_window.input_project_path.toPlainText().strip("\n")
+    statistics.statistics_string(project_res_dir, browser=main_window.translate_statistics)
 
 
 if __name__ == "__main__":
@@ -93,32 +62,20 @@ if __name__ == "__main__":
     width = desktop.width()
     height = desktop.height()
 
-    main_window = MainWindow()
-    main_window.show()
-    main_window.move(int((width - 1780) / 2), int((height - 720) / 2))
-    main_window.setFixedSize(main_window.width(), main_window.height())
-    main_window.setWindowTitle("产品多语言工具-为便捷而生")
-    filename = kevin_utils.resource_path(os.path.join("ico", "favicon.ico"))
+    window = MainWindow()
+    x = int((width - window.frameGeometry().width()) / 2)
+    y = int((height - window.frameGeometry().height()) / 2)
+    window.move(x, y)
+    window.show()
+    window.setWindowTitle("产品多语言工具-为便捷而生")
+    filename = kevin_utils.resource_path(os.path.join("ico", "logo.ico"))
     icon = QtGui.QIcon()
     icon.addPixmap(QtGui.QPixmap(filename))
-    main_window.setWindowIcon(icon)
+    window.setWindowIcon(icon)
 
-    main_window.pushButton.clicked.connect(find_translate)
-    main_window.pushButton_2.clicked.connect(copy_multiple_language)
-    main_window.pushButton_3.clicked.connect(delete_android_values_string)
-    main_window.pushButton_4.clicked.connect(statistics_string)
-
-    if os.path.exists(kevin_utils.get_log_path() + multiple_language_utils.database_name):
-        read_data = open(kevin_utils.get_log_path() + multiple_language_utils.database_name, mode='r', encoding='utf-8')
-        data = json.loads(read_data.read())
-        if isinstance(data["translate_string"], str):
-            main_window.textEdit.append(data["translate_string"])
-        if isinstance(data["translate_res_dir"], str):
-            main_window.lineEdit.insert(data["translate_res_dir"].replace("\n", ""))
-        if isinstance(data["project_res_dir"], str):
-            main_window.lineEdit_2.insert(data["project_res_dir"].replace("\n", ""))
-        read_data.close()
-
-    kevin_utils.print_log = print_log
+    multiple_language.main_window.init_view(window)
+    product_multiple_language.compete_string_view.init_view(window)
+    window.refersh_translate_statistics.clicked.connect(lambda: statistics_string(window))
+    window.check_copy_string.clicked.connect(lambda: find_translate(window))
 
     sys.exit(app.exec_())

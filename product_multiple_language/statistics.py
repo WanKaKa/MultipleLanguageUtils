@@ -8,8 +8,9 @@ string_value_list = []
 string_count_list = {}
 
 
-def statistics_string(project_res_dir, text_browser):
-    text_browser.clear()
+def statistics_string(project_res_dir, browser=None):
+    if browser:
+        browser.clear()
     string_key_list.clear()
     string_value_list.clear()
     string_count_list.clear()
@@ -28,7 +29,7 @@ def statistics_string(project_res_dir, text_browser):
                         string = temp_read_str.strip("\n").strip(" ")
                         string_key_list.append(string_list[0])
                         string_value_list.append(string)
-                        string_count_list[string] = 0
+                        string_count_list[string_list[0]] = 0
                     temp_read_str = ""
                 if "<!--" in temp_read_str and "-->" in temp_read_str:
                     if re.findall("""<!--(.+?)-->""", temp_read_str):
@@ -37,14 +38,15 @@ def statistics_string(project_res_dir, text_browser):
             file.close()
 
             statistics_count(project_res_dir)
-            for string in string_value_list:
-                text_browser.append(string)
-                count = string_count_list[string]
-                if count >= 20:
-                    text_browser.append("翻译数" + kevin_utils.text_style1(count))
-                else:
-                    text_browser.append("翻译数" + kevin_utils.text_style2(count))
-                text_browser.append("\n")
+            if browser:
+                for i in range(len(string_value_list)):
+                    browser.append(string_value_list[i])
+                    count = string_count_list[string_key_list[i]]
+                    if count >= 20:
+                        browser.append("翻译数" + kevin_utils.text_style1(count))
+                    else:
+                        browser.append("翻译数" + kevin_utils.text_style2(count))
+                    browser.append("\n")
 
 
 def statistics_count(project_res_dir):
@@ -64,9 +66,7 @@ def statistics_count(project_res_dir):
                                 if key_list:
                                     for key in key_list:
                                         if key in string_key_list:
-                                            index = string_key_list.index(key)
-                                            value = string_value_list[index]
-                                            string_count_list[value] = string_count_list[value] + 1
+                                            string_count_list[key] = string_count_list[key] + 1
                                 temp_read_str = ""
                             line = file.readline()
                         file.close()

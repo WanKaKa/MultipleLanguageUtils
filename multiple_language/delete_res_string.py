@@ -7,7 +7,7 @@ log_delete_res_string = "log_delete_res_string.txt"
 
 def delete_android_values_string(project_res_dir, input_strings, callback=None):
     if callback:
-        callback(100, 1)
+        callback(1, 100)
 
     if not os.path.exists(kevin_utils.get_log_path()):
         os.makedirs(kevin_utils.get_log_path())
@@ -52,7 +52,7 @@ def delete_android_values_string(project_res_dir, input_strings, callback=None):
                                 break
                         kevin_utils.print_log(log_file, "\n%s\n" % ("*" * 50))
                 if callback:
-                    callback(len(dirs), count)
+                    callback(count, len(dirs))
     log_file.close()
     if callback:
         callback(100, 100)

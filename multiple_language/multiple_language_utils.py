@@ -1,10 +1,9 @@
-import json
 import os
 import re
 from multiple_language import kevin_utils
+import multiple_language.database
 
 language_log_name = "log_multiple_language.txt"
-database_name = "json_multiple_language.json"
 
 # 过滤的文件夹
 filter_folder = ["large", "small", "dpi", "land", "port"]
@@ -16,12 +15,11 @@ project_res_dir = ""
 
 def copy_multiple_language(input1, input2, input3, callback=None):
     if callback:
-        callback(100, 1)
+        callback(1, 100, label="正在拷贝...")
 
     if not os.path.exists(kevin_utils.get_log_path()):
         os.makedirs(kevin_utils.get_log_path())
     log_file = open(kevin_utils.get_log_path() + language_log_name, mode='w', encoding='utf-8')
-    json_file = open(kevin_utils.get_log_path() + database_name, mode='w', encoding='utf-8')
 
     global translate_string
     translate_string = input1
@@ -40,8 +38,7 @@ def copy_multiple_language(input1, input2, input3, callback=None):
         'translate_res_dir': translate_res_dir,
         'project_res_dir': project_res_dir
     }
-    json.dump(data, json_file, ensure_ascii=False)
-    json_file.close()
+    multiple_language.database.set_json_data(data)
 
     kevin_utils.print_log(log_file, "%s 解析复制开始 %s\n\n" % ("*" * 24, "*" * 24))
     if isinstance(translate_string, list):
@@ -76,7 +73,7 @@ def copy_multiple_language(input1, input2, input3, callback=None):
                     if not isPassPath and res_dir_name != "values":
                         analysis_add_string(res_dir_name, add_string_key_list, log_file)
                     if callback:
-                        callback(len(dirs), count)
+                        callback(count, len(dirs))
     kevin_utils.print_log(log_file, "\n%s 解析复制结束 %s\n" % ("*" * 24, "*" * 24))
     log_file.close()
     if callback:
