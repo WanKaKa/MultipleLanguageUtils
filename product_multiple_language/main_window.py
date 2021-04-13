@@ -53,6 +53,8 @@ def progress_callback(*args, **kwargs):
 
 def statistics_string(main_window):
     project_res_dir = main_window.input_project_path.toPlainText().strip("\n")
+    if project_res_dir.startswith("file:///"):
+        project_res_dir = project_res_dir[len("file:///"):]
     statistics.statistics_string(project_res_dir, browser=main_window.translate_statistics)
 
 

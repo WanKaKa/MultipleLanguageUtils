@@ -7,7 +7,10 @@ filter_string_key_regular = """<string name="(.+?)">"""
 
 
 def get_log_path():
-    return 'C:\\IJoySoft\\' + 'Kevin\\'
+    path = 'C:\\IJoySoft\\' + 'Kevin\\'
+    if not os.path.exists(path):
+        os.makedirs(path)
+    return path
 
 
 def print_log(log_file, log_info):
