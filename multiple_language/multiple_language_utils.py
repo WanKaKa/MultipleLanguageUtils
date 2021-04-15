@@ -103,7 +103,8 @@ def analysis_add_string(res_dir_name, add_string_key_list, log_file):
                     if key_list:
                         for key in add_string_key_list:
                             if key == key_list[0]:
-                                if not string_in_project(res_dir_name, key_list[0]):
+                                if not string_in_project(res_dir_name, key_list[0]) and \
+                                        key not in re.findall(kevin_utils.filter_string_key_regular, add_string):
                                     add_string += "\n" if len(add_string) != 0 else ""
                                     if temp_read_str.endswith("\n"):
                                         add_string += temp_read_str[:-1]

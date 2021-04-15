@@ -6,9 +6,9 @@ from PyQt5.QtCore import Qt
 
 import multiple_language.main_window
 from multiple_language import kevin_utils
-from product_multiple_language import main_ui_2, find_translate_copy_rename, statistics
+from product_multiple_language import main_ui_2, find_translate_copy_rename
 from PyQt5.QtWidgets import QApplication, QWidget, QMessageBox, QProgressDialog
-import product_multiple_language.compete_string_view
+import product_multiple_language.statistics_view
 
 
 class MainWindow(QWidget, main_ui_2.Ui_Form):
@@ -41,7 +41,6 @@ def find_translate(main_window: MainWindow):
         if translate_string_list:
             main_window.input_string.clear()
             main_window.input_string.append(translate_string_list)
-        statistics_string(main_window)
 
 
 def progress_callback(*args, **kwargs):
@@ -49,13 +48,6 @@ def progress_callback(*args, **kwargs):
         progress_dialog.setLabelText(kwargs["label"])
     if progress_dialog and isinstance(progress_dialog, QProgressDialog):
         progress_dialog.setValue(args[0] / args[1] * 100)
-
-
-def statistics_string(main_window):
-    project_res_dir = main_window.input_project_path.toPlainText().strip("\n")
-    if project_res_dir.startswith("file:///"):
-        project_res_dir = project_res_dir[len("file:///"):]
-    statistics.statistics_string(project_res_dir, browser=main_window.translate_statistics)
 
 
 if __name__ == "__main__":
@@ -76,8 +68,7 @@ if __name__ == "__main__":
     window.setWindowIcon(icon)
 
     multiple_language.main_window.init_view(window)
-    product_multiple_language.compete_string_view.init_view(window)
-    window.refersh_translate_statistics.clicked.connect(lambda: statistics_string(window))
+    product_multiple_language.statistics_view.init_view(window)
     window.check_copy_string.clicked.connect(lambda: find_translate(window))
 
     sys.exit(app.exec_())
