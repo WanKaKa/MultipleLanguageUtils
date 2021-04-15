@@ -41,7 +41,7 @@ class Ui_Form(object):
         self.verticalLayout_2.addWidget(self.label_2)
         self.input_string = QtWidgets.QTextEdit(Form)
         self.input_string.setStyleSheet("background-color: rgb(255, 255, 255);\n"
-"font: 12pt \"微软雅黑\";")
+"font: 8pt \"微软雅黑\";")
         self.input_string.setObjectName("input_string")
         self.verticalLayout_2.addWidget(self.input_string)
         self.horizontalLayout_3 = QtWidgets.QHBoxLayout()

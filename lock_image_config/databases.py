@@ -1,7 +1,7 @@
 import json
 import os
 
-from . import path
+from lock_image_config import path
 
 NORMAL_JSON_DATABASE_NAME = "normal.json"
 

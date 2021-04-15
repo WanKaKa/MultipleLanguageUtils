@@ -43,7 +43,7 @@ def set_statistics_string_list(main_window):
 
 
 def set_table_widget_item(main_window, index):
-    main_window.translate_statistics_list.setRowHeight(index, 40)
+    main_window.translate_statistics_list.setRowHeight(index, 60)
     key = statistics.string_key_list[index]
 
     item = QTableWidgetItem()
