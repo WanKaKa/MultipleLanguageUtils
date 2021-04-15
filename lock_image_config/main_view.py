@@ -63,6 +63,11 @@ class MainWindow(QWidget, main_ui.Ui_Form):
                 work_image_path = work_image_path[len("file:///"):]
             databases.set_normal_json_data({"service_dir_path": service_image_path, "work_dir_path": work_image_path})
             log_file = open(path.get_cache_path() + path.RUN_LOG_NAME, mode='w', encoding='utf-8')
-            core.run(service_image_path, work_image_path, self.select_service_url, log_file=log_file)
-            log_file.close()
-            QMessageBox.information(self, '提示', '壁纸配置修改成功!')
+            try:
+                core.run(service_image_path, work_image_path, self.select_service_url, log_file=log_file)
+                log_file.close()
+                QMessageBox.information(self, '提示', '壁纸配置修改成功!')
+            except Exception as e:
+                utils.print_log(log_file, str(e))
+                log_file.close()
+                QMessageBox.information(self, '提示', '壁纸配置修改失败!')
