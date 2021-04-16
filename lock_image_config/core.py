@@ -12,12 +12,9 @@ select_service_url = ""
 modify_image_type_list = []
 
 
-def run(service_image_path, work_image_path, service_url, log_file=None, callback=None):
+def run(service_image_path, work_image_path, log_file=None, callback=None):
     if callback:
         callback(10, 100, label="正在修改壁纸...")
-
-    global select_service_url
-    select_service_url = service_url
 
     # 解析需要操作的壁纸文件夹
     modify_image_type_list.clear()
@@ -196,3 +193,15 @@ def modify_thumb_name(work_image_path, image_type, start_index, thumb_file_list,
         index -= 1
 
     utils.print_log(log_file, "重命名缩略图--结束")
+
+
+def get_all_image(work_image_path):
+    temp_list = []
+    for name1 in natsorted(os.listdir(work_image_path), alg=ns.PATH):
+        file_path1 = work_image_path + "/" + name1
+        if os.path.isdir(file_path1) and name1 not in FILTER_DIR_LIST:
+            for name2 in natsorted(os.listdir(file_path1), alg=ns.PATH):
+                file_path2 = work_image_path + "/" + name1 + "/" + name2
+                if os.path.isfile(file_path2):
+                    temp_list.append(file_path2)
+    return temp_list

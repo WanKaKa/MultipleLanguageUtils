@@ -2,6 +2,8 @@ import os
 import shutil
 import sys
 
+from PyQt5 import QtWidgets
+
 
 def resource_path(relative_path):
     if getattr(sys, 'frozen', False):
@@ -26,7 +28,7 @@ def print_list_log(log_file, log_info, str_count, str_length):
                 print_log(log_file, temp_string)
                 count = 0
                 temp_string = ""
-            temp_string += "%s" % (add_key.ljust(str_length))
+            temp_string += "%s" % (add_key.ljust(str_length) if str_length else add_key)
             count += 1
         if temp_string:
             print_log(log_file, temp_string)
@@ -41,3 +43,14 @@ def delete_dir(dir_path):
                 os.remove(file_path)
             elif os.path.isdir(file_path):
                 shutil.rmtree(file_path)
+
+
+def analysis_input_path(text_edit):
+    input_path = ""
+    if isinstance(text_edit, QtWidgets.QTextEdit):
+        input_path = text_edit.toPlainText().strip("\n")
+    if isinstance(text_edit, QtWidgets.QLineEdit):
+        input_path = text_edit.text().strip("\n")
+    if input_path.startswith("file:///"):
+        return input_path[len("file:///"):]
+    return input_path
