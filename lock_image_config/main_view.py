@@ -1,6 +1,7 @@
 import os
 
-from PyQt5.QtWidgets import QWidget, QMessageBox
+from PyQt5.QtCore import Qt
+from PyQt5.QtWidgets import QWidget, QMessageBox, QProgressDialog
 from PyQt5 import QtCore, QtGui
 
 from lock_image_config import main_ui
@@ -22,12 +23,14 @@ class MainWindow(QWidget, main_ui.Ui_Form):
         icon.addPixmap(QtGui.QPixmap(filename))
         self.setWindowIcon(icon)
 
+        self.progress_dialog = None
         self.init_view()
 
     def init_view(self):
         _translate = QtCore.QCoreApplication.translate
         self.service_url_1.setText(_translate("Form", "https://lockscreenres.oss-us-west-1.aliyuncs.com/"))
         self.service_url_2.setText(_translate("Form", "https://lockscreentabres.oss-us-west-1.aliyuncs.com/"))
+        self.reset_button.clicked.connect(self.reset_work)
         self.run_button.clicked.connect(self.run)
         self.log_button.clicked.connect(lambda: os.system(path.get_cache_path() + path.RUN_LOG_NAME))
 
@@ -61,13 +64,40 @@ class MainWindow(QWidget, main_ui.Ui_Form):
             work_image_path = self.work_image_path.toPlainText().strip("\n")
             if work_image_path.startswith("file:///"):
                 work_image_path = work_image_path[len("file:///"):]
+            # 保存数据
             databases.set_normal_json_data({"service_dir_path": service_image_path, "work_dir_path": work_image_path})
             log_file = open(path.get_cache_path() + path.RUN_LOG_NAME, mode='w', encoding='utf-8')
+            self.init_progress_dialog()
             try:
-                core.run(service_image_path, work_image_path, self.select_service_url, log_file=log_file)
-                log_file.close()
-                QMessageBox.information(self, '提示', '壁纸配置修改成功!')
+                modify_success = True
+                core.run(service_image_path, work_image_path,
+                         self.select_service_url, log_file=log_file, callback=self.progress_callback)
             except Exception as e:
+                modify_success = False
                 utils.print_log(log_file, str(e))
-                log_file.close()
-                QMessageBox.information(self, '提示', '壁纸配置修改失败!')
+                self.progress_callback(100, 100)
+            log_file.close()
+            QMessageBox.information(self, '提示', '壁纸配置修改成功!' if modify_success else "壁纸配置修改失败")
+
+    def init_progress_dialog(self):
+        self.progress_dialog = QProgressDialog(self)
+        self.progress_dialog.setCancelButtonText("取消")
+        self.progress_dialog.setMinimumDuration(5)
+        self.progress_dialog.setWindowModality(Qt.WindowModal)
+        self.progress_dialog.setRange(0, 100)
+
+    def reset_work(self):
+        reply = QMessageBox.question(
+            self, '重置工作目录', '确定重置工作目录吗?', QMessageBox.No | QMessageBox.Yes, QMessageBox.No)
+        if reply == QMessageBox.Yes:
+            work_image_path = self.work_image_path.toPlainText().strip("\n")
+            if work_image_path.startswith("file:///"):
+                work_image_path = work_image_path[len("file:///"):]
+            utils.delete_dir(work_image_path + "/xml/")
+            QMessageBox.information(self, '提示', '工作目录已重置!')
+
+    def progress_callback(self, *args, **kwargs):
+        if self.progress_dialog and isinstance(self.progress_dialog, QProgressDialog):
+            if kwargs and "label" in kwargs:
+                self.progress_dialog.setLabelText(kwargs["label"])
+            self.progress_dialog.setValue(min(100, args[0] / args[1] * 100))

@@ -1,4 +1,5 @@
 import os
+import shutil
 import sys
 
 
@@ -29,3 +30,14 @@ def print_list_log(log_file, log_info, str_count, str_length):
             count += 1
         if temp_string:
             print_log(log_file, temp_string)
+
+
+def delete_dir(dir_path):
+    if os.path.exists(dir_path) and os.path.isdir(dir_path):
+        del_list = os.listdir(dir_path)
+        for f in del_list:
+            file_path = os.path.join(dir_path, f)
+            if os.path.isfile(file_path):
+                os.remove(file_path)
+            elif os.path.isdir(file_path):
+                shutil.rmtree(file_path)

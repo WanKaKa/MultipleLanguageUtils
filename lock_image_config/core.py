@@ -12,7 +12,10 @@ select_service_url = ""
 modify_image_type_list = []
 
 
-def run(service_image_path, work_image_path, service_url, log_file=None):
+def run(service_image_path, work_image_path, service_url, log_file=None, callback=None):
+    if callback:
+        callback(10, 100, label="正在修改壁纸...")
+
     global select_service_url
     select_service_url = service_url
 
@@ -23,6 +26,7 @@ def run(service_image_path, work_image_path, service_url, log_file=None):
             modify_image_type_list.append(file)
     utils.print_log(log_file, "操作的壁纸类型列表:")
     utils.print_list_log(log_file, modify_image_type_list, 6, 20)
+    count = 1
     for image_type in modify_image_type_list:
         utils.print_log(log_file, "")
         utils.print_log(log_file, "")
@@ -32,6 +36,9 @@ def run(service_image_path, work_image_path, service_url, log_file=None):
         utils.print_log(log_file, "操作壁纸类型 : %s" % image_type)
         modify_image(service_image_path, work_image_path, image_type, log_file=log_file)
         utils.print_log(log_file, "*" * 100)
+        if callback:
+            callback(count, len(modify_image_type_list))
+        count += 1
 
 
 def modify_image(service_image_path, work_image_path, image_type, log_file=None):
