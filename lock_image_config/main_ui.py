@@ -84,9 +84,13 @@ class Ui_Form(object):
         self.frame.setObjectName("frame")
         self.service_url_1 = QtWidgets.QRadioButton(self.frame)
         self.service_url_1.setGeometry(QtCore.QRect(20, 0, 720, 40))
+        self.service_url_1.setStyleSheet("font: 12pt \"微软雅黑\";\n"
+"color: rgb(85, 85, 255);")
         self.service_url_1.setObjectName("service_url_1")
         self.service_url_2 = QtWidgets.QRadioButton(self.frame)
         self.service_url_2.setGeometry(QtCore.QRect(20, 40, 720, 40))
+        self.service_url_2.setStyleSheet("font: 12pt \"微软雅黑\";\n"
+"color: rgb(85, 85, 255);")
         self.service_url_2.setObjectName("service_url_2")
         self.horizontalLayout_2.addWidget(self.frame)
         self.verticalLayout.addLayout(self.horizontalLayout_2)

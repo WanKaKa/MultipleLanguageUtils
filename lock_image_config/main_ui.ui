@@ -185,6 +185,10 @@ font: 12pt &quot;微软雅黑&quot;;</string>
             <height>40</height>
            </rect>
           </property>
+          <property name="styleSheet">
+           <string notr="true">font: 12pt &quot;微软雅黑&quot;;
+color: rgb(85, 85, 255);</string>
+          </property>
           <property name="text">
            <string>RadioButton</string>
           </property>
@@ -197,6 +201,10 @@ font: 12pt &quot;微软雅黑&quot;;</string>
             <width>720</width>
             <height>40</height>
            </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">font: 12pt &quot;微软雅黑&quot;;
+color: rgb(85, 85, 255);</string>
           </property>
           <property name="text">
            <string>RadioButton</string>
