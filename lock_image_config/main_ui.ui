@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>840</width>
-    <height>440</height>
+    <height>480</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -158,13 +158,13 @@ font: 12pt &quot;微软雅黑&quot;;</string>
          <property name="minimumSize">
           <size>
            <width>0</width>
-           <height>80</height>
+           <height>120</height>
           </size>
          </property>
          <property name="maximumSize">
           <size>
            <width>16777215</width>
-           <height>80</height>
+           <height>120</height>
           </size>
          </property>
          <property name="styleSheet">
@@ -198,6 +198,23 @@ color: rgb(85, 85, 255);</string>
            <rect>
             <x>20</x>
             <y>40</y>
+            <width>720</width>
+            <height>40</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">font: 12pt &quot;微软雅黑&quot;;
+color: rgb(85, 85, 255);</string>
+          </property>
+          <property name="text">
+           <string>RadioButton</string>
+          </property>
+         </widget>
+         <widget class="QRadioButton" name="service_url_3">
+          <property name="geometry">
+           <rect>
+            <x>20</x>
+            <y>80</y>
             <width>720</width>
             <height>40</height>
            </rect>

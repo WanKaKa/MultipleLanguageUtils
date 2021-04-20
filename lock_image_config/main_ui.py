@@ -14,7 +14,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_Form(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
-        Form.resize(840, 440)
+        Form.resize(840, 480)
         self.formLayout = QtWidgets.QFormLayout(Form)
         self.formLayout.setObjectName("formLayout")
         self.verticalLayout = QtWidgets.QVBoxLayout()
@@ -76,8 +76,8 @@ class Ui_Form(object):
         self.horizontalLayout_2 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
         self.frame = QtWidgets.QFrame(Form)
-        self.frame.setMinimumSize(QtCore.QSize(0, 80))
-        self.frame.setMaximumSize(QtCore.QSize(16777215, 80))
+        self.frame.setMinimumSize(QtCore.QSize(0, 120))
+        self.frame.setMaximumSize(QtCore.QSize(16777215, 120))
         self.frame.setStyleSheet("background-color: rgb(255, 255, 255);")
         self.frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame.setFrameShadow(QtWidgets.QFrame.Raised)
@@ -92,6 +92,11 @@ class Ui_Form(object):
         self.service_url_2.setStyleSheet("font: 12pt \"微软雅黑\";\n"
 "color: rgb(85, 85, 255);")
         self.service_url_2.setObjectName("service_url_2")
+        self.service_url_3 = QtWidgets.QRadioButton(self.frame)
+        self.service_url_3.setGeometry(QtCore.QRect(20, 80, 720, 40))
+        self.service_url_3.setStyleSheet("font: 12pt \"微软雅黑\";\n"
+"color: rgb(85, 85, 255);")
+        self.service_url_3.setObjectName("service_url_3")
         self.horizontalLayout_2.addWidget(self.frame)
         self.verticalLayout.addLayout(self.horizontalLayout_2)
         self.horizontalLayout_4 = QtWidgets.QHBoxLayout()
@@ -213,6 +218,7 @@ class Ui_Form(object):
         self.label_3.setText(_translate("Form", "推荐壁纸路径"))
         self.service_url_1.setText(_translate("Form", "RadioButton"))
         self.service_url_2.setText(_translate("Form", "RadioButton"))
+        self.service_url_3.setText(_translate("Form", "RadioButton"))
         self.reset_button.setText(_translate("Form", "重置"))
         self.run_button.setText(_translate("Form", "处理壁纸"))
         self.analysis_recommend_button.setText(_translate("Form", "解析推荐壁纸"))

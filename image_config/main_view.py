@@ -4,12 +4,12 @@ from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QWidget, QMessageBox, QProgressDialog
 from PyQt5 import QtCore, QtGui
 
-from lock_image_config import main_ui
-from lock_image_config import utils
-from lock_image_config import path
-from lock_image_config import core
-from lock_image_config import databases
-from lock_image_config import analysis_recommend
+from image_config import main_ui
+from image_config import utils
+from image_config import path
+from image_config import core
+from image_config import databases
+from image_config import analysis_recommend
 
 
 class MainWindow(QWidget, main_ui.Ui_Form):
@@ -118,16 +118,24 @@ class MainWindow(QWidget, main_ui.Ui_Form):
         reply = QMessageBox.question(
             self, '推荐壁纸', '确认处理推荐壁纸吗?', QMessageBox.No | QMessageBox.Yes, QMessageBox.No)
         if reply == QMessageBox.Yes:
-            log_file = open(path.get_cache_path() + path.ANALYSIS_RECOMMEND_LOG_NAME, mode='w', encoding='utf-8')
             self.init_progress_dialog()
             core.select_service_url = self.select_service_url
-            analysis_recommend.run(service_image_path, work_image_path,
-                                   recommend_image_path, log_file=log_file, callback=self.progress_callback)
-            log_file.close()
-            QMessageBox.information(self, '提示', '推荐壁纸处理成功!')
+            analysis = analysis_recommend.AnalysisRecommend(
+                service_image_path, work_image_path, recommend_image_path, callback=self.progress_callback)
+            analysis.my_signal.connect(self.pyqt_signal_callback)
+            analysis.run()
 
     def progress_callback(self, *args, **kwargs):
         if self.progress_dialog and isinstance(self.progress_dialog, QProgressDialog):
             if kwargs and "label" in kwargs:
                 self.progress_dialog.setLabelText(kwargs["label"])
             self.progress_dialog.setValue(min(100, args[0] / args[1] * 100))
+
+    def pyqt_signal_callback(self, value):
+        if self.progress_dialog and isinstance(self.progress_dialog, QProgressDialog):
+            if value and "label" in value:
+                self.progress_dialog.setLabelText(value["label"])
+            if value and "current" in value and "total" in value:
+                self.progress_dialog.setValue(min(100, value["current"] / value["total"] * 100))
+                if value["current"] == value["total"]:
+                    QMessageBox.information(self, '提示', '推荐壁纸处理成功!')
