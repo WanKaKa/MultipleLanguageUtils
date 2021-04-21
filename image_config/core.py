@@ -71,7 +71,7 @@ def modify_image(service_image_path, work_image_path, image_type, log_file=None)
         shutil.copy(service_image_path + "/xml/skin_" + image_type + ".xml", work_image_path + "/xml/")
         utils.print_log(log_file, "配置文件已拷贝")
 
-        start_index = len(os.listdir(service_image_path + "/" + image_type + "/")) + 1
+        start_index = len(os.listdir(service_image_path + "/skin_original/" + image_type + "/")) + 1
         utils.print_log(log_file, "壁纸 Start Index = %d" % start_index)
     else:
         create_empty_xml_file(work_image_path + "/xml/skin_" + image_type + ".xml")
@@ -122,15 +122,23 @@ def modify_xml(work_image_path, image_type, start_index, count, log_file=None):
 
 def create_item_xml(skin_name, index):
     download_url = select_service_url + "skin_original/" + skin_name + "/" + skin_name + "_" + int2str(index)
-    thumb = select_service_url + "skin_thumb/" + skin_name + "/" + skin_name + "_" + int2str(index)
-    url = "skin_img/" + skin_name + "/" + skin_name + "_" + int2str(index) + ".ijs"
-    item_str = "    <item" + "\n"
-    item_str += "        download_url=" + "\"" + download_url + "\"\n"
-    item_str += "        from=" + "\"" + "net" + "\"\n"
-    item_str += "        id=" + "\"" + str((index - 1)) + "\"\n"
-    item_str += "        thumb=" + "\"" + thumb + "\"\n"
-    item_str += "        url=" + "\"" + url + "\" />"
-    return item_str
+    thumb_url = select_service_url + "skin_thumb/" + skin_name + "/" + skin_name + "_" + int2str(index)
+    local_url = "skin_img/" + skin_name + "/" + skin_name + "_" + int2str(index) + ".ijs"
+
+    value = "    <skin_item id=\"" + str((index - 1)) + "\">"
+    value += "\n"
+    value += "        <type>" + "net" + "</type>"
+    value += "\n"
+    value += "        <download_url>" + download_url + "</download_url>"
+    value += "\n"
+    value += "        <thumb_url>" + thumb_url + "</thumb_url>"
+    value += "\n"
+    value += "        <local_url>" + local_url + "</local_url>"
+    value += "\n"
+    value += "    </skin_item>"
+    value += "\n"
+
+    return value
 
 
 def int2str(index):
