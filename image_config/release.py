@@ -1,6 +1,6 @@
 import os
 
-release_version = "壁纸工具1.0.0"
+release_version = "壁纸工具1.0.1"
 
 if __name__ == '__main__':
     os.system(
