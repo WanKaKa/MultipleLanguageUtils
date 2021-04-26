@@ -27,8 +27,8 @@ class AnalysisRecommend(QObject):
         self.recommend_image_list = []
         self.all_image_path_list = []
         self.add_recommend_image_name_list = []
-        self.count = 1
-        self.all_count = 1
+        self.count = 0
+        self.all_count = 0
 
     def run(self):
         self.callback(1, 100, label="正在分析推荐壁纸...") if self.callback else ""
@@ -68,7 +68,7 @@ class AnalysisRecommend(QObject):
         utils.print_list_log(self.log_file, self.all_image_path_list, 1, 0)
 
         self.add_recommend_image_name_list.clear()
-        self.count = 1
+        self.count = 0
         self.all_count = len(self.recommend_image_list) * len(self.all_image_path_list)
         ThreadPool(2).imap_unordered(self.analysis, self.recommend_image_list)
 
@@ -112,9 +112,9 @@ class AnalysisRecommend(QObject):
                     similar_value["value2"] = value2
                     similar_value["value3"] = value3
                     similar_value["value4"] = value4
-
-            self.my_signal.emit({"current": self.count, "total": self.all_count})
             self.count += 1
+            self.my_signal.emit({"current": self.count, "total": self.all_count})
+
         self.add_recommend_image_name_list.append(os.path.basename(similar_value["image_path"]))
         self.lock.acquire()
         utils.print_log(self.log_file, "")
