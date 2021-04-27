@@ -88,10 +88,11 @@ def analysis_add_string(res_dir_name, add_string_key_list, log_file):
         add_string_key_list : 需要添加字符的Key集合
     """
     no_string_or_strings = True
-    for file_name in kevin_utils.java_string_file_name_list:
+    temp_file_list = os.listdir(translate_res_dir + "\\" + res_dir_name)
+    for file_name in temp_file_list:
         file_path = translate_res_dir + "\\" + res_dir_name + "\\" + file_name
-        add_string = ""
-        if os.path.exists(file_path):
+        if "string" in file_name and os.path.isfile(file_path):
+            add_string = ""
             no_string_or_strings = False
             file = open(file_path, encoding='utf-8')
             line = file.readline()
@@ -153,7 +154,7 @@ def string_in_project(res_dir_name, string_key):
     temp_file_list = os.listdir(dir_path)
     for file_name in temp_file_list:
         file_path = project_res_dir + "\\" + res_dir_name + "\\" + file_name
-        if "string" in file_path and os.path.isfile(file_path):
+        if "string" in file_name and os.path.isfile(file_path):
             if os.path.exists(file_path):
                 file = open(file_path, encoding='utf-8')
                 line = file.readline()
