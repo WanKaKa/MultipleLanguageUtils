@@ -23,6 +23,7 @@ projects_details = [
     ["BarcodeTabAS", "C:\\Work\\ASProjects\\", "\\BarcodeTab", "tool.qr.scanner.barcode.scanner"],
     ["BarcodeScannerAs", "C:\\Work\\ASProjects\\", "\\BarcodeScanner", "tool.scanner.qrscan.barcodescan"],
     ["NoteAS", "C:\\Work\\ASProjects\\", "\\Note", "com.task.notes"],
+    ["NotebookAS", "C:\\Work\\ASProjects\\", "\\NoteBook", "tool.notepad.notes.notebooks"],
     ["WeatherAccurate", "C:\\Work\\ASProjects\\", "\\WeatherForecast", "accurate.local.weather.forecast.channel"],
     ["WeatherForecastAS", "C:\\Work\\ASProjects\\", "\\WeatherForecast", "weather.forecast.live.weather"],
     ["WeatherForecastBM", "C:\\Work\\ASProjects\\", "\\WeatherForecast", "weather.local.weather.forecast.channel"],
