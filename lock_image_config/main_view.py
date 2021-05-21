@@ -82,6 +82,8 @@ class MainWindow(QWidget, main_ui.Ui_Form):
             self.select_service_url = self.service_url_1.text()
         elif self.service_url_2.isChecked():
             self.select_service_url = self.service_url_2.text()
+        elif self.service_url_3.isChecked():
+            self.select_service_url = self.service_url_3.text()
         if self.select_service_url is None:
             QMessageBox.information(self, '提示', '未选择服务器!')
             return True
