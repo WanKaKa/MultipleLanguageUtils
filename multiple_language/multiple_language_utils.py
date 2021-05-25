@@ -122,13 +122,13 @@ def analysis_add_string(res_dir_name, add_string_key_list, log_file):
                 if not os.path.exists(project_res_dir + "\\" + res_dir_name):
                     os.makedirs(project_res_dir + "\\" + res_dir_name)
                     file = open(project_res_dir + "\\" + res_dir_name + "\\strings.xml", mode='w', encoding='utf-8')
-                    file.write("""<?xml version="1.0" encoding="utf-8"?>\n\n<resources>\n</resources>""")
+                    file.write("""<?xml version="1.0" encoding="utf-8"?>\n<resources>\n</resources>""")
                     file.close()
                 else:
                     temp_list = os.listdir(project_res_dir + "\\" + res_dir_name)
                     if not temp_list or ("strings.xml" not in temp_list and "string.xml" not in temp_list):
                         file = open(project_res_dir + "\\" + res_dir_name + "\\strings.xml", mode='w', encoding='utf-8')
-                        file.write("""<?xml version="1.0" encoding="utf-8"?>\n\n<resources>\n</resources>""")
+                        file.write("""<?xml version="1.0" encoding="utf-8"?>\n<resources>\n</resources>""")
                         file.close()
 
                 add_string_to_project_res(res_dir_name, add_string)
