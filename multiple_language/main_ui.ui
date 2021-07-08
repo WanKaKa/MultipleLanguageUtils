@@ -436,7 +436,7 @@ font: 12pt &quot;微软雅黑&quot;;</string>
        <widget class="QCheckBox" name="ignore_language_13">
         <property name="geometry">
          <rect>
-          <x>630</x>
+          <x>480</x>
           <y>30</y>
           <width>150</width>
           <height>30</height>
@@ -452,7 +452,7 @@ font: 12pt &quot;微软雅黑&quot;;</string>
        <widget class="QCheckBox" name="ignore_language_14">
         <property name="geometry">
          <rect>
-          <x>480</x>
+          <x>630</x>
           <y>30</y>
           <width>150</width>
           <height>30</height>

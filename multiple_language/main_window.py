@@ -28,7 +28,7 @@ class MainWindow(QWidget, main_ui.Ui_Form):
             self.ignore_language_11,
             self.ignore_language_12,
             self.ignore_language_13,
-            self.ignore_language_14,
+            self.ignore_language_14
         ]
 
         _translate = QtCore.QCoreApplication.translate
@@ -41,15 +41,15 @@ class MainWindow(QWidget, main_ui.Ui_Form):
                 self.ignore_language_text.setText(language_text)
             else:
                 self.ignore_language_text.setText(self.ignore_language_text.toPlainText() + "/" + language_text)
-            self.ignore_language_radio_button_list[i].toggled.connect(self.click_add_ignore_language)
+            self.ignore_language_radio_button_list[i].toggled.connect(self.__add_ignore_language)
         # 隐藏多出来的按钮
         if len(self.ignore_language_radio_button_list) > len(multiple_language_utils.ignore_language_value_list):
             for i in range(len(self.ignore_language_radio_button_list)):
                 if i >= len(multiple_language_utils.ignore_language_value_list):
                     self.ignore_language_radio_button_list[i].hide()
-        self.ignore_language_select_all.clicked.connect(self.click_select_all_ignore_language)
+        self.ignore_language_select_all.clicked.connect(self.__select_all_ignore_language)
 
-    def click_add_ignore_language(self):
+    def __add_ignore_language(self):
         self.ignore_language_text.setText("")
         for radio_button in self.ignore_language_radio_button_list:
             if radio_button.isChecked():
@@ -59,19 +59,14 @@ class MainWindow(QWidget, main_ui.Ui_Form):
                     self.ignore_language_text.setText(
                         self.ignore_language_text.toPlainText() + "/" + radio_button.text())
 
-    def click_select_all_ignore_language(self):
+    def __select_all_ignore_language(self):
+        self.ignore_language_text.setText("")
         select_all_enable = True
         for radio_button in self.ignore_language_radio_button_list:
             if radio_button.isChecked():
                 select_all_enable = False
         for radio_button in self.ignore_language_radio_button_list:
             radio_button.setChecked(select_all_enable)
-            if not self.ignore_language_text.toPlainText():
-                self.ignore_language_text.setText(radio_button.text())
-            else:
-                self.ignore_language_text.setText(self.ignore_language_text.toPlainText() + "/" + radio_button.text())
-        if not select_all_enable:
-            self.ignore_language_text.setText("")
 
 
 def copy_multiple_language(main_window):
