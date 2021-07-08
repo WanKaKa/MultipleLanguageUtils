@@ -5,7 +5,7 @@ from multiple_language import kevin_utils
 log_delete_res_string = "log_delete_res_string.txt"
 
 
-def delete_android_values_string(project_res_dir, input_strings, callback=None):
+def delete_android_values_string(project_res_dir, input_strings, callback=None, ignore_language_list=None):
     if callback:
         callback(1, 100)
 
@@ -19,7 +19,14 @@ def delete_android_values_string(project_res_dir, input_strings, callback=None):
             count = 0
             for res_dir in dirs:
                 count += 1
-                if os.path.exists(project_res_dir + "\\" + res_dir):
+
+                is_pass_path = False
+                if ignore_language_list:
+                    for ignore_language in ignore_language_list:
+                        if ignore_language in res_dir:
+                            is_pass_path = True
+
+                if not is_pass_path and os.path.exists(project_res_dir + "\\" + res_dir):
                     if res_dir != "values" and "values" in res_dir:
                         kevin_utils.print_log(log_file, "\n%s\n" % res_dir)
                         for path in kevin_utils.java_string_file_name_list:

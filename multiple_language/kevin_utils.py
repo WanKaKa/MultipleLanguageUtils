@@ -1,6 +1,9 @@
 import os
 import re
+import shutil
 import sys
+
+from PyQt5.QtWidgets import QCheckBox
 
 java_string_file_name_list = ["string.xml", "strings.xml"]
 filter_string_key_regular = """<string name="(.+?)">"""
@@ -8,6 +11,13 @@ filter_string_key_regular = """<string name="(.+?)">"""
 
 def get_log_path():
     path = 'C:\\IJoySoft\\' + 'Kevin\\'
+    if not os.path.exists(path):
+        os.makedirs(path)
+    return path
+
+
+def get_res():
+    path = 'C:\\IJoySoft\\Kevin\\res\\'
     if not os.path.exists(path):
         os.makedirs(path)
     return path
@@ -56,6 +66,23 @@ def resource_path(relative_path):
     else:
         base_path = os.path.abspath(".")
     return os.path.join(base_path, relative_path)
+
+
+def copy_res():
+    res_list = os.listdir(get_res())
+    for item in os.listdir(resource_path("./ico")):
+        if item not in res_list:
+            shutil.copyfile(resource_path(os.path.join("ico", item)), os.path.join(get_res(), item))
+
+
+def set_check_box_style(check_box):
+    if isinstance(check_box, QCheckBox):
+        check_box.setStyleSheet(
+            "QCheckBox{background-color: rgb(255, 255, 255);font: 12pt \"微软雅黑\";}"
+            "QCheckBox::indicator {width:25px;height:25px;}"
+            "QCheckBox::indicator:unchecked  {image: url(C:/IJoySoft/Kevin/res/check_box_unchecked.png);}"
+            "QCheckBox::indicator:unchecked:hover {image: url(C:/IJoySoft/Kevin/res/check_box_unchecked_hover.png);}"
+            "QCheckBox::indicator:checked {image: url(C:/IJoySoft/Kevin/res/check_box_checked.png);}")
 
 
 def text_style1(string):

@@ -8,12 +8,23 @@ language_log_name = "log_multiple_language.txt"
 # 过滤的文件夹
 filter_folder = ["large", "small", "dpi", "land", "port"]
 
+ignore_language_value_list = [
+    "values-ar",
+    "values-fa",
+    "values-he",
+    "values-iw",
+    "values-ur",
+    "values-ug",
+    "values-en",
+    "values-zh"
+]
+
 translate_string = ""
 translate_res_dir = ""
 project_res_dir = ""
 
 
-def copy_multiple_language(input1, input2, input3, callback=None):
+def copy_multiple_language(input1, input2, input3, callback=None, ignore_language_list=None):
     if callback:
         callback(1, 100, label="正在拷贝...")
 
@@ -47,7 +58,7 @@ def copy_multiple_language(input1, input2, input3, callback=None):
         add_string_key_list = kevin_utils.analysis_equal_string(translate_string, log_file)
     if project_res_dir and os.path.exists(project_res_dir):
         for root, dirs, file_paths in os.walk(translate_res_dir):
-            if dirs:
+            if root == translate_res_dir and dirs:
                 kevin_utils.print_log(log_file, "\nroot = %s\n" % root)
                 kevin_utils.print_log(log_file, "dirs:\n")
                 kevin_utils.print_list_log(log_file, dirs, 6, 30)
@@ -57,20 +68,24 @@ def copy_multiple_language(input1, input2, input3, callback=None):
                 count = 0
                 for res_dir_name in dirs:
                     count += 1
-                    isPassPath = False
+                    is_pass_path = False
                     if "values" not in res_dir_name:
                         # 文件夹名称不包含values的文件跳过
-                        isPassPath = True
+                        is_pass_path = True
                     else:
+                        if ignore_language_list:
+                            for ignore_language in ignore_language_list:
+                                if ignore_language in res_dir_name:
+                                    is_pass_path = True
                         for i in range(9):
                             if str(i) in res_dir_name:
                                 # 文件夹名称包含数字0-9的文件跳过
-                                isPassPath = True
+                                is_pass_path = True
                         for str_folder in filter_folder:
                             if str_folder in res_dir_name:
                                 # 跳过过滤的文件夹
-                                isPassPath = True
-                    if not isPassPath and res_dir_name != "values":
+                                is_pass_path = True
+                    if not is_pass_path and res_dir_name != "values":
                         analysis_add_string(res_dir_name, add_string_key_list, log_file)
                     if callback:
                         callback(count, len(dirs))

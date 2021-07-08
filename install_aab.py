@@ -31,7 +31,7 @@ projects_details = [
     ["AdvertLibraryExampleAS", "C:\\Work\\ASProjects\\", "\\app", "com.ijoysoft.advert"],
 ]
 # 安装成功后，拷贝aab
-copy_files_dir = "C:/Users/wankai/Desktop/release/aab/"
+copy_files_dir = "C:/Users/DELL/Desktop/release/aab/"
 
 
 def init_main_menu():
