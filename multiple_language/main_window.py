@@ -61,10 +61,10 @@ class MainWindow(QWidget, main_ui.Ui_Form):
 
     def __select_all_ignore_language(self):
         self.ignore_language_text.setText("")
-        select_all_enable = True
+        select_all_enable = False
         for radio_button in self.ignore_language_radio_button_list:
-            if radio_button.isChecked():
-                select_all_enable = False
+            if not radio_button.isChecked():
+                select_all_enable = True
         for radio_button in self.ignore_language_radio_button_list:
             radio_button.setChecked(select_all_enable)
 
