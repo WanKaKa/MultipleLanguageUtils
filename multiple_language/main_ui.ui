@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1155</width>
-    <height>818</height>
+    <height>750</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -113,7 +113,7 @@ font: 12pt &quot;微软雅黑&quot;;</string>
          <rect>
           <x>180</x>
           <y>0</y>
-          <width>805</width>
+          <width>880</width>
           <height>40</height>
          </rect>
         </property>
@@ -131,7 +131,7 @@ font: 12pt &quot;微软雅黑&quot;;</string>
        <widget class="QPushButton" name="copy_translate_path">
         <property name="geometry">
          <rect>
-          <x>985</x>
+          <x>1060</x>
           <y>5</y>
           <width>75</width>
           <height>30</height>
@@ -232,7 +232,7 @@ font: 12pt &quot;微软雅黑&quot;;</string>
          <rect>
           <x>180</x>
           <y>0</y>
-          <width>805</width>
+          <width>880</width>
           <height>40</height>
          </rect>
         </property>
@@ -250,7 +250,7 @@ font: 12pt &quot;微软雅黑&quot;;</string>
        <widget class="QPushButton" name="copy_project_path">
         <property name="geometry">
          <rect>
-          <x>985</x>
+          <x>1060</x>
           <y>5</y>
           <width>75</width>
           <height>30</height>
@@ -468,7 +468,7 @@ font: 12pt &quot;微软雅黑&quot;;</string>
        <widget class="QPushButton" name="ignore_language_select_all">
         <property name="geometry">
          <rect>
-          <x>985</x>
+          <x>1060</x>
           <y>15</y>
           <width>75</width>
           <height>30</height>

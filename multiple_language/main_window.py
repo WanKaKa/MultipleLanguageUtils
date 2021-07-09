@@ -20,6 +20,7 @@ class MainWindow(QWidget, main_ui.Ui_Form):
         super(MainWindow, self).__init__(parent)
         self.setupUi(self)
 
+        self.input_string.insertFromMimeData = self.insertFromMimeData
         self.ignore_language_radio_button_list = [
             self.ignore_language_01,
             self.ignore_language_02,
@@ -67,6 +68,11 @@ class MainWindow(QWidget, main_ui.Ui_Form):
                 select_all_enable = True
         for radio_button in self.ignore_language_radio_button_list:
             radio_button.setChecked(select_all_enable)
+
+    def insertFromMimeData(self, soc):
+        if soc.hasText():
+            # 去除粘贴格式
+            self.input_string.textCursor().insertText(soc.text())
 
 
 def copy_multiple_language(main_window):

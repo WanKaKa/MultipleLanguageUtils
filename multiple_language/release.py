@@ -1,6 +1,6 @@
 import os
 
-release_version = "多语言拷贝脚本1.2.9"
+release_version = "多语言拷贝脚本1.3.0"
 
 os.system(
     "pyinstaller -F --onefile -w -i .\\ico\\logo_multiple_language.ico --add-data \".\\ico;ico\" .\\main_window.py")

@@ -14,7 +14,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_Form(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
-        Form.resize(1155, 818)
+        Form.resize(1155, 750)
         Form.setStyleSheet("background-color: rgb(255, 255, 255);")
         self.formLayout = QtWidgets.QFormLayout(Form)
         self.formLayout.setObjectName("formLayout")
@@ -48,14 +48,14 @@ class Ui_Form(object):
         self.label_2.setAlignment(QtCore.Qt.AlignCenter)
         self.label_2.setObjectName("label_2")
         self.old_translate_path = QtWidgets.QLabel(self.frame_3)
-        self.old_translate_path.setGeometry(QtCore.QRect(180, 0, 805, 40))
+        self.old_translate_path.setGeometry(QtCore.QRect(180, 0, 880, 40))
         self.old_translate_path.setStyleSheet("color: rgb(85, 85, 255);\n"
 "font: 12pt \"微软雅黑\";")
         self.old_translate_path.setText("")
         self.old_translate_path.setAlignment(QtCore.Qt.AlignCenter)
         self.old_translate_path.setObjectName("old_translate_path")
         self.copy_translate_path = QtWidgets.QPushButton(self.frame_3)
-        self.copy_translate_path.setGeometry(QtCore.QRect(985, 5, 75, 30))
+        self.copy_translate_path.setGeometry(QtCore.QRect(1060, 5, 75, 30))
         self.copy_translate_path.setStyleSheet("background-color: rgb(85, 85, 255);\n"
 "font: 12pt \"微软雅黑\";\n"
 "color: rgb(255, 255, 255);")
@@ -85,14 +85,14 @@ class Ui_Form(object):
         self.label_3.setAlignment(QtCore.Qt.AlignCenter)
         self.label_3.setObjectName("label_3")
         self.old_project_path = QtWidgets.QLabel(self.frame_4)
-        self.old_project_path.setGeometry(QtCore.QRect(180, 0, 805, 40))
+        self.old_project_path.setGeometry(QtCore.QRect(180, 0, 880, 40))
         self.old_project_path.setStyleSheet("color: rgb(85, 85, 255);\n"
 "font: 12pt \"微软雅黑\";")
         self.old_project_path.setText("")
         self.old_project_path.setAlignment(QtCore.Qt.AlignCenter)
         self.old_project_path.setObjectName("old_project_path")
         self.copy_project_path = QtWidgets.QPushButton(self.frame_4)
-        self.copy_project_path.setGeometry(QtCore.QRect(985, 5, 75, 30))
+        self.copy_project_path.setGeometry(QtCore.QRect(1060, 5, 75, 30))
         self.copy_project_path.setStyleSheet("background-color: rgb(85, 85, 255);\n"
 "font: 12pt \"微软雅黑\";\n"
 "color: rgb(255, 255, 255);")
@@ -152,7 +152,7 @@ class Ui_Form(object):
         self.ignore_language_14.setStyleSheet("font: 12pt \"微软雅黑\";")
         self.ignore_language_14.setObjectName("ignore_language_14")
         self.ignore_language_select_all = QtWidgets.QPushButton(self.frame_5)
-        self.ignore_language_select_all.setGeometry(QtCore.QRect(985, 15, 75, 30))
+        self.ignore_language_select_all.setGeometry(QtCore.QRect(1060, 15, 75, 30))
         self.ignore_language_select_all.setStyleSheet("background-color: rgb(85, 85, 255);\n"
 "font: 12pt \"微软雅黑\";\n"
 "color: rgb(255, 255, 255);")
