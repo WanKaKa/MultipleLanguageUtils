@@ -6,7 +6,7 @@ import sys
 from PyQt5.QtWidgets import QCheckBox
 
 java_string_file_name_list = ["string.xml", "strings.xml"]
-filter_string_key_regular = """<string name="(.+?)">"""
+filter_string_key_regular = """\\s*<\\s*string \\s*name\\s*=\\s*"(.+?)"\\s*>"""
 
 
 def get_log_path():
