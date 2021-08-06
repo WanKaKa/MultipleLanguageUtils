@@ -25,7 +25,7 @@ projects_details = [
     ["AdvertLibraryExampleAS", "C:\\Work\\ASProjects\\", "\\app", "com.ijoysoft.advert"],
 ]
 # 安装成功后，拷贝apk和txt的路径
-copy_files_dir = "C:/Users/DELL/Desktop/release/apk/"
+copy_files_dir = "C:/Users/DELL/Desktop/release/"
 
 
 def init_main_menu():
