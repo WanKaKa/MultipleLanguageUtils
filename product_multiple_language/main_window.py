@@ -127,6 +127,7 @@ if __name__ == "__main__":
     desktop = app.desktop()
     width = desktop.width()
     height = desktop.height()
+    kevin_utils.copy_res()
 
     window = MainWindow()
     x = int((width - window.frameGeometry().width()) / 2)
