@@ -1,6 +1,6 @@
 import os
 
-release_version = "产品工具-多语言1.1.3"
+release_version = "产品工具-多语言1.1.5"
 
 if __name__ == '__main__':
     os.system(

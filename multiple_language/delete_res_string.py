@@ -23,7 +23,7 @@ def delete_android_values_string(project_res_dir, input_strings, callback=None, 
                 is_pass_path = False
                 if ignore_language_list:
                     for ignore_language in ignore_language_list:
-                        if ignore_language in res_dir:
+                        if ignore_language and ignore_language in res_dir:
                             is_pass_path = True
 
                 if not is_pass_path and os.path.exists(project_res_dir + "\\" + res_dir):

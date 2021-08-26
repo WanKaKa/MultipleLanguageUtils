@@ -20,7 +20,7 @@ def init_view(main_window):
     main_window.translate_statistics_list.setHorizontalHeaderLabels(['数量', '字符'])
     main_window.translate_statistics_list.setEditTriggers(QAbstractItemView.NoEditTriggers)
     main_window.translate_statistics_list.setColumnWidth(0, 60)
-    main_window.translate_statistics_list.setColumnWidth(1, 560)
+    main_window.translate_statistics_list.setColumnWidth(1, 500)
     # 开始统计
     statistics_string(main_window)
 

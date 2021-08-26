@@ -75,7 +75,7 @@ def copy_multiple_language(input1, input2, input3, callback=None, ignore_languag
                     else:
                         if ignore_language_list:
                             for ignore_language in ignore_language_list:
-                                if ignore_language in res_dir_name:
+                                if ignore_language and ignore_language in res_dir_name:
                                     is_pass_path = True
                         for i in range(9):
                             if str(i) in res_dir_name:

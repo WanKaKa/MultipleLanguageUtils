@@ -10,7 +10,7 @@ translate_reference_key_list = []
 translate_project_key_list = []
 
 
-def find_translate(translate_res_dir, project_res_dir, callback=None):
+def find_translate(translate_res_dir, project_res_dir, callback=None, ignore_language_list=None):
     if callback:
         callback(1, 100, label="正在解析字符...")
 
@@ -69,7 +69,8 @@ def find_translate(translate_res_dir, project_res_dir, callback=None):
 
     if translate_string_list:
         multiple_language_utils.copy_multiple_language(
-            translate_string_list, translate_res_dir, project_res_dir, callback=callback)
+            translate_string_list, translate_res_dir, project_res_dir, callback=callback,
+            ignore_language_list=ignore_language_list)
     return translate_string_list
 
 

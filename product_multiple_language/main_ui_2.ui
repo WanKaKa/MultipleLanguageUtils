@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1439</width>
-    <height>720</height>
+    <width>1600</width>
+    <height>800</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -20,534 +20,806 @@
    <item row="0" column="0" colspan="2">
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
-      <layout class="QVBoxLayout" name="verticalLayout_2">
-       <item>
-        <widget class="QLabel" name="label">
-         <property name="minimumSize">
-          <size>
-           <width>0</width>
-           <height>40</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>16777215</width>
-           <height>40</height>
-          </size>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">background-color: rgb(255, 255, 255);
+      <widget class="QFrame" name="frame_6">
+       <property name="minimumSize">
+        <size>
+         <width>540</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::StyledPanel</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Raised</enum>
+       </property>
+       <layout class="QFormLayout" name="formLayout_3">
+        <item row="0" column="0" colspan="2">
+         <layout class="QVBoxLayout" name="verticalLayout_3">
+          <item>
+           <widget class="QLabel" name="label">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>40</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>40</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">background-color: rgb(255, 255, 255);
 color: rgb(85, 85, 255);
 font: 16pt &quot;微软雅黑&quot;;</string>
-         </property>
-         <property name="text">
-          <string>拷贝区域</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignCenter</set>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QLabel" name="label_2">
-         <property name="minimumSize">
-          <size>
-           <width>0</width>
-           <height>40</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>16777215</width>
-           <height>40</height>
-          </size>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">background-color: rgb(255, 255, 255);
+            </property>
+            <property name="text">
+             <string>拷贝区域</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_2">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>40</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>40</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">background-color: rgb(255, 255, 255);
 font: 10pt &quot;微软雅黑&quot;;</string>
-         </property>
-         <property name="text">
-          <string>需要拷贝的字符，格式如下：&lt;string name=&quot;i_joy_soft&quot;&gt;IJoySoft&lt;/string&gt;</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignCenter</set>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QTextEdit" name="input_string">
-         <property name="styleSheet">
-          <string notr="true">background-color: rgb(255, 255, 255);
-font: 8pt &quot;微软雅黑&quot;;</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_3">
-         <item>
-          <widget class="QLabel" name="label_7">
-           <property name="minimumSize">
-            <size>
-             <width>80</width>
-             <height>40</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>80</width>
-             <height>40</height>
-            </size>
-           </property>
-           <property name="styleSheet">
-            <string notr="true">background-color: rgb(255, 255, 255);
-font: 10pt &quot;微软雅黑&quot;;</string>
-           </property>
-           <property name="text">
-            <string>翻译路径:</string>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignCenter</set>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLabel" name="old_translate_path">
-           <property name="minimumSize">
-            <size>
-             <width>0</width>
-             <height>40</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>16777215</width>
-             <height>40</height>
-            </size>
-           </property>
-           <property name="styleSheet">
-            <string notr="true">background-color: rgb(255, 255, 255);
-font: 12pt &quot;微软雅黑&quot;;
+            </property>
+            <property name="text">
+             <string>需要拷贝的字符，格式如下：&lt;string name=&quot;i_joy_soft&quot;&gt;IJoySoft&lt;/string&gt;</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QTextEdit" name="input_string">
+            <property name="styleSheet">
+             <string notr="true">background-color: rgb(255, 255, 255);
+font: 8pt &quot;微软雅黑&quot;;
 color: rgb(85, 85, 255);</string>
-           </property>
-           <property name="text">
-            <string/>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignCenter</set>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="copy_translate_path">
-           <property name="maximumSize">
-            <size>
-             <width>75</width>
-             <height>30</height>
-            </size>
-           </property>
-           <property name="styleSheet">
-            <string notr="true">background-color: rgb(85, 85, 255);
-font: 12pt &quot;微软雅黑&quot;;
-color: rgb(255, 255, 255);</string>
-           </property>
-           <property name="text">
-            <string>使用</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-       <item>
-        <widget class="QTextEdit" name="input_translate_path">
-         <property name="minimumSize">
-          <size>
-           <width>0</width>
-           <height>60</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>16777215</width>
-           <height>60</height>
-          </size>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">background-color: rgb(255, 255, 255);
-color: rgb(85, 85, 255);
-font: 16pt &quot;微软雅黑&quot;;</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_5">
-         <item>
-          <widget class="QLabel" name="label_6">
-           <property name="minimumSize">
-            <size>
-             <width>80</width>
-             <height>40</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>80</width>
-             <height>40</height>
-            </size>
-           </property>
-           <property name="styleSheet">
-            <string notr="true">background-color: rgb(255, 255, 255);
+            </property>
+           </widget>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_4">
+            <item>
+             <widget class="QLabel" name="label_7">
+              <property name="minimumSize">
+               <size>
+                <width>80</width>
+                <height>40</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>80</width>
+                <height>40</height>
+               </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">background-color: rgb(255, 255, 255);
 font: 10pt &quot;微软雅黑&quot;;</string>
-           </property>
-           <property name="text">
-            <string>项目路径:</string>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignCenter</set>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLabel" name="old_project_path">
-           <property name="minimumSize">
-            <size>
-             <width>440</width>
-             <height>40</height>
-            </size>
-           </property>
-           <property name="styleSheet">
-            <string notr="true">background-color: rgb(255, 255, 255);
-font: 12pt &quot;微软雅黑&quot;;
-color: rgb(85, 85, 255);</string>
-           </property>
-           <property name="text">
-            <string/>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignCenter</set>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="copy_project_path">
-           <property name="maximumSize">
-            <size>
-             <width>75</width>
-             <height>30</height>
-            </size>
-           </property>
-           <property name="styleSheet">
-            <string notr="true">background-color: rgb(85, 85, 255);
+              </property>
+              <property name="text">
+               <string>翻译路径:</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="old_translate_path">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>40</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>16777215</width>
+                <height>40</height>
+               </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">background-color: rgb(255, 255, 255);
+font: 12pt &quot;微软雅黑&quot;;</string>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="copy_translate_path">
+              <property name="minimumSize">
+               <size>
+                <width>75</width>
+                <height>30</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>75</width>
+                <height>30</height>
+               </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">background-color: rgb(85, 85, 255);
 font: 12pt &quot;微软雅黑&quot;;
 color: rgb(255, 255, 255);</string>
-           </property>
-           <property name="text">
-            <string>使用</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-       <item>
-        <widget class="QTextEdit" name="input_project_path">
-         <property name="minimumSize">
-          <size>
-           <width>0</width>
-           <height>60</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>16777215</width>
-           <height>60</height>
-          </size>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">background-color: rgb(255, 255, 255);
+              </property>
+              <property name="text">
+               <string>使用</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <widget class="QTextEdit" name="input_translate_path">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>60</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>60</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">background-color: rgb(255, 255, 255);
 color: rgb(85, 85, 255);
-font: 16pt &quot;微软雅黑&quot;;</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_6">
-         <item>
-          <widget class="QPushButton" name="check_copy_string">
-           <property name="minimumSize">
-            <size>
-             <width>100</width>
-             <height>40</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>100</width>
-             <height>40</height>
-            </size>
-           </property>
-           <property name="styleSheet">
-            <string notr="true">background-color: rgb(85, 85, 255);
+font: 12pt &quot;微软雅黑&quot;;</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_8">
+            <item>
+             <widget class="QLabel" name="label_6">
+              <property name="minimumSize">
+               <size>
+                <width>80</width>
+                <height>40</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>80</width>
+                <height>40</height>
+               </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">background-color: rgb(255, 255, 255);
+font: 10pt &quot;微软雅黑&quot;;</string>
+              </property>
+              <property name="text">
+               <string>项目路径:</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="old_project_path">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>40</height>
+               </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">background-color: rgb(255, 255, 255);
+font: 12pt &quot;微软雅黑&quot;;</string>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="copy_project_path">
+              <property name="minimumSize">
+               <size>
+                <width>75</width>
+                <height>30</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>75</width>
+                <height>30</height>
+               </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">background-color: rgb(85, 85, 255);
 font: 12pt &quot;微软雅黑&quot;;
 color: rgb(255, 255, 255);</string>
-           </property>
-           <property name="text">
-            <string>查重拷贝</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QFrame" name="frame">
-           <property name="frameShape">
-            <enum>QFrame::StyledPanel</enum>
-           </property>
-           <property name="frameShadow">
-            <enum>QFrame::Raised</enum>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="copy_string">
-           <property name="minimumSize">
-            <size>
-             <width>100</width>
-             <height>40</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>100</width>
-             <height>40</height>
-            </size>
-           </property>
-           <property name="styleSheet">
-            <string notr="true">background-color: rgb(85, 85, 255);
+              </property>
+              <property name="text">
+               <string>使用</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <widget class="QTextEdit" name="input_project_path">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>60</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>60</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">background-color: rgb(255, 255, 255);
+color: rgb(85, 85, 255);
+font: 12pt &quot;微软雅黑&quot;;</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_3">
+            <item>
+             <widget class="QFrame" name="frame_7">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>60</height>
+               </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">background-color: rgb(255, 255, 255);</string>
+              </property>
+              <property name="frameShape">
+               <enum>QFrame::StyledPanel</enum>
+              </property>
+              <property name="frameShadow">
+               <enum>QFrame::Raised</enum>
+              </property>
+              <widget class="QLabel" name="label_5">
+               <property name="geometry">
+                <rect>
+                 <x>0</x>
+                 <y>0</y>
+                 <width>180</width>
+                 <height>60</height>
+                </rect>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>60</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>40</height>
+                </size>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">background-color: rgb(255, 255, 255);
+font: 12pt &quot;微软雅黑&quot;;</string>
+               </property>
+               <property name="text">
+                <string>忽略的语言:</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+               <property name="margin">
+                <number>0</number>
+               </property>
+              </widget>
+              <widget class="QCheckBox" name="ignore_language_11">
+               <property name="geometry">
+                <rect>
+                 <x>180</x>
+                 <y>30</y>
+                 <width>150</width>
+                 <height>30</height>
+                </rect>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">font: 12pt &quot;微软雅黑&quot;;</string>
+               </property>
+               <property name="text">
+                <string>CheckBox</string>
+               </property>
+              </widget>
+              <widget class="QCheckBox" name="ignore_language_14">
+               <property name="geometry">
+                <rect>
+                 <x>630</x>
+                 <y>30</y>
+                 <width>150</width>
+                 <height>30</height>
+                </rect>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">font: 12pt &quot;微软雅黑&quot;;</string>
+               </property>
+               <property name="text">
+                <string>CheckBox</string>
+               </property>
+              </widget>
+              <widget class="QCheckBox" name="ignore_language_03">
+               <property name="geometry">
+                <rect>
+                 <x>480</x>
+                 <y>0</y>
+                 <width>150</width>
+                 <height>30</height>
+                </rect>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">font: 12pt &quot;微软雅黑&quot;;</string>
+               </property>
+               <property name="text">
+                <string>CheckBox</string>
+               </property>
+              </widget>
+              <widget class="QCheckBox" name="ignore_language_04">
+               <property name="geometry">
+                <rect>
+                 <x>630</x>
+                 <y>0</y>
+                 <width>150</width>
+                 <height>30</height>
+                </rect>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">font: 12pt &quot;微软雅黑&quot;;</string>
+               </property>
+               <property name="text">
+                <string>CheckBox</string>
+               </property>
+              </widget>
+              <widget class="QCheckBox" name="ignore_language_13">
+               <property name="geometry">
+                <rect>
+                 <x>480</x>
+                 <y>30</y>
+                 <width>150</width>
+                 <height>30</height>
+                </rect>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">font: 12pt &quot;微软雅黑&quot;;</string>
+               </property>
+               <property name="text">
+                <string>CheckBox</string>
+               </property>
+              </widget>
+              <widget class="QCheckBox" name="ignore_language_12">
+               <property name="geometry">
+                <rect>
+                 <x>330</x>
+                 <y>30</y>
+                 <width>150</width>
+                 <height>30</height>
+                </rect>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">font: 12pt &quot;微软雅黑&quot;;</string>
+               </property>
+               <property name="text">
+                <string>CheckBox</string>
+               </property>
+              </widget>
+              <widget class="QCheckBox" name="ignore_language_01">
+               <property name="geometry">
+                <rect>
+                 <x>180</x>
+                 <y>0</y>
+                 <width>150</width>
+                 <height>30</height>
+                </rect>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">font: 12pt &quot;微软雅黑&quot;;</string>
+               </property>
+               <property name="text">
+                <string>CheckBox</string>
+               </property>
+              </widget>
+              <widget class="QCheckBox" name="ignore_language_02">
+               <property name="geometry">
+                <rect>
+                 <x>330</x>
+                 <y>0</y>
+                 <width>150</width>
+                 <height>30</height>
+                </rect>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">font: 12pt &quot;微软雅黑&quot;;</string>
+               </property>
+               <property name="text">
+                <string>CheckBox</string>
+               </property>
+              </widget>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="ignore_language_select_all">
+              <property name="maximumSize">
+               <size>
+                <width>75</width>
+                <height>16777215</height>
+               </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">background-color: rgb(85, 85, 255);
 font: 12pt &quot;微软雅黑&quot;;
 color: rgb(255, 255, 255);</string>
-           </property>
-           <property name="text">
-            <string>拷贝</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QFrame" name="frame_2">
-           <property name="frameShape">
-            <enum>QFrame::StyledPanel</enum>
-           </property>
-           <property name="frameShadow">
-            <enum>QFrame::Raised</enum>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="delete_string">
-           <property name="minimumSize">
-            <size>
-             <width>100</width>
-             <height>40</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>100</width>
-             <height>40</height>
-            </size>
-           </property>
-           <property name="styleSheet">
-            <string notr="true">background-color: rgb(255, 85, 127);
+              </property>
+              <property name="text">
+               <string>(非)全选</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <widget class="QTextEdit" name="ignore_language_text">
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>60</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">font: 12pt &quot;微软雅黑&quot;;
+background-color: rgb(255, 255, 255);
+color: rgb(85, 85, 255);</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_6">
+            <item>
+             <widget class="QPushButton" name="check_copy_string">
+              <property name="minimumSize">
+               <size>
+                <width>100</width>
+                <height>40</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>100</width>
+                <height>40</height>
+               </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">background-color: rgb(85, 85, 255);
 font: 12pt &quot;微软雅黑&quot;;
 color: rgb(255, 255, 255);</string>
-           </property>
-           <property name="text">
-            <string>删除</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QFrame" name="frame_3">
-           <property name="frameShape">
-            <enum>QFrame::StyledPanel</enum>
-           </property>
-           <property name="frameShadow">
-            <enum>QFrame::Raised</enum>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="open_copy_logo">
-           <property name="minimumSize">
-            <size>
-             <width>100</width>
-             <height>40</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>100</width>
-             <height>40</height>
-            </size>
-           </property>
-           <property name="styleSheet">
-            <string notr="true">background-color: rgb(85, 85, 255);
+              </property>
+              <property name="text">
+               <string>查重拷贝</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QFrame" name="frame">
+              <property name="frameShape">
+               <enum>QFrame::StyledPanel</enum>
+              </property>
+              <property name="frameShadow">
+               <enum>QFrame::Raised</enum>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="copy_string">
+              <property name="minimumSize">
+               <size>
+                <width>100</width>
+                <height>40</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>100</width>
+                <height>40</height>
+               </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">background-color: rgb(85, 85, 255);
 font: 12pt &quot;微软雅黑&quot;;
 color: rgb(255, 255, 255);</string>
-           </property>
-           <property name="text">
-            <string>Log-拷贝</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QFrame" name="frame_4">
-           <property name="frameShape">
-            <enum>QFrame::StyledPanel</enum>
-           </property>
-           <property name="frameShadow">
-            <enum>QFrame::Raised</enum>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="open_delete_log">
-           <property name="minimumSize">
-            <size>
-             <width>100</width>
-             <height>40</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>100</width>
-             <height>40</height>
-            </size>
-           </property>
-           <property name="styleSheet">
-            <string notr="true">background-color: rgb(85, 85, 255);
+              </property>
+              <property name="text">
+               <string>拷贝</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QFrame" name="frame_2">
+              <property name="frameShape">
+               <enum>QFrame::StyledPanel</enum>
+              </property>
+              <property name="frameShadow">
+               <enum>QFrame::Raised</enum>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="delete_string">
+              <property name="minimumSize">
+               <size>
+                <width>100</width>
+                <height>40</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>100</width>
+                <height>40</height>
+               </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">background-color: rgb(255, 85, 127);
 font: 12pt &quot;微软雅黑&quot;;
 color: rgb(255, 255, 255);</string>
-           </property>
-           <property name="text">
-            <string>Log-删除</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-      </layout>
+              </property>
+              <property name="text">
+               <string>删除</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QFrame" name="frame_3">
+              <property name="frameShape">
+               <enum>QFrame::StyledPanel</enum>
+              </property>
+              <property name="frameShadow">
+               <enum>QFrame::Raised</enum>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="open_copy_logo">
+              <property name="minimumSize">
+               <size>
+                <width>100</width>
+                <height>40</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>100</width>
+                <height>40</height>
+               </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">background-color: rgb(85, 85, 255);
+font: 12pt &quot;微软雅黑&quot;;
+color: rgb(255, 255, 255);</string>
+              </property>
+              <property name="text">
+               <string>Log-拷贝</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QFrame" name="frame_4">
+              <property name="frameShape">
+               <enum>QFrame::StyledPanel</enum>
+              </property>
+              <property name="frameShadow">
+               <enum>QFrame::Raised</enum>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="open_delete_log">
+              <property name="minimumSize">
+               <size>
+                <width>100</width>
+                <height>40</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>100</width>
+                <height>40</height>
+               </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">background-color: rgb(85, 85, 255);
+font: 12pt &quot;微软雅黑&quot;;
+color: rgb(255, 255, 255);</string>
+              </property>
+              <property name="text">
+               <string>Log-删除</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
      </item>
      <item>
-      <layout class="QVBoxLayout" name="verticalLayout_3">
-       <item>
-        <widget class="QLabel" name="label_4">
-         <property name="minimumSize">
-          <size>
-           <width>0</width>
-           <height>40</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>16777215</width>
-           <height>40</height>
-          </size>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">background-color: rgb(255, 255, 255);
+      <widget class="QFrame" name="frame_5">
+       <property name="minimumSize">
+        <size>
+         <width>640</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>540</width>
+         <height>16777215</height>
+        </size>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::StyledPanel</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Raised</enum>
+       </property>
+       <layout class="QFormLayout" name="formLayout_2">
+        <item row="0" column="0" colspan="2">
+         <layout class="QVBoxLayout" name="verticalLayout">
+          <item>
+           <widget class="QLabel" name="label_4">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>40</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>40</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">background-color: rgb(255, 255, 255);
 color: rgb(85, 85, 255);
 font: 16pt &quot;微软雅黑&quot;;</string>
-         </property>
-         <property name="text">
-          <string>翻译统计区域</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignCenter</set>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_4">
-         <item>
-          <widget class="QLineEdit" name="translate_statistics_find_string">
-           <property name="minimumSize">
-            <size>
-             <width>0</width>
-             <height>40</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>16777215</width>
-             <height>40</height>
-            </size>
-           </property>
-           <property name="styleSheet">
-            <string notr="true">background-color: rgb(255, 255, 255);
+            </property>
+            <property name="text">
+             <string>翻译统计区域</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_7">
+            <item>
+             <widget class="QLineEdit" name="translate_statistics_find_string">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>40</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>16777215</width>
+                <height>40</height>
+               </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">background-color: rgb(255, 255, 255);
 font: 12pt &quot;微软雅黑&quot;;
 color: rgb(85, 85, 255);</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="translate_statistics_click_find">
-           <property name="minimumSize">
-            <size>
-             <width>80</width>
-             <height>40</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>80</width>
-             <height>40</height>
-            </size>
-           </property>
-           <property name="styleSheet">
-            <string notr="true">background-color: rgb(85, 85, 255);
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="translate_statistics_click_find">
+              <property name="minimumSize">
+               <size>
+                <width>80</width>
+                <height>40</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>80</width>
+                <height>40</height>
+               </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">background-color: rgb(85, 85, 255);
 color: rgb(255, 255, 255);
 font: 12pt &quot;微软雅黑&quot;;</string>
-           </property>
-           <property name="text">
-            <string>查找</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-       <item>
-        <widget class="QTableWidget" name="translate_statistics_list">
-         <property name="styleSheet">
-          <string notr="true">background-color: rgb(255, 255, 255);</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_2">
-         <item>
-          <widget class="QPushButton" name="refersh_translate_statistics">
-           <property name="minimumSize">
-            <size>
-             <width>100</width>
-             <height>40</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>100</width>
-             <height>40</height>
-            </size>
-           </property>
-           <property name="styleSheet">
-            <string notr="true">background-color: rgb(85, 85, 255);
+              </property>
+              <property name="text">
+               <string>查找</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <widget class="QTableWidget" name="translate_statistics_list">
+            <property name="styleSheet">
+             <string notr="true">background-color: rgb(255, 255, 255);</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_2">
+            <item>
+             <widget class="QPushButton" name="refersh_translate_statistics">
+              <property name="minimumSize">
+               <size>
+                <width>100</width>
+                <height>40</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>100</width>
+                <height>40</height>
+               </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">background-color: rgb(85, 85, 255);
 font: 12pt &quot;微软雅黑&quot;;
 color: rgb(255, 255, 255);</string>
-           </property>
-           <property name="text">
-            <string>刷新</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-      </layout>
+              </property>
+              <property name="text">
+               <string>刷新</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
      </item>
     </layout>
    </item>
