@@ -17,6 +17,7 @@ class Ui_Form(object):
         Form.resize(1600, 800)
         Form.setStyleSheet("background-color: rgb(240, 240, 240);")
         self.formLayout = QtWidgets.QFormLayout(Form)
+        self.formLayout.setContentsMargins(6, 6, 6, 6)
         self.formLayout.setObjectName("formLayout")
         self.horizontalLayout = QtWidgets.QHBoxLayout()
         self.horizontalLayout.setObjectName("horizontalLayout")
@@ -26,6 +27,8 @@ class Ui_Form(object):
         self.frame_6.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame_6.setObjectName("frame_6")
         self.formLayout_3 = QtWidgets.QFormLayout(self.frame_6)
+        self.formLayout_3.setContentsMargins(0, 0, 0, 0)
+        self.formLayout_3.setHorizontalSpacing(6)
         self.formLayout_3.setObjectName("formLayout_3")
         self.verticalLayout_3 = QtWidgets.QVBoxLayout()
         self.verticalLayout_3.setObjectName("verticalLayout_3")
@@ -72,8 +75,8 @@ class Ui_Form(object):
         self.old_translate_path.setObjectName("old_translate_path")
         self.horizontalLayout_4.addWidget(self.old_translate_path)
         self.copy_translate_path = QtWidgets.QPushButton(self.frame_6)
-        self.copy_translate_path.setMinimumSize(QtCore.QSize(75, 30))
-        self.copy_translate_path.setMaximumSize(QtCore.QSize(75, 30))
+        self.copy_translate_path.setMinimumSize(QtCore.QSize(75, 40))
+        self.copy_translate_path.setMaximumSize(QtCore.QSize(75, 40))
         self.copy_translate_path.setStyleSheet("background-color: rgb(85, 85, 255);\n"
 "font: 12pt \"微软雅黑\";\n"
 "color: rgb(255, 255, 255);")
@@ -107,8 +110,8 @@ class Ui_Form(object):
         self.old_project_path.setObjectName("old_project_path")
         self.horizontalLayout_8.addWidget(self.old_project_path)
         self.copy_project_path = QtWidgets.QPushButton(self.frame_6)
-        self.copy_project_path.setMinimumSize(QtCore.QSize(75, 30))
-        self.copy_project_path.setMaximumSize(QtCore.QSize(75, 30))
+        self.copy_project_path.setMinimumSize(QtCore.QSize(75, 40))
+        self.copy_project_path.setMaximumSize(QtCore.QSize(75, 40))
         self.copy_project_path.setStyleSheet("background-color: rgb(85, 85, 255);\n"
 "font: 12pt \"微软雅黑\";\n"
 "color: rgb(255, 255, 255);")
@@ -173,7 +176,8 @@ class Ui_Form(object):
         self.ignore_language_02.setObjectName("ignore_language_02")
         self.horizontalLayout_3.addWidget(self.frame_7)
         self.ignore_language_select_all = QtWidgets.QPushButton(self.frame_6)
-        self.ignore_language_select_all.setMaximumSize(QtCore.QSize(75, 16777215))
+        self.ignore_language_select_all.setMinimumSize(QtCore.QSize(0, 40))
+        self.ignore_language_select_all.setMaximumSize(QtCore.QSize(75, 40))
         self.ignore_language_select_all.setStyleSheet("background-color: rgb(85, 85, 255);\n"
 "font: 12pt \"微软雅黑\";\n"
 "color: rgb(255, 255, 255);")
@@ -259,6 +263,7 @@ class Ui_Form(object):
         self.frame_5.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame_5.setObjectName("frame_5")
         self.formLayout_2 = QtWidgets.QFormLayout(self.frame_5)
+        self.formLayout_2.setContentsMargins(0, 0, 0, 0)
         self.formLayout_2.setObjectName("formLayout_2")
         self.verticalLayout = QtWidgets.QVBoxLayout()
         self.verticalLayout.setObjectName("verticalLayout")
