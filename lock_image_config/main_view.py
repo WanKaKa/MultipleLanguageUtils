@@ -30,8 +30,8 @@ class MainWindow(QWidget, main_ui.Ui_Form):
     def init_view(self):
         _translate = QtCore.QCoreApplication.translate
         self.service_url_1.setText(_translate("Form", ""))
-        self.service_url_2.setText(_translate("Form", "https://lockscreenres.oss-us-west-1.aliyuncs.com/"))
-        self.service_url_3.setText(_translate("Form", "https://lockscreentabres.oss-us-west-1.aliyuncs.com/"))
+        self.service_url_2.setText(_translate("Form", "https://lockscreenencrypt.oss-us-west-1.aliyuncs.com/"))
+        self.service_url_3.setText(_translate("Form", "https://lockscreentabencrypt.oss-us-west-1.aliyuncs.com/"))
         self.reset_button.clicked.connect(self.reset_work)
         self.run_button.clicked.connect(self.run)
         self.log_button.clicked.connect(lambda: os.system(path.get_cache_path() + path.RUN_LOG_NAME))
