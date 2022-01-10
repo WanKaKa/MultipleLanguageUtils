@@ -85,7 +85,7 @@ def copy_multiple_language(input1, input2, input3, callback=None, ignore_languag
                             if str_folder in res_dir_name:
                                 # 跳过过滤的文件夹
                                 is_pass_path = True
-                    if not is_pass_path and res_dir_name != "values":
+                    if not is_pass_path:  # res_dir_name != "values"
                         analysis_add_string(res_dir_name, add_string_key_list, log_file)
                     if callback:
                         callback(count, len(dirs))
@@ -207,7 +207,7 @@ def add_string_to_project_res(res_dir_name, add_str):
                 tmp_file.write(line)
                 line = file.readline()
             tmp_file.write(add_str)
-            tmp_file.write("\n</resources>")
+            tmp_file.write("\n</resources>\n")
             file.close()
             tmp_file.close()
             os.remove(file_path)

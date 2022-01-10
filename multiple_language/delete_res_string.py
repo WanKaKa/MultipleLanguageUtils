@@ -27,7 +27,7 @@ def delete_android_values_string(project_res_dir, input_strings, callback=None, 
                             is_pass_path = True
 
                 if not is_pass_path and os.path.exists(project_res_dir + "\\" + res_dir):
-                    if res_dir != "values" and "values" in res_dir:
+                    if "values" in res_dir:  # res_dir != "values"
                         kevin_utils.print_log(log_file, "\n%s\n" % res_dir)
                         for path in kevin_utils.java_string_file_name_list:
                             file_path = project_res_dir + "\\" + res_dir + "\\" + path
