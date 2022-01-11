@@ -18,9 +18,14 @@ class MainWindow(QWidget, main_ui.Ui_Form):
         super(MainWindow, self).__init__(parent)
         self.setupUi(self)
 
+        kevin_utils.set_radio_button_style(self.copy_string_mode, False)
+        kevin_utils.set_radio_button_style(self.copy_dime_mode, False)
+
+        self.copy_string_mode.setChecked(True)
+
 
 class MainWindowFactory:
-    def __init__(self, main_window):
+    def __init__(self, main_window: MainWindow):
         self.main_window = main_window
 
         self.progress_dialog = QProgressDialog(self.main_window)
@@ -129,7 +134,7 @@ class MainWindowFactory:
             value = self.main_window.ignore_language_text.toPlainText()
             multiple_language_utils.copy_multiple_language(
                 input_strings, translate_dir, project_dir, callback=self.progress_callback,
-                ignore_language_list=value.split("/") if value else None)
+                ignore_language_list=value.split("/") if value else None, copy_mode=self.get_copy_mode())
 
     def delete_android_values_string(self):
         reply = QMessageBox.question(
@@ -148,13 +153,19 @@ class MainWindowFactory:
             value = self.main_window.ignore_language_text.toPlainText()
             delete_res_string.delete_android_values_string(
                 project_dir, input_strings, callback=self.progress_callback,
-                ignore_language_list=value.split("/") if value else None)
+                ignore_language_list=value.split("/") if value else None, copy_mode=self.get_copy_mode())
 
     def progress_callback(self, *args, **kwargs):
         if kwargs and "label" in kwargs:
             self.progress_dialog.setLabelText(kwargs["label"])
         if self.progress_dialog and isinstance(self.progress_dialog, QProgressDialog):
             self.progress_dialog.setValue(int(args[0] / args[1] * 100))
+
+    def get_copy_mode(self):
+        if self.main_window.copy_string_mode.isChecked():
+            return "string"
+        elif self.main_window.copy_dime_mode.isChecked():
+            return "dime"
 
 
 if __name__ == '__main__':
