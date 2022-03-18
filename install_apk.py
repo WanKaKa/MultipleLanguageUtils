@@ -23,7 +23,7 @@ projects_details = [
     ["WeatherForecastBM", "C:\\Work\\ASProjects\\", "\\WeatherForecast", "weather.local.weather.forecast.channel"],
     ["LauncherIOS", "C:\\Work\\ASProjects\\", "\\app", "theme.wallpaper.smart.launcher"],
     ["AdvertLibraryExampleAS", "C:\\Work\\ASProjects\\", "\\app", "com.ijoysoft.advert"],
-    ["ScreenRecorder", "C:\\Work\\ASProjects\\", "\\app", "smart.recorder.screenrecorder"],
+    ["ScreenRecorderAS", "C:\\Work\\ASProjects\\", "\\app", "smart.recorder.screenrecorder"],
 ]
 # 安装成功后，拷贝apk和txt的路径
 copy_files_dir = "C:/Users/DELL/Desktop/release/"
