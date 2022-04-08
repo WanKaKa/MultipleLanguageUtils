@@ -31,6 +31,7 @@ projects_details = [
     ["AdvertLibraryExampleAS", "C:\\Work\\ASProjects\\", "\\app", "com.ijoysoft.advert"],
     ["ScreenRecorderAS", "C:\\Work\\ASProjects\\", "\\app", "smart.recorder.screenrecorder"],
     ["ScreenRecorderTheme", "C:\\Work\\ASProjects\\", "\\app", "smart.video.recorder.screenrecorder"],
+    ["ScreenRecorderTabAS", "C:\\Work\\ASProjects\\", "\\app", "tool.video.screen.recorder"],
 ]
 # 安装成功后，拷贝aab
 copy_files_dir = "C:/Users/DELL/Desktop/release/"
