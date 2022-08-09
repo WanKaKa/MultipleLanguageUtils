@@ -27,9 +27,11 @@ projects_details = [
     ["WeatherAccurate", "C:\\Work\\ASProjects\\", "\\WeatherForecast", "accurate.local.weather.forecast.channel"],
     ["WeatherForecastAS", "C:\\Work\\ASProjects\\", "\\WeatherForecast", "weather.forecast.live.weather"],
     ["WeatherForecastBM", "C:\\Work\\ASProjects\\", "\\WeatherForecast", "weather.local.weather.forecast.channel"],
+    ["WeatherForecastGrid", "C:\\Work\\ASProjects\\", "\\WeatherForecast", "local.weather.forecast.pro"],
+    ["WeatherForecastBlack", "C:\\Work\\ASProjects\\", "\\WeatherForecast", "weather.radar.real.weather.forecast"],
     ["LauncherIOS", "C:\\Work\\ASProjects\\", "\\app", "theme.wallpaper.smart.launcher"],
     ["AdvertLibraryExampleAS", "C:\\Work\\ASProjects\\", "\\app", "com.ijoysoft.advert"],
-    ["ScreenRecorderAS", "C:\\Work\\ASProjects\\", "\\app", "smart.recorder.screenrecorder"],
+    ["ScreenRecorderAS", "C:\\Work\\ASProjects\\", "\\app", "tool.video.recorder.screenrecorder"],
     ["ScreenRecorderTheme", "C:\\Work\\ASProjects\\", "\\app", "smart.video.recorder.screenrecorder"],
     ["ScreenRecorderTabAS", "C:\\Work\\ASProjects\\", "\\app", "tool.video.screen.recorder"],
 ]
