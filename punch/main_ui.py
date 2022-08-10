@@ -15,7 +15,8 @@ class Ui_Form(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
         Form.resize(369, 126)
-        Form.setMinimumSize(QtCore.QSize(0, 0))
+        Form.setMinimumSize(QtCore.QSize(369, 126))
+        Form.setMaximumSize(QtCore.QSize(369, 126))
         Form.setStyleSheet("background-color: rgb(255, 255, 255);\n"
 "background-color: rgb(240, 240, 240);")
         self.formLayout = QtWidgets.QFormLayout(Form)

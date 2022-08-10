@@ -96,7 +96,12 @@ class MainWidget(QWidget):
         # 获取输入的时间
         self.timing_hour = int(self.ui.hour.text())
         self.timing_minutes = int(self.ui.minutes.text())
+        self.get_countdown()
 
+        timer = threading.Timer(1, function=self.countdown_task)
+        timer.start()
+
+    def get_countdown(self):
         # 获取电脑当前时间
         current_time = time.localtime(time.time())
         current_hour = int(time.strftime('%H', current_time))
@@ -105,12 +110,12 @@ class MainWidget(QWidget):
 
         timing_second = self.timing_hour * 3600 + self.timing_minutes * 60
         if timing_second <= current_second:
-            self.countdown = 24 * 3600 + timing_second - current_second
+            if abs(timing_second - current_second) <= 5:
+                self.countdown = 0
+            else:
+                self.countdown = 24 * 3600 + timing_second - current_second
         else:
             self.countdown = timing_second - current_second
-
-        timer = threading.Timer(1, function=self.countdown_task)
-        timer.start()
 
     def countdown_task(self):
         if self.countdown <= 0:
@@ -118,7 +123,7 @@ class MainWidget(QWidget):
             timer = threading.Timer(1, function=self.punch_task)
             timer.start()
             return
-        self.countdown -= 1
+        self.get_countdown()
 
         countdown_minutes, countdown_second = divmod(self.countdown, 60)
         countdown_hour, countdown_minutes = divmod(countdown_minutes, 60)
@@ -129,37 +134,50 @@ class MainWidget(QWidget):
 
     def punch_task(self):
         if self.punch_time == 0:
+            self.ui.countdown.setText("亮屏")
+            os.system("adb shell input keyevent 82")
+        elif self.punch_time == 5:
+            self.ui.countdown.setText("启动主页")
             ding_ding_class = "com.alibaba.android.rimet/com.alibaba.android.rimet.biz.LaunchHomeActivity"
             os.system("adb shell am start -n " + ding_ding_class)
 
-        elif self.punch_time == 5:
+        elif self.punch_time == 10:
+            self.ui.countdown.setText("步骤一 截图")
             os.system("adb shell screencap /sdcard/AutoPunchScreenshot.png")
             os.system("adb pull /sdcard/AutoPunchScreenshot.png %s" % self.ScreenshotImage)
-        elif self.punch_time == 10:
+        elif self.punch_time == 15:
             img1 = Image(self.ScreenshotImage)
             img2 = Image(utils.resource_path(os.path.join("image", "app.png")))
             process = MatchImg(img1, img2, 0.6)
             points = process.get_img_center()
             if len(points) > 0:
+                self.ui.countdown.setText("步骤一 点击 %d %d" % (points[0][0], points[0][1]))
                 print(points)
                 os.system("adb shell input tap %d %d" % (points[0][0], points[0][1]))
+            else:
+                self.ui.countdown.setText("步骤一 无点击")
 
-        elif self.punch_time == 15:
+        elif self.punch_time == 20:
+            self.ui.countdown.setText("步骤二 截图")
             os.system("adb shell screencap /sdcard/AutoPunchScreenshot.png")
             os.system("adb pull /sdcard/AutoPunchScreenshot.png %s" % self.ScreenshotImage)
-        elif self.punch_time == 20:
+        elif self.punch_time == 25:
             img1 = Image("C:/IJoySoft/Kevin/AutoPunch/AutoPunchScreenshot.png")
             img2 = Image(utils.resource_path(os.path.join("image", "punch.png")))
             process = MatchImg(img1, img2, 0.8)
             points = process.get_img_center()
             if len(points) > 0:
+                self.ui.countdown.setText("步骤二 点击 %d %d" % (points[0][0], points[0][1]))
                 print(points)
                 os.system("adb shell input tap %d %d" % (points[0][0], points[0][1]))
+            else:
+                self.ui.countdown.setText("步骤二 无点击")
 
-        elif self.punch_time == 30:
+        elif self.punch_time == 35:
+            self.ui.countdown.setText("步骤三 截图")
             os.system("adb shell screencap /sdcard/AutoPunchScreenshot.png")
             os.system("adb pull /sdcard/AutoPunchScreenshot.png %s" % self.ScreenshotImage)
-        elif self.punch_time == 35:
+        elif self.punch_time == 40:
             img1 = Image("C:/IJoySoft/Kevin/AutoPunch/AutoPunchScreenshot.png")
             img2 = Image(utils.resource_path(os.path.join("image", "punch_complete.png")))
             process = MatchImg(img1, img2, 0.6)
@@ -167,6 +185,7 @@ class MainWidget(QWidget):
             if len(points) > 0:
                 print(points)
                 os.system("adb shell input tap %d %d" % (points[0][0], points[0][1]))
+            self.ui.countdown.setText("表演结束")
             return
 
         self.punch_time += 1
