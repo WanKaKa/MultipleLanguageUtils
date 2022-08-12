@@ -134,21 +134,13 @@ class MainWidget(QWidget):
 
     def punch_task(self):
         if self.punch_time == 0:
-            self.ui.countdown.setText("亮屏")
-            os.system("adb shell input keyevent 82")
-        elif self.punch_time == 5:
-            self.ui.countdown.setText("启动主页")
-            ding_ding_class = "com.alibaba.android.rimet/com.alibaba.android.rimet.biz.LaunchHomeActivity"
-            os.system("adb shell am start -n " + ding_ding_class)
-
-        elif self.punch_time == 10:
             self.ui.countdown.setText("步骤一 截图")
             os.system("adb shell screencap /sdcard/AutoPunchScreenshot.png")
             os.system("adb pull /sdcard/AutoPunchScreenshot.png %s" % self.ScreenshotImage)
-        elif self.punch_time == 15:
+        elif self.punch_time == 2:
             img1 = Image(self.ScreenshotImage)
             img2 = Image(utils.resource_path(os.path.join("image", "app.png")))
-            process = MatchImg(img1, img2, 0.6)
+            process = MatchImg(img1, img2, 0.5)
             points = process.get_img_center()
             if len(points) > 0:
                 self.ui.countdown.setText("步骤一 点击 %d %d" % (points[0][0], points[0][1]))
@@ -157,11 +149,11 @@ class MainWidget(QWidget):
             else:
                 self.ui.countdown.setText("步骤一 无点击")
 
-        elif self.punch_time == 20:
+        elif self.punch_time == 6:
             self.ui.countdown.setText("步骤二 截图")
             os.system("adb shell screencap /sdcard/AutoPunchScreenshot.png")
             os.system("adb pull /sdcard/AutoPunchScreenshot.png %s" % self.ScreenshotImage)
-        elif self.punch_time == 25:
+        elif self.punch_time == 8:
             img1 = Image("C:/IJoySoft/Kevin/AutoPunch/AutoPunchScreenshot.png")
             img2 = Image(utils.resource_path(os.path.join("image", "punch.png")))
             process = MatchImg(img1, img2, 0.8)
@@ -173,19 +165,21 @@ class MainWidget(QWidget):
             else:
                 self.ui.countdown.setText("步骤二 无点击")
 
-        elif self.punch_time == 35:
+        elif self.punch_time == 14:
             self.ui.countdown.setText("步骤三 截图")
             os.system("adb shell screencap /sdcard/AutoPunchScreenshot.png")
             os.system("adb pull /sdcard/AutoPunchScreenshot.png %s" % self.ScreenshotImage)
-        elif self.punch_time == 40:
+        elif self.punch_time == 16:
             img1 = Image("C:/IJoySoft/Kevin/AutoPunch/AutoPunchScreenshot.png")
             img2 = Image(utils.resource_path(os.path.join("image", "punch_complete.png")))
-            process = MatchImg(img1, img2, 0.6)
+            process = MatchImg(img1, img2, 0.5)
             points = process.get_img_center()
             if len(points) > 0:
+                self.ui.countdown.setText("步骤三 点击 %d %d" % (points[0][0], points[0][1]))
                 print(points)
                 os.system("adb shell input tap %d %d" % (points[0][0], points[0][1]))
-            self.ui.countdown.setText("表演结束")
+            else:
+                self.ui.countdown.setText("步骤三 无点击")
             return
 
         self.punch_time += 1
