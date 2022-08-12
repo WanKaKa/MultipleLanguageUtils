@@ -85,6 +85,7 @@ class MainWidget(QWidget):
         self.timing_minutes = 0
         self.countdown = 0
         self.punch_time = 0
+        self.break_timer = False
 
         self.ui.ok.clicked.connect(self.start_countdown)
 
@@ -129,6 +130,9 @@ class MainWidget(QWidget):
         countdown_hour, countdown_minutes = divmod(countdown_minutes, 60)
         self.ui.countdown.setText("%02d:%02d:%02d" % (countdown_hour, countdown_minutes, countdown_second))
 
+        if self.break_timer:
+            print("倒计时任务终止")
+            return
         timer = threading.Timer(1, self.countdown_task)
         timer.start()
 
@@ -182,6 +186,12 @@ class MainWidget(QWidget):
                 self.ui.countdown.setText("步骤三 无点击")
             return
 
+        if self.break_timer:
+            print("表演终止")
+            return
         self.punch_time += 1
         timer = threading.Timer(1, self.punch_task)
         timer.start()
+
+    def closeEvent(self, event):
+        self.break_timer = True
