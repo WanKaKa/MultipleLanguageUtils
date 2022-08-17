@@ -87,9 +87,10 @@ class MainWidget(QWidget):
         self.punch_time = 0
         self.break_timer = False
 
-        self.ui.ok.clicked.connect(self.start_countdown)
+        self.ui.ok.clicked.connect(lambda: self.start_countdown(False))
+        self.ui.ok_now.clicked.connect(lambda: self.start_countdown(True))
 
-    def start_countdown(self):
+    def start_countdown(self, running_now=False):
         if not self.ui.hour.text().isdigit() or not self.ui.minutes.text().isdigit():
             QMessageBox.information(self, '提示', "请输入数字")
             return
@@ -97,12 +98,12 @@ class MainWidget(QWidget):
         # 获取输入的时间
         self.timing_hour = int(self.ui.hour.text())
         self.timing_minutes = int(self.ui.minutes.text())
-        self.get_countdown()
+        self.get_countdown(running_now)
 
-        timer = threading.Timer(1, function=self.countdown_task)
+        timer = threading.Timer(1, function=lambda: self.countdown_task(running_now))
         timer.start()
 
-    def get_countdown(self):
+    def get_countdown(self, running_now=False):
         # 获取电脑当前时间
         current_time = time.localtime(time.time())
         current_hour = int(time.strftime('%H', current_time))
@@ -110,21 +111,24 @@ class MainWidget(QWidget):
         current_second = current_minutes * 60 + int(time.strftime('%S', current_time))
 
         timing_second = self.timing_hour * 3600 + self.timing_minutes * 60
-        if timing_second <= current_second:
-            if abs(timing_second - current_second) <= 5:
-                self.countdown = 0
-            else:
-                self.countdown = 24 * 3600 + timing_second - current_second
+        if running_now:
+            self.countdown = 0
         else:
-            self.countdown = timing_second - current_second
+            if timing_second <= current_second:
+                if abs(timing_second - current_second) <= 5:
+                    self.countdown = 0
+                else:
+                    self.countdown = 24 * 3600 + timing_second - current_second
+            else:
+                self.countdown = timing_second - current_second
 
-    def countdown_task(self):
+    def countdown_task(self, running_now=False):
         if self.countdown <= 0:
             self.ui.countdown.setText("开始表演")
             timer = threading.Timer(1, function=self.punch_task)
             timer.start()
             return
-        self.get_countdown()
+        self.get_countdown(running_now)
 
         countdown_minutes, countdown_second = divmod(self.countdown, 60)
         countdown_hour, countdown_minutes = divmod(countdown_minutes, 60)
@@ -133,7 +137,7 @@ class MainWidget(QWidget):
         if self.break_timer:
             print("倒计时任务终止")
             return
-        timer = threading.Timer(1, self.countdown_task)
+        timer = threading.Timer(1, function=lambda: self.countdown_task(running_now))
         timer.start()
 
     def punch_task(self):
@@ -144,7 +148,7 @@ class MainWidget(QWidget):
         elif self.punch_time == 2:
             img1 = Image(self.ScreenshotImage)
             img2 = Image(utils.resource_path(os.path.join("image", "app.png")))
-            process = MatchImg(img1, img2, 0.5)
+            process = MatchImg(img1, img2, 0.8)
             points = process.get_img_center()
             if len(points) > 0:
                 self.ui.countdown.setText("步骤一 点击 %d %d" % (points[0][0], points[0][1]))
@@ -176,14 +180,23 @@ class MainWidget(QWidget):
         elif self.punch_time == 16:
             img1 = Image("C:/IJoySoft/Kevin/AutoPunch/AutoPunchScreenshot.png")
             img2 = Image(utils.resource_path(os.path.join("image", "punch_complete.png")))
-            process = MatchImg(img1, img2, 0.5)
+            process = MatchImg(img1, img2, 0.8)
             points = process.get_img_center()
             if len(points) > 0:
                 self.ui.countdown.setText("步骤三 点击 %d %d" % (points[0][0], points[0][1]))
                 print(points)
                 os.system("adb shell input tap %d %d" % (points[0][0], points[0][1]))
             else:
-                self.ui.countdown.setText("步骤三 无点击")
+                img1 = Image("C:/IJoySoft/Kevin/AutoPunch/AutoPunchScreenshot.png")
+                img2 = Image(utils.resource_path(os.path.join("image", "punch_complete.png")))
+                process = MatchImg(img1, img2, 0.5)
+                points = process.get_img_center()
+                if len(points) > 0:
+                    self.ui.countdown.setText("步骤三 点击 %d %d" % (points[0][0], points[0][1]))
+                    print(points)
+                    os.system("adb shell input tap %d %d" % (points[0][0], points[0][1]))
+                else:
+                    self.ui.countdown.setText("步骤三 无点击")
             return
 
         if self.break_timer:

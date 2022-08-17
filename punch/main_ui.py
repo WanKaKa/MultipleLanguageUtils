@@ -14,9 +14,9 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_Form(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
-        Form.resize(369, 126)
-        Form.setMinimumSize(QtCore.QSize(369, 126))
-        Form.setMaximumSize(QtCore.QSize(369, 126))
+        Form.resize(480, 126)
+        Form.setMinimumSize(QtCore.QSize(480, 126))
+        Form.setMaximumSize(QtCore.QSize(480, 126))
         Form.setStyleSheet("background-color: rgb(255, 255, 255);\n"
 "background-color: rgb(240, 240, 240);")
         self.formLayout = QtWidgets.QFormLayout(Form)
@@ -30,7 +30,7 @@ class Ui_Form(object):
         self.label.setMinimumSize(QtCore.QSize(0, 36))
         self.label.setStyleSheet("background-color: rgb(255, 255, 255);\n"
 "color: rgb(0, 0, 0);\n"
-"font: 18pt \"微软雅黑\";")
+"font: 14pt \"微软雅黑\";")
         self.label.setAlignment(QtCore.Qt.AlignCenter)
         self.label.setObjectName("label")
         self.verticalLayout.addWidget(self.label)
@@ -42,7 +42,7 @@ class Ui_Form(object):
         self.label_2.setMaximumSize(QtCore.QSize(100, 16777215))
         self.label_2.setStyleSheet("background-color: rgb(255, 255, 255);\n"
 "color: rgb(0, 0, 0);\n"
-"font: 16pt \"微软雅黑\";")
+"font: 12pt \"微软雅黑\";")
         self.label_2.setAlignment(QtCore.Qt.AlignCenter)
         self.label_2.setObjectName("label_2")
         self.horizontalLayout.addWidget(self.label_2)
@@ -50,7 +50,7 @@ class Ui_Form(object):
         self.hour.setMinimumSize(QtCore.QSize(0, 36))
         self.hour.setStyleSheet("background-color: rgb(255, 255, 255);\n"
 "color: rgb(0, 0, 0);\n"
-"font: 16pt \"微软雅黑\";")
+"font: 12pt \"微软雅黑\";")
         self.hour.setAlignment(QtCore.Qt.AlignCenter)
         self.hour.setObjectName("hour")
         self.horizontalLayout.addWidget(self.hour)
@@ -65,7 +65,7 @@ class Ui_Form(object):
         self.minutes.setMinimumSize(QtCore.QSize(0, 36))
         self.minutes.setStyleSheet("background-color: rgb(255, 255, 255);\n"
 "color: rgb(0, 0, 0);\n"
-"font: 16pt \"微软雅黑\";")
+"font: 12pt \"微软雅黑\";")
         self.minutes.setAlignment(QtCore.Qt.AlignCenter)
         self.minutes.setObjectName("minutes")
         self.horizontalLayout.addWidget(self.minutes)
@@ -73,10 +73,18 @@ class Ui_Form(object):
         self.ok.setMinimumSize(QtCore.QSize(100, 36))
         self.ok.setMaximumSize(QtCore.QSize(100, 16777215))
         self.ok.setStyleSheet("background-color: rgb(255, 255, 255);\n"
-"font: 16pt \"微软雅黑\";\n"
+"font: 12pt \"微软雅黑\";\n"
 "color: rgb(85, 85, 255);")
         self.ok.setObjectName("ok")
         self.horizontalLayout.addWidget(self.ok)
+        self.ok_now = QtWidgets.QPushButton(Form)
+        self.ok_now.setMinimumSize(QtCore.QSize(100, 36))
+        self.ok_now.setMaximumSize(QtCore.QSize(100, 36))
+        self.ok_now.setStyleSheet("background-color: rgb(255, 255, 255);\n"
+"font: 12pt \"微软雅黑\";\n"
+"color: rgb(85, 85, 255);")
+        self.ok_now.setObjectName("ok_now")
+        self.horizontalLayout.addWidget(self.ok_now)
         self.verticalLayout.addLayout(self.horizontalLayout)
         self.horizontalLayout_2 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
@@ -85,14 +93,14 @@ class Ui_Form(object):
         self.label_4.setMaximumSize(QtCore.QSize(100, 36))
         self.label_4.setStyleSheet("background-color: rgb(255, 255, 255);\n"
 "color: rgb(0, 0, 0);\n"
-"font: 16pt \"微软雅黑\";")
+"font: 12pt \"微软雅黑\";")
         self.label_4.setAlignment(QtCore.Qt.AlignCenter)
         self.label_4.setObjectName("label_4")
         self.horizontalLayout_2.addWidget(self.label_4)
         self.countdown = QtWidgets.QLabel(Form)
         self.countdown.setStyleSheet("background-color: rgb(255, 255, 255);\n"
 "color: rgb(85, 85, 255);\n"
-"font: 16pt \"微软雅黑\";")
+"font: 12pt \"微软雅黑\";")
         self.countdown.setAlignment(QtCore.Qt.AlignCenter)
         self.countdown.setObjectName("countdown")
         self.horizontalLayout_2.addWidget(self.countdown)
@@ -111,5 +119,6 @@ class Ui_Form(object):
         self.label_5.setText(_translate("Form", ":"))
         self.minutes.setText(_translate("Form", "00"))
         self.ok.setText(_translate("Form", "确定"))
+        self.ok_now.setText(_translate("Form", "立即执行"))
         self.label_4.setText(_translate("Form", "倒计时"))
         self.countdown.setText(_translate("Form", "00:00:00"))

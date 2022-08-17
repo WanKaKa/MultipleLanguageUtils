@@ -6,19 +6,19 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>369</width>
+    <width>480</width>
     <height>126</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>369</width>
+    <width>480</width>
     <height>126</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>369</width>
+    <width>480</width>
     <height>126</height>
    </size>
   </property>
@@ -64,7 +64,7 @@ background-color: rgb(240, 240, 240);</string>
        <property name="styleSheet">
         <string notr="true">background-color: rgb(255, 255, 255);
 color: rgb(0, 0, 0);
-font: 18pt &quot;微软雅黑&quot;;</string>
+font: 14pt &quot;微软雅黑&quot;;</string>
        </property>
        <property name="text">
         <string>24小时制</string>
@@ -96,7 +96,7 @@ font: 18pt &quot;微软雅黑&quot;;</string>
          <property name="styleSheet">
           <string notr="true">background-color: rgb(255, 255, 255);
 color: rgb(0, 0, 0);
-font: 16pt &quot;微软雅黑&quot;;</string>
+font: 12pt &quot;微软雅黑&quot;;</string>
          </property>
          <property name="text">
           <string>时间</string>
@@ -117,7 +117,7 @@ font: 16pt &quot;微软雅黑&quot;;</string>
          <property name="styleSheet">
           <string notr="true">background-color: rgb(255, 255, 255);
 color: rgb(0, 0, 0);
-font: 16pt &quot;微软雅黑&quot;;</string>
+font: 12pt &quot;微软雅黑&quot;;</string>
          </property>
          <property name="text">
           <string>09</string>
@@ -158,7 +158,7 @@ font: 20pt &quot;微软雅黑&quot;;</string>
          <property name="styleSheet">
           <string notr="true">background-color: rgb(255, 255, 255);
 color: rgb(0, 0, 0);
-font: 16pt &quot;微软雅黑&quot;;</string>
+font: 12pt &quot;微软雅黑&quot;;</string>
          </property>
          <property name="text">
           <string>00</string>
@@ -184,11 +184,35 @@ font: 16pt &quot;微软雅黑&quot;;</string>
          </property>
          <property name="styleSheet">
           <string notr="true">background-color: rgb(255, 255, 255);
-font: 16pt &quot;微软雅黑&quot;;
+font: 12pt &quot;微软雅黑&quot;;
 color: rgb(85, 85, 255);</string>
          </property>
          <property name="text">
           <string>确定</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="ok_now">
+         <property name="minimumSize">
+          <size>
+           <width>100</width>
+           <height>36</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>100</width>
+           <height>36</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(255, 255, 255);
+font: 12pt &quot;微软雅黑&quot;;
+color: rgb(85, 85, 255);</string>
+         </property>
+         <property name="text">
+          <string>立即执行</string>
          </property>
         </widget>
        </item>
@@ -213,7 +237,7 @@ color: rgb(85, 85, 255);</string>
          <property name="styleSheet">
           <string notr="true">background-color: rgb(255, 255, 255);
 color: rgb(0, 0, 0);
-font: 16pt &quot;微软雅黑&quot;;</string>
+font: 12pt &quot;微软雅黑&quot;;</string>
          </property>
          <property name="text">
           <string>倒计时</string>
@@ -228,7 +252,7 @@ font: 16pt &quot;微软雅黑&quot;;</string>
          <property name="styleSheet">
           <string notr="true">background-color: rgb(255, 255, 255);
 color: rgb(85, 85, 255);
-font: 16pt &quot;微软雅黑&quot;;</string>
+font: 12pt &quot;微软雅黑&quot;;</string>
          </property>
          <property name="text">
           <string>00:00:00</string>
