@@ -34,6 +34,7 @@ projects_details = [
     ["ScreenRecorderAS", "C:\\Work\\ASProjects\\", "\\app", "tool.video.recorder.screenrecorder"],
     ["ScreenRecorderTheme", "C:\\Work\\ASProjects\\", "\\app", "smart.video.recorder.screenrecorder"],
     ["ScreenRecorderTabAS", "C:\\Work\\ASProjects\\", "\\app", "tool.video.screen.recorder"],
+    ["APPLocker", "C:\\Work\\ASProjects\\", "\\app", "tool.app.safe.applocker"],
 ]
 # 安装成功后，拷贝aab
 copy_files_dir = "C:/Users/DELL/Desktop/release/"

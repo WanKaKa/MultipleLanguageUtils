@@ -171,7 +171,15 @@ class MainWidget(QWidget):
                 print(points)
                 os.system("adb shell input tap %d %d" % (points[0][0], points[0][1]))
             else:
-                self.ui.countdown.setText("步骤二 无点击")
+                img2_ex = Image(utils.resource_path(os.path.join("image", "punch-2.png")))
+                process = MatchImg(img1, img2_ex, 0.8)
+                points = process.get_img_center()
+                if len(points) > 0:
+                    self.ui.countdown.setText("步骤二 点击 %d %d" % (points[0][0], points[0][1]))
+                    print(points)
+                    os.system("adb shell input tap %d %d" % (points[0][0], points[0][1]))
+                else:
+                    self.ui.countdown.setText("步骤二 无点击")
 
         elif self.punch_time == 14:
             self.ui.countdown.setText("步骤三 截图")
