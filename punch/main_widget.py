@@ -142,10 +142,11 @@ class MainWidget(QWidget):
 
     def punch_task(self):
         if self.punch_time == 0:
-            self.ui.countdown.setText("步骤一 截图")
+            self.ui.countdown.setText("步骤一 截图中")
             os.system("adb shell screencap /sdcard/AutoPunchScreenshot.png")
             os.system("adb pull /sdcard/AutoPunchScreenshot.png %s" % self.ScreenshotImage)
-        elif self.punch_time == 2:
+            self.ui.countdown.setText("步骤一 截图完成")
+        elif self.punch_time == 5:
             img1 = Image(self.ScreenshotImage)
             img2 = Image(utils.resource_path(os.path.join("image", "app.png")))
             process = MatchImg(img1, img2, 0.8)
@@ -157,11 +158,12 @@ class MainWidget(QWidget):
             else:
                 self.ui.countdown.setText("步骤一 无点击")
 
-        elif self.punch_time == 6:
-            self.ui.countdown.setText("步骤二 截图")
+        elif self.punch_time == 15:
+            self.ui.countdown.setText("步骤二 截图中")
             os.system("adb shell screencap /sdcard/AutoPunchScreenshot.png")
             os.system("adb pull /sdcard/AutoPunchScreenshot.png %s" % self.ScreenshotImage)
-        elif self.punch_time == 8:
+            self.ui.countdown.setText("步骤二 截图完成")
+        elif self.punch_time == 20:
             img1 = Image("C:/IJoySoft/Kevin/AutoPunch/AutoPunchScreenshot.png")
             img2 = Image(utils.resource_path(os.path.join("image", "punch.png")))
             process = MatchImg(img1, img2, 0.8)
@@ -181,11 +183,12 @@ class MainWidget(QWidget):
                 else:
                     self.ui.countdown.setText("步骤二 无点击")
 
-        elif self.punch_time == 14:
-            self.ui.countdown.setText("步骤三 截图")
+        elif self.punch_time == 30:
+            self.ui.countdown.setText("步骤三 截图中")
             os.system("adb shell screencap /sdcard/AutoPunchScreenshot.png")
             os.system("adb pull /sdcard/AutoPunchScreenshot.png %s" % self.ScreenshotImage)
-        elif self.punch_time == 16:
+            self.ui.countdown.setText("步骤三 截图完成")
+        elif self.punch_time == 35:
             img1 = Image("C:/IJoySoft/Kevin/AutoPunch/AutoPunchScreenshot.png")
             img2 = Image(utils.resource_path(os.path.join("image", "punch_complete.png")))
             process = MatchImg(img1, img2, 0.8)
