@@ -1,6 +1,6 @@
 import os
 
-release_version = "隐私政策转HTML_1.0.0"
+release_version = "TXT转HTML_1.0.2"
 
 if __name__ == '__main__':
     os.system(
