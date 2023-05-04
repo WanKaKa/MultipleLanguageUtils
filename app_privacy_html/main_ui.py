@@ -32,7 +32,7 @@ class Ui_Form(object):
         self.input.setMaximumSize(QtCore.QSize(16777215, 80))
         self.input.setStyleSheet("background-color: rgb(255, 255, 255);\n"
 "color: rgb(0, 0, 0);\n"
-"font: 20pt \"Courier New\";")
+"font: 16pt \"Courier New\";")
         self.input.setObjectName("input")
         self.verticalLayout.addWidget(self.input)
         self.horizontalLayout = QtWidgets.QHBoxLayout()
@@ -74,5 +74,5 @@ class Ui_Form(object):
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "Form"))
-        self.message.setText(_translate("Form", "看我表演"))
+        self.message.setText(_translate("Form", "文件夹或文件"))
         self.start.setText(_translate("Form", "开始"))
