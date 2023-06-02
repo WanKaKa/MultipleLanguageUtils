@@ -1,6 +1,6 @@
 import os
 
-release_version = "爽歪歪1.0.8"
+release_version = "爽歪歪1.1.0"
 
 if __name__ == '__main__':
     os.system(

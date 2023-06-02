@@ -80,13 +80,29 @@ class MainWidget(QWidget):
         self.ui.setupUi(self)
         self.setWindowTitle("爽歪歪")
 
-        self.ScreenshotImage = "C:/IJoySoft/Kevin/AutoPunch/AutoPunchScreenshot.png"
-        self.timing_hour = 9
+        self.screenshot_image_1 = "C:/IJoySoft/Kevin/AutoPunch/AutoPunchScreenshot_1.png"
+        self.mate_punch_list_1 = {
+            "app.png",
+        }
+        self.screenshot_image_2 = "C:/IJoySoft/Kevin/AutoPunch/AutoPunchScreenshot_2.png"
+        self.mate_punch_list_2 = {
+            "punch.png",
+            "punch_2.png",
+            "punch_3.png"
+        }
+        self.screenshot_image_3 = "C:/IJoySoft/Kevin/AutoPunch/AutoPunchScreenshot_3.png"
+        self.mate_punch_list_3 = {
+            "punch_complete.png",
+            "punch_complete_2.png",
+        }
+
+        self.timing_hour = 20
         self.timing_minutes = 0
         self.countdown = 0
         self.punch_time = 0
         self.break_timer = False
 
+        self.ui.hour.setText(str(self.timing_hour))
         self.ui.ok.clicked.connect(lambda: self.start_countdown(False))
         self.ui.ok_now.clicked.connect(lambda: self.start_countdown(True))
 
@@ -143,79 +159,70 @@ class MainWidget(QWidget):
     def punch_task(self):
         if self.punch_time == 0:
             self.ui.countdown.setText("步骤一 截图中")
-            os.system("adb shell screencap /sdcard/AutoPunchScreenshot.png")
-            os.system("adb pull /sdcard/AutoPunchScreenshot.png %s" % self.ScreenshotImage)
+            screenshot(self.screenshot_image_1)
             self.ui.countdown.setText("步骤一 截图完成")
         elif self.punch_time == 5:
-            img1 = Image(self.ScreenshotImage)
-            img2 = Image(utils.resource_path(os.path.join("image", "app.png")))
-            process = MatchImg(img1, img2, 0.8)
-            points = process.get_img_center()
-            if len(points) > 0:
-                self.ui.countdown.setText("步骤一 点击 %d %d" % (points[0][0], points[0][1]))
-                print(points)
-                os.system("adb shell input tap %d %d" % (points[0][0], points[0][1]))
-            else:
-                self.ui.countdown.setText("步骤一 无点击")
-
+            self.mate_punch_1()
         elif self.punch_time == 15:
             self.ui.countdown.setText("步骤二 截图中")
-            os.system("adb shell screencap /sdcard/AutoPunchScreenshot.png")
-            os.system("adb pull /sdcard/AutoPunchScreenshot.png %s" % self.ScreenshotImage)
+            screenshot(self.screenshot_image_2)
             self.ui.countdown.setText("步骤二 截图完成")
         elif self.punch_time == 20:
-            img1 = Image("C:/IJoySoft/Kevin/AutoPunch/AutoPunchScreenshot.png")
-            img2 = Image(utils.resource_path(os.path.join("image", "punch.png")))
-            process = MatchImg(img1, img2, 0.8)
-            points = process.get_img_center()
-            if len(points) > 0:
-                self.ui.countdown.setText("步骤二 点击 %d %d" % (points[0][0], points[0][1]))
-                print(points)
-                os.system("adb shell input tap %d %d" % (points[0][0], points[0][1]))
-            else:
-                img2_ex = Image(utils.resource_path(os.path.join("image", "punch-2.png")))
-                process = MatchImg(img1, img2_ex, 0.8)
-                points = process.get_img_center()
-                if len(points) > 0:
-                    self.ui.countdown.setText("步骤二 点击 %d %d" % (points[0][0], points[0][1]))
-                    print(points)
-                    os.system("adb shell input tap %d %d" % (points[0][0], points[0][1]))
-                else:
-                    self.ui.countdown.setText("步骤二 无点击")
-
+            self.mate_punch_2()
         elif self.punch_time == 30:
             self.ui.countdown.setText("步骤三 截图中")
-            os.system("adb shell screencap /sdcard/AutoPunchScreenshot.png")
-            os.system("adb pull /sdcard/AutoPunchScreenshot.png %s" % self.ScreenshotImage)
+            screenshot(self.screenshot_image_3)
             self.ui.countdown.setText("步骤三 截图完成")
         elif self.punch_time == 35:
-            img1 = Image("C:/IJoySoft/Kevin/AutoPunch/AutoPunchScreenshot.png")
-            img2 = Image(utils.resource_path(os.path.join("image", "punch_complete.png")))
-            process = MatchImg(img1, img2, 0.8)
-            points = process.get_img_center()
-            if len(points) > 0:
-                self.ui.countdown.setText("步骤三 点击 %d %d" % (points[0][0], points[0][1]))
-                print(points)
-                os.system("adb shell input tap %d %d" % (points[0][0], points[0][1]))
-            else:
-                img1 = Image("C:/IJoySoft/Kevin/AutoPunch/AutoPunchScreenshot.png")
-                img2 = Image(utils.resource_path(os.path.join("image", "punch_complete.png")))
-                process = MatchImg(img1, img2, 0.5)
-                points = process.get_img_center()
-                if len(points) > 0:
-                    self.ui.countdown.setText("步骤三 点击 %d %d" % (points[0][0], points[0][1]))
-                    print(points)
-                    os.system("adb shell input tap %d %d" % (points[0][0], points[0][1]))
-                else:
-                    self.ui.countdown.setText("步骤三 无点击")
+            self.mate_punch_3()
+
+            print("表演终止")
             return
 
         if self.break_timer:
             print("表演终止")
             return
+
         self.punch_time += 1
         timer = threading.Timer(1, self.punch_task)
         timer.start()
 
+    def mate_punch_1(self):
+        screenshot_image = Image(self.screenshot_image_1)
+        for file_name in self.mate_punch_list_1:
+            if self.mate_punch_image(screenshot_image, file_name):
+                return
+        self.ui.countdown.setText("步骤一 无点击")
+
+    def mate_punch_2(self):
+        screenshot_image = Image(self.screenshot_image_2)
+        for file_name in self.mate_punch_list_2:
+            if self.mate_punch_image(screenshot_image, file_name):
+                return
+        self.ui.countdown.setText("步骤二 无点击")
+
+    def mate_punch_3(self):
+        screenshot_image = Image(self.screenshot_image_3)
+        for file_name in self.mate_punch_list_3:
+            if self.mate_punch_image(screenshot_image, file_name):
+                return
+        self.ui.countdown.setText("步骤三 无点击")
+
+    def mate_punch_image(self, screenshot_image: Image, file_name):
+        image_mate = Image(utils.resource_path(os.path.join("image", file_name)))
+        process = MatchImg(screenshot_image, image_mate, 0.8)
+        points = process.get_img_center()
+        if len(points) > 0:
+            self.ui.countdown.setText("点击(%d, %d)" % (points[0][0], points[0][1]))
+            print(points)
+            os.system("adb shell input tap %d %d" % (points[0][0], points[0][1]))
+            return True
+        return False
+
     def closeEvent(self, event):
         self.break_timer = True
+
+
+def screenshot(file_path):
+    os.system("adb shell screencap /sdcard/AutoPunchScreenshot.png")
+    os.system("adb pull /sdcard/AutoPunchScreenshot.png %s" % file_path)
