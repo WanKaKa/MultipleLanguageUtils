@@ -36,6 +36,7 @@ projects_details = [
     ["ScreenRecorderTheme", "C:\\Work\\ASProjects\\", "\\app", "smart.video.recorder.screenrecorder"],
     ["ScreenRecorderTabAS", "C:\\Work\\ASProjects\\", "\\app", "tool.video.screen.recorder"],
     ["APPLocker", "C:\\Work\\ASProjects\\", "\\app", "tool.app.safe.applocker"],
+    ["Pedometer", "C:\\Work\\ASProjects\\", "\\app", "tool.fitness.step.counter.pedometer"],
 ]
 # 安装成功后，拷贝aab
 copy_files_dir = "C:/Users/DELL/Desktop/release/"
@@ -110,7 +111,7 @@ def install_aab(project_index, aab_index):
                 os.system(install_bundle_path + "\\install.bat")
                 # 拷贝文件
                 file_name = os.path.splitext(os.path.split(aab_files[aab_index])[1])[0]
-                if input(">>>是否拷贝aab到发布文件夹(Y/N): ").upper() == "Y":
+                if "Y" or "1" in input(">>>是否拷贝aab到发布文件夹(Y/N): ").upper():
                     for root, dirs, files in os.walk(aab_dir):
                         for file in files:
                             if file_name in file:

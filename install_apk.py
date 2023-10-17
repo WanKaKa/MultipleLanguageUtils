@@ -30,6 +30,7 @@ projects_details = [
     ["ScreenRecorderTheme", "C:\\Work\\ASProjects\\", "\\app", "smart.video.recorder.screenrecorder"],
     ["ScreenRecorderTabAS", "C:\\Work\\ASProjects\\", "\\app", "tool.video.screen.recorder"],
     ["APPLocker", "C:\\Work\\ASProjects\\", "\\app", "tool.app.safe.applocker"],
+    ["Pedometer", "C:\\Work\\ASProjects\\", "\\app", "tool.fitness.step.counter.pedometer"],
 ]
 # 安装成功后，拷贝apk和txt的路径
 copy_files_dir = "C:/Users/DELL/Desktop/release/"
@@ -95,7 +96,7 @@ def install_apk(project_index, apk_index):
                 os.system("adb install " + apk_files[apk_index])
                 # 拷贝文件
                 file_name = os.path.splitext(os.path.split(apk_files[apk_index])[1])[0]
-                if input(">>>是否拷贝Apk到发布文件夹(Y/N): ").upper() == "Y":
+                if "Y" or "1" in input(">>>是否拷贝apk到发布文件夹(Y/N): ").upper():
                     for root, dirs, files in os.walk(apk_dir):
                         for file in files:
                             if file_name in file:
