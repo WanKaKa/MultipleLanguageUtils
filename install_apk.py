@@ -96,7 +96,8 @@ def install_apk(project_index, apk_index):
                 os.system("adb install " + apk_files[apk_index])
                 # 拷贝文件
                 file_name = os.path.splitext(os.path.split(apk_files[apk_index])[1])[0]
-                if "Y" or "1" in input(">>>是否拷贝apk到发布文件夹(Y/N): ").upper():
+                is_copy = input(">>>是否拷贝apk到发布文件夹(Y/N): ").upper()
+                if "Y" in is_copy or "1" in is_copy:
                     for root, dirs, files in os.walk(apk_dir):
                         for file in files:
                             if file_name in file:

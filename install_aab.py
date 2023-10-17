@@ -111,7 +111,8 @@ def install_aab(project_index, aab_index):
                 os.system(install_bundle_path + "\\install.bat")
                 # 拷贝文件
                 file_name = os.path.splitext(os.path.split(aab_files[aab_index])[1])[0]
-                if "Y" or "1" in input(">>>是否拷贝aab到发布文件夹(Y/N): ").upper():
+                is_copy = input(">>>是否拷贝aab到发布文件夹(Y/N): ").upper()
+                if "Y" in is_copy or "1" in is_copy:
                     for root, dirs, files in os.walk(aab_dir):
                         for file in files:
                             if file_name in file:
