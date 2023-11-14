@@ -30,7 +30,7 @@ class MainWidget(QWidget):
 
     def show_time(self):
         file_path = analysis_input_path(self.ui.input)
-        # file_path = "C:\\Work\\ASProjects\\ScreenRecorderTabAS\\app\\src\\main\\assets"
+        # file_path = "D:\\Work\\ASProjects\\ScreenRecorderTabAS\\app\\src\\main\\assets"
         if os.path.isdir(file_path):
             self.ui.message.setText("数量 = %d 表演中 玩会手机" % len(os.listdir(file_path)))
             self.txt_to_html(file_path)
