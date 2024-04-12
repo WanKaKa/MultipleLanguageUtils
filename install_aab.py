@@ -30,6 +30,7 @@ projects_details = [
     ["WeatherForecastGrid", "D:\\Work\\ASProjects\\", "\\WeatherForecast", "local.weather.forecast.pro"],
     ["WeatherForecastBlack", "D:\\Work\\ASProjects\\", "\\WeatherForecast", "weather.radar.real.weather.forecast"],
     ["WeatherForecastRadar", "D:\\Work\\ASProjects\\", "\\WeatherForecast", "weather.radar.weather.forecast.channel"],
+    ["WeatherLive", "D:\\Work\\ASProjects\\", "\\WeatherForecast", "weather.live.radar.weather.forecast"],
     ["LauncherIOS", "D:\\Work\\ASProjects\\", "\\app", "theme.wallpaper.smart.launcher"],
     ["AdvertLibraryExampleAS", "D:\\Work\\ASProjects\\", "\\app", "com.ijoysoft.advert"],
     ["ScreenRecorderAS", "D:\\Work\\ASProjects\\", "\\app", "tool.video.recorder.screenrecorder"],
@@ -38,6 +39,7 @@ projects_details = [
     ["APPLocker", "D:\\Work\\ASProjects\\", "\\app", "tool.app.safe.applocker"],
     ["APPLockerGrid", "D:\\Work\\ASProjects\\", "\\app", "locker.app.safe.applocker"],
     ["Pedometer", "D:\\Work\\ASProjects\\", "\\app", "tool.fitness.step.counter.pedometer"],
+    ["PdfReader", "D:\\Work\\ASProjects\\", "\\app", "tools.app.pdf.reader"],
 ]
 # 安装成功后，拷贝aab
 copy_files_dir = "C:/Users/DELL/Desktop/release/"
