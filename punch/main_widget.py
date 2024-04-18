@@ -161,19 +161,19 @@ class MainWidget(QWidget):
             self.ui.countdown.setText("步骤一 截图中")
             screenshot(self.screenshot_image_1)
             self.ui.countdown.setText("步骤一 截图完成")
-        elif self.punch_time == 5:
+        elif self.punch_time == 10:
             self.mate_punch_1()
-        elif self.punch_time == 15:
+        elif self.punch_time == 30:
             self.ui.countdown.setText("步骤二 截图中")
             screenshot(self.screenshot_image_2)
             self.ui.countdown.setText("步骤二 截图完成")
-        elif self.punch_time == 20:
+        elif self.punch_time == 40:
             self.mate_punch_2()
-        elif self.punch_time == 30:
+        elif self.punch_time == 60:
             self.ui.countdown.setText("步骤三 截图中")
             screenshot(self.screenshot_image_3)
             self.ui.countdown.setText("步骤三 截图完成")
-        elif self.punch_time == 35:
+        elif self.punch_time == 70:
             self.mate_punch_3()
 
             print("表演终止")
@@ -192,14 +192,14 @@ class MainWidget(QWidget):
         for file_name in self.mate_punch_list_1:
             if self.mate_punch_image(screenshot_image, file_name):
                 return
-        self.ui.countdown.setText("步骤一 无点击")
+        self.ui.countdown.setText("步骤一 无点击 截图中等待中")
 
     def mate_punch_2(self):
         screenshot_image = Image(self.screenshot_image_2)
         for file_name in self.mate_punch_list_2:
             if self.mate_punch_image(screenshot_image, file_name):
                 return
-        self.ui.countdown.setText("步骤二 无点击")
+        self.ui.countdown.setText("步骤二 无点击 截图中等待中")
 
     def mate_punch_3(self):
         screenshot_image = Image(self.screenshot_image_3)
