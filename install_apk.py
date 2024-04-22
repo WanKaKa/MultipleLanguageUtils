@@ -33,7 +33,7 @@ projects_details = [
     ["APPLocker", "D:\\Work\\ASProjects\\", "\\app", "tool.app.safe.applocker"],
     ["APPLockerGrid", "D:\\Work\\ASProjects\\", "\\app", "locker.app.safe.applocker"],
     ["Pedometer", "D:\\Work\\ASProjects\\", "\\app", "tool.fitness.step.counter.pedometer"],
-    ["PdfReader", "D:\\Work\\ASProjects\\", "\\app", "tools.app.pdf.reader"],
+    ["PdfReader", "D:\\Work\\ASProjects\\", "\\app", "tool.office.ebook.reader.pdfreader"],
 ]
 # 安装成功后，拷贝apk和txt的路径
 copy_files_dir = "C:/Users/DELL/Desktop/release/"
