@@ -171,6 +171,20 @@ class Ui_Form(object):
 "font: 12pt \"微软雅黑\";")
         self.bandizip.setObjectName("bandizip")
         self.horizontalLayout_4.addWidget(self.frame_8)
+        self.frame_13 = QtWidgets.QFrame(Form)
+        self.frame_13.setMaximumSize(QtCore.QSize(120, 50))
+        self.frame_13.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_13.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_13.setObjectName("frame_13")
+        self.bandizip_de = QtWidgets.QPushButton(self.frame_13)
+        self.bandizip_de.setGeometry(QtCore.QRect(0, 10, 120, 40))
+        self.bandizip_de.setMinimumSize(QtCore.QSize(120, 40))
+        self.bandizip_de.setMaximumSize(QtCore.QSize(120, 40))
+        self.bandizip_de.setStyleSheet("background-color: rgb(85, 85, 255);\n"
+"color: rgb(255, 255, 255);\n"
+"font: 12pt \"微软雅黑\";")
+        self.bandizip_de.setObjectName("bandizip_de")
+        self.horizontalLayout_4.addWidget(self.frame_13)
         self.frame = QtWidgets.QFrame(Form)
         self.frame.setMinimumSize(QtCore.QSize(120, 50))
         self.frame.setMaximumSize(QtCore.QSize(120, 50))
@@ -216,8 +230,8 @@ class Ui_Form(object):
         self.log_remove_suffix.setGeometry(QtCore.QRect(0, 10, 120, 40))
         self.log_remove_suffix.setMinimumSize(QtCore.QSize(120, 40))
         self.log_remove_suffix.setMaximumSize(QtCore.QSize(120, 40))
-        self.log_remove_suffix.setStyleSheet("background-color: rgb(85, 85, 255);\n"
-"color: rgb(255, 255, 255);\n"
+        self.log_remove_suffix.setStyleSheet("background-color: rgb(255, 255, 255);\n"
+"color: rgb(0, 0, 0);\n"
 "font: 12pt \"微软雅黑\";")
         self.log_remove_suffix.setObjectName("log_remove_suffix")
         self.horizontalLayout_10.addWidget(self.frame_7)
@@ -231,8 +245,8 @@ class Ui_Form(object):
         self.log_add_suffix.setGeometry(QtCore.QRect(0, 10, 120, 40))
         self.log_add_suffix.setMinimumSize(QtCore.QSize(120, 40))
         self.log_add_suffix.setMaximumSize(QtCore.QSize(120, 40))
-        self.log_add_suffix.setStyleSheet("background-color: rgb(85, 85, 255);\n"
-"color: rgb(255, 255, 255);\n"
+        self.log_add_suffix.setStyleSheet("background-color: rgb(255, 255, 255);\n"
+"color: rgb(0, 0, 0);\n"
 "font: 12pt \"微软雅黑\";")
         self.log_add_suffix.setObjectName("log_add_suffix")
         self.horizontalLayout_10.addWidget(self.frame_3)
@@ -246,8 +260,8 @@ class Ui_Form(object):
         self.log_modify_suffix.setGeometry(QtCore.QRect(0, 10, 120, 40))
         self.log_modify_suffix.setMinimumSize(QtCore.QSize(120, 40))
         self.log_modify_suffix.setMaximumSize(QtCore.QSize(120, 40))
-        self.log_modify_suffix.setStyleSheet("background-color: rgb(85, 85, 255);\n"
-"color: rgb(255, 255, 255);\n"
+        self.log_modify_suffix.setStyleSheet("background-color: rgb(255, 255, 255);\n"
+"color: rgb(0, 0, 0);\n"
 "font: 12pt \"微软雅黑\";")
         self.log_modify_suffix.setObjectName("log_modify_suffix")
         self.horizontalLayout_10.addWidget(self.frame_5)
@@ -261,11 +275,25 @@ class Ui_Form(object):
         self.log_bandizip.setGeometry(QtCore.QRect(0, 10, 120, 40))
         self.log_bandizip.setMinimumSize(QtCore.QSize(120, 40))
         self.log_bandizip.setMaximumSize(QtCore.QSize(120, 40))
-        self.log_bandizip.setStyleSheet("background-color: rgb(85, 85, 255);\n"
-"color: rgb(255, 255, 255);\n"
+        self.log_bandizip.setStyleSheet("background-color: rgb(255, 255, 255);\n"
+"color: rgb(0, 0, 0);\n"
 "font: 12pt \"微软雅黑\";")
         self.log_bandizip.setObjectName("log_bandizip")
         self.horizontalLayout_10.addWidget(self.frame_9)
+        self.frame_14 = QtWidgets.QFrame(Form)
+        self.frame_14.setMaximumSize(QtCore.QSize(120, 50))
+        self.frame_14.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_14.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_14.setObjectName("frame_14")
+        self.log_bandizip_de = QtWidgets.QPushButton(self.frame_14)
+        self.log_bandizip_de.setGeometry(QtCore.QRect(0, 10, 120, 40))
+        self.log_bandizip_de.setMinimumSize(QtCore.QSize(120, 40))
+        self.log_bandizip_de.setMaximumSize(QtCore.QSize(120, 40))
+        self.log_bandizip_de.setStyleSheet("background-color: rgb(255, 255, 255);\n"
+"color: rgb(0, 0, 0);\n"
+"font: 12pt \"微软雅黑\";")
+        self.log_bandizip_de.setObjectName("log_bandizip_de")
+        self.horizontalLayout_10.addWidget(self.frame_14)
         self.frame_10 = QtWidgets.QFrame(Form)
         self.frame_10.setMinimumSize(QtCore.QSize(120, 50))
         self.frame_10.setMaximumSize(QtCore.QSize(120, 50))
@@ -277,8 +305,8 @@ class Ui_Form(object):
         self.log_delete_frame.setGeometry(QtCore.QRect(0, 10, 120, 40))
         self.log_delete_frame.setMinimumSize(QtCore.QSize(120, 40))
         self.log_delete_frame.setMaximumSize(QtCore.QSize(120, 40))
-        self.log_delete_frame.setStyleSheet("background-color: rgb(85, 85, 255);\n"
-"color: rgb(255, 255, 255);\n"
+        self.log_delete_frame.setStyleSheet("background-color: rgb(255, 255, 255);\n"
+"color: rgb(0, 0, 0);\n"
 "font: 12pt \"微软雅黑\";")
         self.log_delete_frame.setObjectName("log_delete_frame")
         self.horizontalLayout_10.addWidget(self.frame_10)
@@ -293,8 +321,8 @@ class Ui_Form(object):
         self.log_modify_name.setGeometry(QtCore.QRect(0, 10, 120, 40))
         self.log_modify_name.setMinimumSize(QtCore.QSize(120, 40))
         self.log_modify_name.setMaximumSize(QtCore.QSize(120, 40))
-        self.log_modify_name.setStyleSheet("background-color: rgb(85, 85, 255);\n"
-"color: rgb(255, 255, 255);\n"
+        self.log_modify_name.setStyleSheet("background-color: rgb(255, 255, 255);\n"
+"color: rgb(0, 0, 0);\n"
 "font: 12pt \"微软雅黑\";")
         self.log_modify_name.setObjectName("log_modify_name")
         self.horizontalLayout_10.addWidget(self.frame_12)
@@ -316,11 +344,13 @@ class Ui_Form(object):
         self.add_suffix.setText(_translate("Form", "一键加后缀"))
         self.modify_suffix.setText(_translate("Form", "修改后缀"))
         self.bandizip.setText(_translate("Form", "压缩"))
+        self.bandizip_de.setText(_translate("Form", "解压"))
         self.delete_frame.setText(_translate("Form", "删除Frame"))
         self.modify_name.setText(_translate("Form", "重命名文件"))
         self.log_remove_suffix.setText(_translate("Form", "Log-一键去"))
         self.log_add_suffix.setText(_translate("Form", "Log-一键加"))
         self.log_modify_suffix.setText(_translate("Form", "Log-修改"))
         self.log_bandizip.setText(_translate("Form", "Log-压缩"))
+        self.log_bandizip_de.setText(_translate("Form", "Log-解压"))
         self.log_delete_frame.setText(_translate("Form", "Log-删除"))
         self.log_modify_name.setText(_translate("Form", "Log-重命名"))

@@ -73,6 +73,7 @@ class MainWindow(QWidget, main_ui.Ui_Form):
         self.add_suffix.clicked.connect(self.auto_add_suffix_click)
         self.modify_suffix.clicked.connect(self.modify_suffix_click)
         self.bandizip.clicked.connect(self.bandizip_click)
+        self.bandizip_de.clicked.connect(self.bandizip_de_click)
         self.delete_frame.clicked.connect(self.delete_frame_click)
         self.modify_name.clicked.connect(self.modify_name_click)
 
@@ -80,6 +81,7 @@ class MainWindow(QWidget, main_ui.Ui_Form):
         self.log_add_suffix.clicked.connect(lambda: os.system(path_ex.get_cache_path() + path_ex.LOG_ADD_SUFFIX))
         self.log_modify_suffix.clicked.connect(lambda: os.system(path_ex.get_cache_path() + path_ex.LOG_MODIFY_SUFFIX))
         self.log_bandizip.clicked.connect(lambda: os.system(path_ex.get_cache_path() + path_ex.LOG_BANDIZIP))
+        self.log_bandizip_de.clicked.connect(lambda: os.system(path_ex.get_cache_path() + path_ex.LOG_BANDIZIP_DE))
         self.log_delete_frame.clicked.connect(lambda: os.system(path_ex.get_cache_path() + path_ex.LOG_DELETE_FRAME))
         self.log_modify_name.clicked.connect(lambda: os.system(path_ex.get_cache_path() + path_ex.LOG_MODIFY_NAME))
 
@@ -154,6 +156,13 @@ class MainWindow(QWidget, main_ui.Ui_Form):
         log_file = open(path_ex.get_cache_path() + path_ex.LOG_BANDIZIP, mode='w', encoding='utf-8')
         self.get_input_value_list(log_file)
         bandizip_task(self.work_path, log_file)
+        log_file.close()
+        QMessageBox.information(self, '提示', '成功')
+
+    def bandizip_de_click(self):
+        log_file = open(path_ex.get_cache_path() + path_ex.LOG_BANDIZIP_DE, mode='w', encoding='utf-8')
+        self.get_input_value_list(log_file)
+        bandizip_de_task(self.work_path, log_file)
         log_file.close()
         QMessageBox.information(self, '提示', '成功')
 
@@ -270,5 +279,28 @@ def bandizip_task(dir_path, log_file):
         if os.path.isdir(old_file):
             value = "bandizip.exe c " + old_file + "/" + file + ".zip " + old_file
             log_file.write("%s\n" % value)
+            print("%s\n" % value)
+            os.system(value)
+
+
+def bandizip_de_task(dir_path, log_file):
+    file_list = os.listdir(dir_path)
+    for file in file_list:
+        old_file = os.path.join(dir_path, file)
+        if os.path.isdir(old_file):
+            # 删除不是zip的文件
+            file_list_2 = os.listdir(old_file)
+            for file_2 in file_list_2:
+                print("%s\n" % file_2)
+                if os.path.isfile(old_file + "/" + file_2) and ".zip" not in file_2:
+                    value = "del " + old_file + "\\" + file_2
+                    print("%s\n" % value)
+                    os.system(value)
+            value = "bandizip.exe x " + old_file + "\\" + file + ".zip " + old_file
+            log_file.write("%s\n" % value)
+            print("%s\n" % value)
+            os.system(value)
+
+            value = "del " + old_file + "\\" + file + ".zip"
             print("%s\n" % value)
             os.system(value)
