@@ -1,10 +1,9 @@
 import os
 import shutil
-import struct
+import threading
 
-from PyQt5.QtCore import Qt
-from PyQt5.QtWidgets import QWidget, QMessageBox, QProgressDialog
-from PyQt5 import QtCore, QtGui
+from PyQt5.QtWidgets import QWidget, QMessageBox
+from PyQt5 import QtGui
 from filetype import filetype
 
 from modify_suffix import main_ui, utils, path_ex, database
@@ -131,6 +130,9 @@ class MainWindow(QWidget, main_ui.Ui_Form):
         log_file.write("工作路径：%s\n" % self.work_path)
         print("工作路径：%s\n" % self.work_path)
 
+        log_file.write("\n\n")
+        print("\n\n")
+
     def remove_suffix_click(self):
         log_file = open(path_ex.get_cache_path() + path_ex.LOG_REMOVE_SUFFIX, mode='w', encoding='utf-8')
         self.get_input_value_list(log_file)
@@ -153,18 +155,12 @@ class MainWindow(QWidget, main_ui.Ui_Form):
         QMessageBox.information(self, '提示', '成功')
 
     def bandizip_click(self):
-        log_file = open(path_ex.get_cache_path() + path_ex.LOG_BANDIZIP, mode='w', encoding='utf-8')
-        self.get_input_value_list(log_file)
-        bandizip_task(self.work_path, log_file)
-        log_file.close()
-        QMessageBox.information(self, '提示', '成功')
+        t = threading.Thread(target=self.bandizip_task)
+        t.start()
 
     def bandizip_de_click(self):
-        log_file = open(path_ex.get_cache_path() + path_ex.LOG_BANDIZIP_DE, mode='w', encoding='utf-8')
-        self.get_input_value_list(log_file)
-        bandizip_de_task(self.work_path, log_file)
-        log_file.close()
-        QMessageBox.information(self, '提示', '成功')
+        t = threading.Thread(target=self.bandizip_de_task)
+        t.start()
 
     def delete_frame_click(self):
         log_file = open(path_ex.get_cache_path() + path_ex.LOG_DELETE_FRAME, mode='w', encoding='utf-8')
@@ -263,6 +259,84 @@ class MainWindow(QWidget, main_ui.Ui_Form):
                     print("新文件 = %s\n" % new_file)
                     shutil.move(old_file, new_file)
 
+    def bandizip_task(self):
+        log_file = open(path_ex.get_cache_path() + path_ex.LOG_BANDIZIP, mode='w', encoding='utf-8')
+        self.get_input_value_list(log_file)
+
+        file_list = os.listdir(self.work_path)
+        for file in file_list:
+            old_file = os.path.join(self.work_path, file)
+            if os.path.isdir(old_file):
+                file_list_2 = os.listdir(old_file)
+                # 判断是否有zip文件 无zip文件则返回
+                has_zip = False
+                for file_2 in file_list_2:
+                    if ".zip" in file_2:
+                        has_zip = True
+                        break
+                if has_zip:
+                    value = "%s 有zip文件不压缩" % old_file
+                    log_file.write("%s\n" % value)
+                    print("%s\n" % value)
+                    continue
+
+                value = "bandizip.exe c " + old_file + "\\" + file + ".zip " + old_file
+                log_file.write("%s\n" % value)
+                print("%s\n" % value)
+                os.system(value)
+
+                for file_2 in file_list_2:
+                    if os.path.isfile(old_file + "/" + file_2) and ".zip" not in file_2:
+                        value = "del " + old_file + "\\" + file_2
+                        log_file.write("删除文件 %s\n" % value)
+                        print("删除文件 %s\n" % value)
+                        os.system(value)
+            log_file.write("\n\n")
+            print("\n\n")
+        log_file.close()
+        # QMessageBox.information(self, '提示', '成功')
+
+    def bandizip_de_task(self):
+        log_file = open(path_ex.get_cache_path() + path_ex.LOG_BANDIZIP_DE, mode='w', encoding='utf-8')
+        self.get_input_value_list(log_file)
+
+        file_list = os.listdir(self.work_path)
+        for file in file_list:
+            old_file = os.path.join(self.work_path, file)
+            if os.path.isdir(old_file):
+                file_list_2 = os.listdir(old_file)
+                # 判断是否有zip文件 无zip文件则返回
+                has_zip = False
+                for file_2 in file_list_2:
+                    if ".zip" in file_2:
+                        has_zip = True
+                        break
+                if not has_zip:
+                    value = "%s 无zip文件不解压" % old_file
+                    log_file.write("%s\n" % value)
+                    print("%s\n" % value)
+                    continue
+                # 删除不是zip的文件
+                for file_2 in file_list_2:
+                    if os.path.isfile(old_file + "/" + file_2) and ".zip" not in file_2:
+                        value = "del " + old_file + "\\" + file_2
+                        log_file.write("删除文件 %s\n" % value)
+                        print("删除文件 %s\n" % value)
+                        os.system(value)
+                value = "bandizip.exe x " + old_file + "\\" + file + ".zip " + old_file
+                log_file.write("%s\n" % value)
+                print("%s\n" % value)
+                os.system(value)
+
+                value = "del " + old_file + "\\" + file + ".zip"
+                log_file.write("%s\n" % value)
+                print("%s\n" % value)
+                os.system(value)
+            log_file.write("\n\n")
+            print("\n\n")
+        log_file.close()
+        # QMessageBox.information(self, '提示', '成功')
+
 
 def get_file_type(file_path):
     kind = filetype.guess(file_path)
@@ -270,37 +344,3 @@ def get_file_type(file_path):
         return kind.extension
     else:
         return 'unknown'
-
-
-def bandizip_task(dir_path, log_file):
-    file_list = os.listdir(dir_path)
-    for file in file_list:
-        old_file = os.path.join(dir_path, file)
-        if os.path.isdir(old_file):
-            value = "bandizip.exe c " + old_file + "/" + file + ".zip " + old_file
-            log_file.write("%s\n" % value)
-            print("%s\n" % value)
-            os.system(value)
-
-
-def bandizip_de_task(dir_path, log_file):
-    file_list = os.listdir(dir_path)
-    for file in file_list:
-        old_file = os.path.join(dir_path, file)
-        if os.path.isdir(old_file):
-            # 删除不是zip的文件
-            file_list_2 = os.listdir(old_file)
-            for file_2 in file_list_2:
-                print("%s\n" % file_2)
-                if os.path.isfile(old_file + "/" + file_2) and ".zip" not in file_2:
-                    value = "del " + old_file + "\\" + file_2
-                    print("%s\n" % value)
-                    os.system(value)
-            value = "bandizip.exe x " + old_file + "\\" + file + ".zip " + old_file
-            log_file.write("%s\n" % value)
-            print("%s\n" % value)
-            os.system(value)
-
-            value = "del " + old_file + "\\" + file + ".zip"
-            print("%s\n" % value)
-            os.system(value)

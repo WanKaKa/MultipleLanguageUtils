@@ -1,6 +1,6 @@
 import os
 
-release_version = "UI脚本1.0.3"
+release_version = "UI脚本1.0.5"
 
 if __name__ == '__main__':
     os.system(
