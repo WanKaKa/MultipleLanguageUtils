@@ -49,7 +49,7 @@ class MainWindow(QWidget, main_ui.Ui_Form):
         self.setupUi(self)
 
         self.setWindowTitle("UI工具-为便捷而生")
-        filename = utils.resource_path(os.path.join("ico", "fast.ico"))
+        filename = utils.resource_path(os.path.join("image", "fast.ico"))
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap(filename))
         self.setWindowIcon(icon)
