@@ -62,6 +62,10 @@ def analysis_equal_string(strings, log_file, copy_mode=None):
     add_string_key_list = []
     temp_read_str = ""
     for line in strings.split("\n"):
+        # 新的行首次读取时一定要有key，没有key直接pass
+        if temp_read_str == "" and not re.findall(get_filter_key_regular(copy_mode), line):
+            continue
+
         temp_read_str += line
         end_string = "</%s>" % get_filter_key_value(copy_mode)
         if "resources" in temp_read_str or end_string in temp_read_str:

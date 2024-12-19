@@ -45,23 +45,17 @@ def copy_multiple_language(input1, input2, input3, callback=None, ignore_languag
     project_res_dir = input3
     # kevin_utils.print_log(log_file, "%s\n" % project_res_dir)
 
+    ignore_language_str = ""
     if ignore_language_list:
-        ignore_language_str = ""
         for language in ignore_language_list:
             if language:
                 ignore_language_str += (language + "/")
-        data = {
-            'translate_string': translate_string,
-            'translate_res_dir': translate_res_dir,
-            'project_res_dir': project_res_dir,
-            'ignore_language_str': ignore_language_str
-        }
-    else:
-        data = {
-            'translate_string': translate_string,
-            'translate_res_dir': translate_res_dir,
-            'project_res_dir': project_res_dir,
-        }
+    data = {
+        'translate_string': translate_string,
+        'translate_res_dir': translate_res_dir,
+        'project_res_dir': project_res_dir,
+        'ignore_language_str': ignore_language_str
+    }
     multiple_language.database.set_json_data(data)
 
     if not os.path.exists(translate_res_dir) or not os.path.exists(translate_res_dir):
@@ -134,6 +128,10 @@ def analysis_add_string(res_dir_name, add_string_key_list, log_file, copy_mode=N
             line = file.readline()
             temp_read_str = ""
             while line:
+                # 新的行首次读取时一定要有key，没有key直接pass
+                if temp_read_str == "" and not re.findall(kevin_utils.get_filter_key_regular(copy_mode), line):
+                    line = file.readline()
+                    continue
                 temp_read_str += line
                 end_string = "</%s>" % kevin_utils.get_filter_key_value(copy_mode)
                 if "resources" in temp_read_str or end_string in temp_read_str:
