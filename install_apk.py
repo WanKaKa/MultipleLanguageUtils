@@ -32,6 +32,7 @@ projects_details = [
     ["ScreenRecorderTabAS", "D:\\Work\\ASProjects\\", "\\app", "tool.video.screen.recorder"],
     ["APPLocker", "D:\\Work\\ASProjects\\", "\\app", "tool.app.safe.applocker"],
     ["APPLockerGrid", "D:\\Work\\ASProjects\\", "\\app", "locker.app.safe.applocker"],
+    ["AppLockerTab", "D:\\Work\\ASProjects\\", "\\app", "applocker.password.safe.fingerprint.locker"],
     ["Pedometer", "D:\\Work\\ASProjects\\", "\\app", "tool.fitness.step.counter.pedometer"],
     ["PdfReader", "D:\\Work\\ASProjects\\", "\\app", "tool.office.ebook.reader.pdfreader"],
 ]

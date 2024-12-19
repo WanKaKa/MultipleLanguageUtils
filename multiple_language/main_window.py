@@ -27,6 +27,8 @@ class MainWindow(QWidget, main_ui.Ui_Form):
 class MainWindowFactory:
     def __init__(self, main_window: MainWindow):
         self.main_window = main_window
+        self.ignore_language_button_change_enable = True
+        self.ignore_language_text_change_enable = True
 
         self.progress_dialog = QProgressDialog(self.main_window)
         self.progress_dialog.setMinimumDuration(5)
@@ -40,24 +42,41 @@ class MainWindowFactory:
             self.main_window.ignore_language_02,
             self.main_window.ignore_language_03,
             self.main_window.ignore_language_04,
+            self.main_window.ignore_language_05,
             self.main_window.ignore_language_11,
             self.main_window.ignore_language_12,
             self.main_window.ignore_language_13,
-            self.main_window.ignore_language_14
+            self.main_window.ignore_language_14,
+            self.main_window.ignore_language_15
         ]
 
+        data = multiple_language.database.get_json_data()
         _translate = QtCore.QCoreApplication.translate
-        for i in range(len(multiple_language_utils.ignore_language_value_list)):
-            kevin_utils.set_check_box_style(self.ignore_language_radio_button_list[i])
-            language_text = multiple_language_utils.ignore_language_value_list[i]
-            self.ignore_language_radio_button_list[i].setText(_translate("Form", language_text))
-            self.ignore_language_radio_button_list[i].setChecked(True)
-            if not self.main_window.ignore_language_text.toPlainText():
-                self.main_window.ignore_language_text.setText(language_text)
-            else:
-                self.main_window.ignore_language_text.setText(
-                    self.main_window.ignore_language_text.toPlainText() + "/" + language_text)
-            self.ignore_language_radio_button_list[i].toggled.connect(self.__add_ignore_language)
+        ignore_language_str = None
+        if "ignore_language_str" in data:
+            ignore_language_str = data["ignore_language_str"]
+        if ignore_language_str:
+            for i in range(len(multiple_language_utils.ignore_language_value_list)):
+                kevin_utils.set_check_box_style(self.ignore_language_radio_button_list[i])
+                language_text = multiple_language_utils.ignore_language_value_list[i]
+                self.ignore_language_radio_button_list[i].setText(_translate("Form", language_text))
+                self.ignore_language_radio_button_list[i].setChecked(language_text in ignore_language_str)
+                self.ignore_language_radio_button_list[i].toggled.connect(self.__add_ignore_language)
+            self.main_window.ignore_language_text.setText(ignore_language_str)
+        else:
+            for i in range(len(multiple_language_utils.ignore_language_value_list)):
+                kevin_utils.set_check_box_style(self.ignore_language_radio_button_list[i])
+                language_text = multiple_language_utils.ignore_language_value_list[i]
+                self.ignore_language_radio_button_list[i].setText(_translate("Form", language_text))
+                self.ignore_language_radio_button_list[i].setChecked(True)
+                if not self.main_window.ignore_language_text.toPlainText():
+                    self.main_window.ignore_language_text.setText(language_text)
+                else:
+                    self.main_window.ignore_language_text.setText(
+                        self.main_window.ignore_language_text.toPlainText() + "/" + language_text)
+                self.ignore_language_radio_button_list[i].toggled.connect(self.__add_ignore_language)
+        self.main_window.ignore_language_text.textChanged.connect(self.__on_ignore_language_text_change)
+
         # 隐藏多出来的按钮
         if len(self.ignore_language_radio_button_list) > len(multiple_language_utils.ignore_language_value_list):
             for i in range(len(self.ignore_language_radio_button_list)):
@@ -77,7 +96,6 @@ class MainWindowFactory:
         self.main_window.open_delete_log.clicked.connect(lambda: kevin_utils.open_file(
             kevin_utils.get_log_path() + delete_res_string.log_delete_res_string))
 
-        data = multiple_language.database.get_json_data()
         if data:
             if "translate_string" in data:
                 self.main_window.input_string.setText(data["translate_string"])
@@ -91,16 +109,20 @@ class MainWindowFactory:
                 self.main_window.copy_project_path.hide()
 
     def __add_ignore_language(self):
-        self.main_window.ignore_language_text.setText("")
-        for radio_button in self.ignore_language_radio_button_list:
-            if radio_button.isChecked():
-                if not self.main_window.ignore_language_text.toPlainText():
-                    self.main_window.ignore_language_text.setText(radio_button.text())
-                else:
-                    self.main_window.ignore_language_text.setText(
-                        self.main_window.ignore_language_text.toPlainText() + "/" + radio_button.text())
+        if self.ignore_language_button_change_enable:
+            self.ignore_language_text_change_enable = False
+            self.main_window.ignore_language_text.setText("")
+            for radio_button in self.ignore_language_radio_button_list:
+                if radio_button.isChecked():
+                    if not self.main_window.ignore_language_text.toPlainText():
+                        self.main_window.ignore_language_text.setText(radio_button.text())
+                    else:
+                        self.main_window.ignore_language_text.setText(
+                            self.main_window.ignore_language_text.toPlainText() + "/" + radio_button.text())
+            self.ignore_language_text_change_enable = True
 
     def __select_all_ignore_language(self):
+        self.ignore_language_text_change_enable = False
         self.main_window.ignore_language_text.setText("")
         select_all_enable = False
         for radio_button in self.ignore_language_radio_button_list:
@@ -108,11 +130,24 @@ class MainWindowFactory:
                 select_all_enable = True
         for radio_button in self.ignore_language_radio_button_list:
             radio_button.setChecked(select_all_enable)
+        self.ignore_language_text_change_enable = True
 
     def __insert_from_mime_data(self, soc):
         if soc.hasText():
             # 去除粘贴格式
             self.main_window.input_string.textCursor().insertText(soc.text())
+
+    def __on_ignore_language_text_change(self):
+        self.ignore_language_button_change_enable = False
+        if self.ignore_language_text_change_enable:
+            ignore_language_str = self.main_window.ignore_language_text.toPlainText()
+            for radio_button in self.ignore_language_radio_button_list:
+                radio_button_text = radio_button.text()
+                if radio_button_text and radio_button_text in ignore_language_str:
+                    radio_button.setChecked(True)
+                else:
+                    radio_button.setChecked(False)
+        self.ignore_language_button_change_enable = True
 
     def copy_multiple_language(self):
         reply = QMessageBox.question(

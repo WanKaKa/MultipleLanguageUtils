@@ -494,6 +494,38 @@ font: 12pt &quot;微软雅黑&quot;;</string>
            <string>CheckBox</string>
           </property>
          </widget>
+         <widget class="QCheckBox" name="ignore_language_05">
+          <property name="geometry">
+           <rect>
+            <x>780</x>
+            <y>0</y>
+            <width>150</width>
+            <height>30</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">font: 12pt &quot;微软雅黑&quot;;</string>
+          </property>
+          <property name="text">
+           <string>CheckBox</string>
+          </property>
+         </widget>
+         <widget class="QCheckBox" name="ignore_language_15">
+          <property name="geometry">
+           <rect>
+            <x>780</x>
+            <y>30</y>
+            <width>150</width>
+            <height>30</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">font: 12pt &quot;微软雅黑&quot;;</string>
+          </property>
+          <property name="text">
+           <string>CheckBox</string>
+          </property>
+         </widget>
         </widget>
        </item>
        <item>

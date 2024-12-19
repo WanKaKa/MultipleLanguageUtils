@@ -16,7 +16,8 @@ ignore_language_value_list = [
     "values-ur",
     "values-ug",
     "values-en",
-    "values-zh"
+    "values-zh",
+    "values-vv",
 ]
 
 translate_string = ""
@@ -44,12 +45,29 @@ def copy_multiple_language(input1, input2, input3, callback=None, ignore_languag
     project_res_dir = input3
     # kevin_utils.print_log(log_file, "%s\n" % project_res_dir)
 
-    data = {
-        'translate_string': translate_string,
-        'translate_res_dir': translate_res_dir,
-        'project_res_dir': project_res_dir
-    }
+    if ignore_language_list:
+        ignore_language_str = ""
+        for language in ignore_language_list:
+            if language:
+                ignore_language_str += (language + "/")
+        data = {
+            'translate_string': translate_string,
+            'translate_res_dir': translate_res_dir,
+            'project_res_dir': project_res_dir,
+            'ignore_language_str': ignore_language_str
+        }
+    else:
+        data = {
+            'translate_string': translate_string,
+            'translate_res_dir': translate_res_dir,
+            'project_res_dir': project_res_dir,
+        }
     multiple_language.database.set_json_data(data)
+
+    if not os.path.exists(translate_res_dir) or not os.path.exists(translate_res_dir):
+        if callback:
+            callback(100, 100)
+        return
 
     kevin_utils.print_log(log_file, "%s 解析复制开始 %s\n\n" % ("*" * 24, "*" * 24))
     if isinstance(translate_string, list):
@@ -216,4 +234,3 @@ def add_string_to_project_res(res_dir_name, add_str, output_name):
     tmp_file.close()
     os.remove(create_file_path)
     os.rename(tmp_file_path, create_file_path)
-
