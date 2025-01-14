@@ -20,6 +20,13 @@ ignore_language_value_list = [
     "values-vv",
 ]
 
+force_ignore_language_value_list = [
+    "values-zz",
+    "values-ph",
+    "values-ma",
+    "values-vv",
+]
+
 translate_string = ""
 translate_res_dir = ""
 project_res_dir = ""
@@ -86,10 +93,15 @@ def copy_multiple_language(input1, input2, input3, callback=None, ignore_languag
                         # 文件夹名称不包含values的文件跳过
                         is_pass_path = True
                     else:
+                        # 用户编辑忽略的语言
                         if ignore_language_list:
                             for ignore_language in ignore_language_list:
                                 if ignore_language and ignore_language in res_dir_name:
                                     is_pass_path = True
+                        # 强制忽略的语言
+                        for force_ignore_language in force_ignore_language_value_list:
+                            if force_ignore_language and force_ignore_language in res_dir_name:
+                                is_pass_path = True
                         # 拷贝字符串时需要过滤
                         if "string" == copy_mode:
                             for i in range(9):
