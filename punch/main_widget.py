@@ -88,12 +88,14 @@ class MainWidget(QWidget):
         self.mate_punch_list_2 = {
             "punch.png",
             "punch_2.png",
-            "punch_3.png"
+            "punch_3.png",
+            "punch_4.png",
         }
         self.screenshot_image_3 = "C:/IJoySoft/Kevin/AutoPunch/AutoPunchScreenshot_3.png"
         self.mate_punch_list_3 = {
             "punch_complete.png",
             "punch_complete_2.png",
+            "punch_complete_3.png",
         }
 
         self.timing_hour = 20
