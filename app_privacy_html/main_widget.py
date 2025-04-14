@@ -18,6 +18,13 @@ HTML_FOOTER = """
     </body>
 </html>"""
 
+file_name_list = [
+    "AppPrivacy.txt",
+    "AppPrivacy_cn.txt",
+    "Terms.txt",
+    "Terms_cn.txt",
+]
+
 
 class MainWidget(QWidget):
     def __init__(self, parent=None):
@@ -51,7 +58,7 @@ class MainWidget(QWidget):
 
 def txt_to_html_task(file):
     file_name = os.path.basename(file)
-    if "AppPrivacy.txt" in file_name or "AppPrivacy_cn.txt" in file_name:
+    if file_name in file_name_list:
         print(file_name)
 
         # 根据二进制信息判断编码{'encoding': 'ascii', 'confidence': 1.0, 'language': ''}
