@@ -8,6 +8,7 @@ class WallpaperItem:
         self.from_type = kwargs[xml_pro.TAG_FROM] if xml_pro.TAG_FROM in kwargs else None
         self.thumb = kwargs[xml_pro.TAG_THUMB] if xml_pro.TAG_THUMB in kwargs else None
         self.url = kwargs[xml_pro.TAG_URL] if xml_pro.TAG_URL in kwargs else None
+        self.vip = kwargs[xml_pro.TAG_VIP] if xml_pro.TAG_VIP in kwargs else "false"
 
     def __str__(self):
         return "WallpaperItem = {\n" \
@@ -16,4 +17,5 @@ class WallpaperItem:
                "    from_type = %s;\n" \
                "    thumb = %s;\n" \
                "    url = %s;\n" \
-               "} " % (self.id, self.download_url, self.from_type, self.thumb, self.url)
+               "    vip = %s;\n" \
+               "} " % (self.id, self.download_url, self.from_type, self.thumb, self.url, self.vip)

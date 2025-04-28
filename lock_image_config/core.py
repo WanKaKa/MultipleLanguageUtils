@@ -137,7 +137,9 @@ def modify_xml(work_image_path, image_type, start_index, count, log_file=None):
     new_path = work_image_path + "/xml/skin_" + image_type + ".xml.ijs"
     new_file = open(new_path, mode='w', encoding='utf-8')
 
-    head_str = """<?xml version="1.0" encoding="utf-8"?>\n<skin>\n"""
+    head_str = """<?xml version="1.0" encoding="utf-8"?>\n<skin """
+    head_str += "root_url=\"" + select_service_url + "\""
+    head_str += """>\n"""
     new_file.write(head_str)
     utils.print_log(log_file, head_str)
 
@@ -164,16 +166,19 @@ def create_wallpaper_item(skin_name, index):
     wallpaper_item.from_type = "net"
     wallpaper_item.thumb = thumb
     wallpaper_item.url = url
+    wallpaper_item.vip = "false"
     return wallpaper_item
 
 
 def create_wallpaper_item_xml(wallpaper_item):
-    item_str = "    <item" + "\n"
-    item_str += "        id=" + "\"" + str(wallpaper_item.id) + "\"\n"
-    item_str += "        download_url=" + "\"" + wallpaper_item.download_url + "\"\n"
-    item_str += "        from=" + "\"" + wallpaper_item.from_type + "\"\n"
-    item_str += "        thumb=" + "\"" + wallpaper_item.thumb + "\"\n"
-    item_str += "        url=" + "\"" + wallpaper_item.url + "\" />\n"
+    item_str = "    <" + xml_pro.TAG_ITEM + "\n"
+    item_str += "        " + xml_pro.TAG_ITEM + "=" + "\"" + str(wallpaper_item.id) + "\"\n"
+    item_str += "        " + xml_pro.TAG_DOWNLOAD_URL + "=" + "\"" + wallpaper_item.download_url + "\"\n"
+    item_str += "        " + xml_pro.TAG_FROM + "=" + "\"" + wallpaper_item.from_type + "\"\n"
+    item_str += "        " + xml_pro.TAG_THUMB + "=" + "\"" + wallpaper_item.thumb + "\"\n"
+    item_str += "        " + xml_pro.TAG_URL + "=" + "\"" + wallpaper_item.url + "\"\n"
+    item_str += "        " + xml_pro.TAG_VIP + "=" + "\"" + wallpaper_item.vip
+    item_str += "\" />\n"
     return item_str
 
 

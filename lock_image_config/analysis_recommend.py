@@ -178,7 +178,9 @@ def modify_recommend_xml(work_image_path, add_recommend_image_name_list, log_fil
     new_path = work_image_path + "/xml/skin_recommend.xml.ijs"
     new_file = open(new_path, mode='w', encoding='utf-8')
 
-    head_str = """<?xml version="1.0" encoding="utf-8"?>\n<skin>\n"""
+    head_str = """<?xml version="1.0" encoding="utf-8"?>\n<skin """
+    head_str += "root_url=\"" + core.select_service_url + "\""
+    head_str += """>\n"""
     new_file.write(head_str)
     utils.print_log(log_file, head_str)
 
