@@ -8,6 +8,8 @@ import numpy as np
 from lock_image_config import utils
 from lock_image_config import core
 
+import xml_pro
+
 recommend_image_list = []
 
 
@@ -137,25 +139,58 @@ def modify_recommend_xml(work_image_path, add_recommend_image_name_list, log_fil
     utils.print_log(log_file, "*" * 100)
     utils.print_log(log_file, "修改推荐配置文件--开始")
 
+    # 解析xml
     old_path = work_image_path + "/xml/skin_recommend.xml"
-    old_file = open(old_path, mode='r', encoding='utf-8')
+    item_list_old = xml_pro.analysis_wallpaper_xml(old_path)
+    os.remove(old_path)
+
+    item_list_merge = []
+    item_list_new = []
+
+    # 新增item
+    for name in add_recommend_image_name_list:
+        image_type = str(name).split("_")[0]
+        index = int(name.split("_")[1]) if "." not in name else int(name.split("_")[1].split(".")[0])
+        wallpaper_entity = core.create_wallpaper_item(image_type, index)
+        utils.print_log(log_file, str(wallpaper_entity))
+        item_list_new.append(wallpaper_entity)
+
+    # 合并文件和新增的item
+    head_assets = True
+    for entity in item_list_old:
+        if head_assets:
+            if entity.from_type == "assets":
+                item_list_merge.append(entity)
+            else:
+                for entity_new in item_list_new:
+                    item_list_merge.append(entity_new)
+                item_list_merge.append(entity)
+                head_assets = False
+        else:
+            item_list_merge.append(entity)
+
+    # 重置id
+    index = 0
+    for entity in item_list_merge:
+        entity.id = index
+        index += 1
+
     new_path = work_image_path + "/xml/skin_recommend.xml.ijs"
     new_file = open(new_path, mode='w', encoding='utf-8')
-    line = old_file.readline()
-    while line:
-        new_file.write(line)
-        if line.replace("\n", "") == "<skin>":
-            for name in add_recommend_image_name_list:
-                image_type = str(name).split("_")[0]
-                index = int(name.split("_")[1]) if "." not in name else int(name.split("_")[1].split(".")[0])
-                item_string = core.create_item_xml(image_type, index)
-                new_file.write(item_string)
-                new_file.write("\n")
-                utils.print_log(log_file, item_string)
-        line = old_file.readline()
-    old_file.close()
+
+    head_str = """<?xml version="1.0" encoding="utf-8"?>\n<skin>\n"""
+    new_file.write(head_str)
+    utils.print_log(log_file, head_str)
+
+    for entity in item_list_merge:
+        item_xml_str = core.create_wallpaper_item_xml(entity)
+        new_file.write(item_xml_str)
+
+    footer_str = """</skin>"""
+    new_file.write(footer_str)
+    utils.print_log(log_file, footer_str)
+
     new_file.close()
-    os.remove(old_path)
     os.rename(new_path, old_path)
     utils.print_log(log_file, "修改推荐配置文件--结束")
     utils.print_log(log_file, "*" * 100)

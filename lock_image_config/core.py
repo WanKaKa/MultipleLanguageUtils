@@ -4,6 +4,8 @@ import shutil
 
 from natsort import natsorted, ns
 from lock_image_config import utils
+import entity
+import xml_pro
 
 FILTER_DIR_LIST = [".git", "skin_thumb", "xml", "version.xml"]
 
@@ -99,37 +101,79 @@ def modify_xml(work_image_path, image_type, start_index, count, log_file=None):
     utils.print_log(log_file, "")
     utils.print_log(log_file, "")
     utils.print_log(log_file, "修改配置文件--开始")
+
     old_path = work_image_path + "/xml/skin_" + image_type + ".xml"
-    old_file = open(old_path, mode='r', encoding='utf-8')
+    item_list_old = xml_pro.analysis_wallpaper_xml(old_path)
+    os.remove(old_path)
+
+    item_list_merge = []
+    item_list_new = []
+    # 新增item
+    for i in range(count):
+        wallpaper_entity = create_wallpaper_item(image_type, start_index + i)
+        utils.print_log(log_file, str(wallpaper_entity))
+        item_list_new.append(wallpaper_entity)
+
+    # 合并文件和新增的item
+    head_assets = True
+    for wallpaper_entity in item_list_old:
+        if head_assets:
+            if wallpaper_entity.from_type == "assets":
+                item_list_merge.append(wallpaper_entity)
+            else:
+                for entity_new in item_list_new:
+                    item_list_merge.append(entity_new)
+                item_list_merge.append(wallpaper_entity)
+                head_assets = False
+        else:
+            item_list_merge.append(wallpaper_entity)
+
+    # 重置id
+    index = 0
+    for wallpaper_entity in item_list_merge:
+        wallpaper_entity.id = index
+        index += 1
+
     new_path = work_image_path + "/xml/skin_" + image_type + ".xml.ijs"
     new_file = open(new_path, mode='w', encoding='utf-8')
-    line = old_file.readline()
-    while line:
-        new_file.write(line)
-        if line.replace("\n", "") == "<skin>":
-            for i in range(count):
-                item_string = create_item_xml(image_type, start_index + i)
-                new_file.write(item_string)
-                new_file.write("\n")
-                utils.print_log(log_file, item_string)
-        line = old_file.readline()
-    old_file.close()
+
+    head_str = """<?xml version="1.0" encoding="utf-8"?>\n<skin>\n"""
+    new_file.write(head_str)
+    utils.print_log(log_file, head_str)
+
+    for wallpaper_entity in item_list_merge:
+        item_xml_str = create_wallpaper_item_xml(wallpaper_entity)
+        new_file.write(item_xml_str)
+
+    footer_str = """</skin>"""
+    new_file.write(footer_str)
+    utils.print_log(log_file, footer_str)
+
     new_file.close()
-    os.remove(old_path)
     os.rename(new_path, old_path)
     utils.print_log(log_file, "修改配置文件--结束")
 
 
-def create_item_xml(skin_name, index):
+def create_wallpaper_item(skin_name, index):
     download_url = select_service_url + skin_name + "/" + skin_name + "_" + int2str(index)
     thumb = select_service_url + "skin_thumb/" + skin_name + "/" + skin_name + "_" + int2str(index)
     url = "skin_img/" + skin_name + "/" + skin_name + "_" + int2str(index) + ".ijs"
+
+    wallpaper_item = entity.WallpaperItem()
+    wallpaper_item.download_url = download_url
+    wallpaper_item.from_type = "net"
+    wallpaper_item.thumb = thumb
+    wallpaper_item.url = url
+    return wallpaper_item
+
+
+def create_wallpaper_item_xml(wallpaper_item):
     item_str = "    <item" + "\n"
-    item_str += "        download_url=" + "\"" + download_url + "\"\n"
-    item_str += "        from=" + "\"" + "net" + "\"\n"
-    item_str += "        id=" + "\"" + str((index - 1)) + "\"\n"
-    item_str += "        thumb=" + "\"" + thumb + "\"\n"
-    item_str += "        url=" + "\"" + url + "\" />"
+    item_str += "        id=" + "\"" + str(wallpaper_item.id) + "\"\n"
+    item_str += "        download_url=" + "\"" + wallpaper_item.download_url + "\"\n"
+    item_str += "        from=" + "\"" + wallpaper_item.from_type + "\"\n"
+    item_str += "        thumb=" + "\"" + wallpaper_item.thumb + "\"\n"
+    item_str += "        url=" + "\"" + wallpaper_item.url + "\" />\n"
     return item_str
 
 
