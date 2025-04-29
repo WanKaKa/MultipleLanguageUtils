@@ -1,6 +1,6 @@
 import os
 
-release_version = "锁屏壁纸工具1.0.9"
+release_version = "锁屏壁纸工具1.1.0"
 
 if __name__ == '__main__':
     os.system(

@@ -1,6 +1,7 @@
 import os
 
 from PyQt5.QtCore import Qt
+from PyQt5.QtGui import QTextCursor
 from PyQt5.QtWidgets import QWidget, QMessageBox, QProgressDialog
 from PyQt5 import QtCore, QtGui
 
@@ -32,19 +33,24 @@ class MainWindow(QWidget, main_ui.Ui_Form):
         self.service_url_2.setText(_translate("Form", "https://lockscreenencrypt.oss-us-west-1.aliyuncs.com/"))
         self.service_url_3.setText(_translate("Form", "https://lockscreentabencrypt.oss-us-west-1.aliyuncs.com/"))
         self.reset_button.clicked.connect(self.reset_work)
+        self.clear_input_button.clicked.connect(self.clear_input)
+        self.format_xml_button.clicked.connect(self.format_xml)
+        self.check_vip_button.clicked.connect(self.check_vip)
         self.run_button.clicked.connect(self.run)
-        self.log_button.clicked.connect(lambda: os.system(path.get_cache_path() + path.RUN_LOG_NAME))
-        self.log_button_2.clicked.connect(lambda: os.system(path.get_cache_path() + path.ANALYSIS_RECOMMEND_LOG_NAME))
+        self.log_button.clicked.connect(lambda: os.system("start " + path.get_cache_path()))
         self.analysis_recommend_button.clicked.connect(self.analysis_recommend_image)
 
         data = databases.get_normal_json_data()
         if data:
             if "service_dir_path" in data:
                 self.service_image_path.setText(data["service_dir_path"])
+                self.service_image_path.moveCursor(QTextCursor.End)
             if "work_dir_path" in data:
                 self.work_image_path.setText(data["work_dir_path"])
+                self.work_image_path.moveCursor(QTextCursor.End)
             if "recommend_image_path" in data:
                 self.recommend_image_path.setText(data["recommend_image_path"])
+                self.recommend_image_path.moveCursor(QTextCursor.End)
 
     def run(self):
         if self.tip_input():
@@ -76,15 +82,18 @@ class MainWindow(QWidget, main_ui.Ui_Form):
         if not self.work_image_path.toPlainText():
             QMessageBox.information(self, '提示', '工作路径为空!')
             return True
+        self.get_select_service_url()
+        if self.select_service_url is None:
+            QMessageBox.information(self, '提示', '未选择服务器!')
+            return True
+        return False
+
+    def get_select_service_url(self):
         self.select_service_url = None
         if self.service_url_2.isChecked():
             self.select_service_url = self.service_url_2.text()
         elif self.service_url_3.isChecked():
             self.select_service_url = self.service_url_3.text()
-        if self.select_service_url is None:
-            QMessageBox.information(self, '提示', '未选择服务器!')
-            return True
-        return False
 
     def init_progress_dialog(self):
         self.progress_dialog = QProgressDialog(self)
@@ -100,6 +109,27 @@ class MainWindow(QWidget, main_ui.Ui_Form):
             work_image_path = utils.analysis_input_path(self.work_image_path)
             utils.delete_dir(work_image_path + "/xml/")
             QMessageBox.information(self, '提示', '工作目录已重置!')
+
+    def clear_input(self):
+        self.service_image_path.setText("")
+        self.work_image_path.setText("")
+        self.recommend_image_path.setText("")
+
+    def format_xml(self):
+        self.get_select_service_url()
+        if self.select_service_url is None:
+            QMessageBox.information(self, '提示', '未选择服务器!')
+            return
+        core.select_service_url = self.select_service_url
+        if core.format_xml(utils.analysis_input_path(self.work_image_path)):
+            QMessageBox.information(self, '提示', '格式化成功!')
+        else:
+            QMessageBox.information(self, '提示', '格式化失败!')
+
+    def check_vip(self):
+        log_file = open(path.get_cache_path() + path.CHECK_VIP_TXT, mode='w', encoding='utf-8')
+        core.check_vip(utils.analysis_input_path(self.work_image_path), log_file)
+        log_file.close()
 
     def analysis_recommend_image(self):
         if self.tip_input():

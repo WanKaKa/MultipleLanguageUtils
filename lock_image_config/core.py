@@ -156,6 +156,103 @@ def modify_xml(work_image_path, image_type, start_index, count, log_file=None):
     utils.print_log(log_file, "修改配置文件--结束")
 
 
+def format_xml(work_image_path):
+    dir_path = work_image_path + "/xml/"
+    if not os.path.exists(dir_path):
+        return False
+    for file in os.listdir(dir_path):
+        file_path = dir_path + file
+        if os.path.isfile(file_path) and file.endswith(".xml"):
+            item_list = xml_pro.analysis_wallpaper_xml(file_path)
+
+            # 重置id
+            index = 0
+            for wallpaper_entity in item_list:
+                wallpaper_entity.id = index
+                index += 1
+
+            if item_list and len(item_list) > 0:
+                file_open = open(file_path, mode='w', encoding='utf-8')
+                head_str = """<?xml version="1.0" encoding="utf-8"?>\n<skin """
+                head_str += "root_url=\"" + select_service_url + "\""
+                head_str += """>\n"""
+                file_open.write(head_str)
+
+                for wallpaper_entity in item_list:
+                    item_xml_str = create_wallpaper_item_xml(wallpaper_entity)
+                    file_open.write(item_xml_str)
+
+                footer_str = """</skin>"""
+                file_open.write(footer_str)
+
+                file_open.close()
+    return True
+
+
+def check_vip(work_image_path, log_file=None):
+    utils.print_log(log_file, "检查vip--开始")
+    utils.print_log(log_file, "\n" * 4)
+
+    skin_recommend_path = work_image_path + "/xml/skin_recommend.xml"
+    recommend_vip_item_list = {}
+    others_vip_item_list = {}
+    if os.path.exists(skin_recommend_path):
+        skin_recommend_list = xml_pro.analysis_wallpaper_xml(skin_recommend_path)
+        for wallpaper_entity in skin_recommend_list:
+            if wallpaper_entity.vip == "true":
+                wallpaper_entity_name = wallpaper_entity.url.split("/")[-1]
+                image_type = wallpaper_entity_name.split("_")[0]
+                if recommend_vip_item_list.get(image_type) is None:
+                    recommend_vip_item_list[image_type] = []
+                recommend_vip_item_list[image_type].append(wallpaper_entity_name)
+
+        for image_type in recommend_vip_item_list.keys():
+            path = work_image_path + "/xml/skin_" + image_type + ".xml"
+            if os.path.exists(path):
+                item_list = xml_pro.analysis_wallpaper_xml(path)
+                for wallpaper_entity in item_list:
+                    if wallpaper_entity.vip == "true":
+                        wallpaper_entity_name = wallpaper_entity.url.split("/")[-1]
+                        if others_vip_item_list.get(image_type) is None:
+                            others_vip_item_list[image_type] = []
+                        others_vip_item_list[image_type].append(wallpaper_entity_name)
+
+        for key in recommend_vip_item_list.keys():
+            recommend_name_str = ""
+            others_name_str = ""
+            utils.print_log(log_file, "推荐")
+            for name in natsorted(recommend_vip_item_list[key], alg=ns.PATH):
+                recommend_name_str += name.ljust(30, " ")
+                if len(recommend_name_str) >= 150:
+                    utils.print_log(log_file, recommend_name_str)
+                    recommend_name_str = ""
+            if recommend_name_str:
+                utils.print_log(log_file, recommend_name_str)
+            utils.print_log(log_file, "")
+
+            utils.print_log(log_file, key)
+            for name in natsorted(others_vip_item_list[key], alg=ns.PATH):
+                others_name_str += name.ljust(30, " ")
+                if len(others_name_str) >= 150:
+                    utils.print_log(log_file, others_name_str)
+                    others_name_str = ""
+            if others_name_str:
+                utils.print_log(log_file, others_name_str)
+            utils.print_log(log_file, "")
+
+            utils.print_log(log_file, "异常")
+            vip_error = False
+            for name in natsorted(recommend_vip_item_list[key], alg=ns.PATH):
+                if name not in others_vip_item_list[key]:
+                    vip_error = True
+                    utils.print_log(log_file, name)
+            if not vip_error:
+                utils.print_log(log_file, "vip资源正常")
+            utils.print_log(log_file, "\n" * 4)
+
+    utils.print_log(log_file, "检查vip--结束")
+
+
 def create_wallpaper_item(skin_name, index):
     download_url = select_service_url + skin_name + "/" + skin_name + "_" + int2str(index)
     thumb = select_service_url + "skin_thumb/" + skin_name + "/" + skin_name + "_" + int2str(index)

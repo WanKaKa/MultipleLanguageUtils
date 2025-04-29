@@ -14,7 +14,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_Form(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
-        Form.resize(840, 480)
+        Form.resize(900, 540)
         self.formLayout = QtWidgets.QFormLayout(Form)
         self.formLayout.setObjectName("formLayout")
         self.verticalLayout = QtWidgets.QVBoxLayout()
@@ -76,130 +76,219 @@ class Ui_Form(object):
         self.horizontalLayout_2 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
         self.frame = QtWidgets.QFrame(Form)
-        self.frame.setMinimumSize(QtCore.QSize(0, 80))
-        self.frame.setMaximumSize(QtCore.QSize(16777215, 80))
+        self.frame.setMinimumSize(QtCore.QSize(0, 120))
+        self.frame.setMaximumSize(QtCore.QSize(16777215, 120))
         self.frame.setStyleSheet("background-color: rgb(255, 255, 255);")
         self.frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame.setObjectName("frame")
         self.service_url_2 = QtWidgets.QRadioButton(self.frame)
-        self.service_url_2.setGeometry(QtCore.QRect(20, 0, 720, 40))
-        self.service_url_2.setStyleSheet("font: 12pt \"微软雅黑\";\n"
-"color: rgb(85, 85, 255);")
+        self.service_url_2.setGeometry(QtCore.QRect(20, 0, 720, 60))
+        self.service_url_2.setStyleSheet("QRadioButton{\n"
+"    font: 12pt \"微软雅黑\";\n"
+"}\n"
+"QRadioButton::checked{\n"
+"    color: rgb(85, 85, 255);\n"
+"}\n"
+"QRadioButton::unchecked{\n"
+"    color: rgb(150, 150, 150);\n"
+"}\n"
+"QRadioButton::indicator {\n"
+"    width:24px;\n"
+"    height:24px;\n"
+"    border-radius:12px;\n"
+"}\n"
+"QRadioButton::indicator::checked{\n"
+"    background-color:rgb(85, 85, 255);\n"
+"}\n"
+"QRadioButton::indicator::unchecked{\n"
+"    background-color:rgb(200, 200, 200);\n"
+"}")
+        self.service_url_2.setAutoExclusive(True)
         self.service_url_2.setObjectName("service_url_2")
         self.service_url_3 = QtWidgets.QRadioButton(self.frame)
-        self.service_url_3.setGeometry(QtCore.QRect(20, 40, 720, 40))
-        self.service_url_3.setStyleSheet("font: 12pt \"微软雅黑\";\n"
-"color: rgb(85, 85, 255);")
+        self.service_url_3.setGeometry(QtCore.QRect(20, 60, 720, 60))
+        self.service_url_3.setStyleSheet("QRadioButton{\n"
+"    font: 12pt \"微软雅黑\";\n"
+"}\n"
+"QRadioButton::checked{\n"
+"    color: rgb(85, 85, 255);\n"
+"}\n"
+"QRadioButton::unchecked{\n"
+"    color: rgb(150, 150, 150);\n"
+"}\n"
+"QRadioButton::indicator {\n"
+"    width:24px;\n"
+"    height:24px;\n"
+"    border-radius:12px;\n"
+"}\n"
+"QRadioButton::indicator::checked{\n"
+"    background-color:rgb(85, 85, 255);\n"
+"}\n"
+"QRadioButton::indicator::unchecked{\n"
+"    background-color:rgb(200, 200, 200);\n"
+"}")
         self.service_url_3.setObjectName("service_url_3")
         self.horizontalLayout_2.addWidget(self.frame)
         self.verticalLayout.addLayout(self.horizontalLayout_2)
         self.horizontalLayout_4 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_4.setObjectName("horizontalLayout_4")
         self.frame_2 = QtWidgets.QFrame(Form)
-        self.frame_2.setMinimumSize(QtCore.QSize(120, 50))
-        self.frame_2.setMaximumSize(QtCore.QSize(120, 50))
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.frame_2.sizePolicy().hasHeightForWidth())
+        self.frame_2.setSizePolicy(sizePolicy)
+        self.frame_2.setMinimumSize(QtCore.QSize(0, 50))
         self.frame_2.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame_2.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame_2.setObjectName("frame_2")
         self.reset_button = QtWidgets.QPushButton(self.frame_2)
         self.reset_button.setGeometry(QtCore.QRect(0, 10, 120, 40))
-        self.reset_button.setMinimumSize(QtCore.QSize(120, 40))
-        self.reset_button.setMaximumSize(QtCore.QSize(120, 40))
         self.reset_button.setStyleSheet("background-color: rgb(255, 85, 127);\n"
 "color: rgb(255, 255, 255);\n"
 "font: 12pt \"微软雅黑\";")
         self.reset_button.setObjectName("reset_button")
         self.horizontalLayout_4.addWidget(self.frame_2)
         self.frame_3 = QtWidgets.QFrame(Form)
-        self.frame_3.setMinimumSize(QtCore.QSize(0, 50))
-        self.frame_3.setMaximumSize(QtCore.QSize(16777215, 50))
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.frame_3.sizePolicy().hasHeightForWidth())
+        self.frame_3.setSizePolicy(sizePolicy)
         self.frame_3.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame_3.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame_3.setObjectName("frame_3")
+        self.clear_input_button = QtWidgets.QPushButton(self.frame_3)
+        self.clear_input_button.setEnabled(True)
+        self.clear_input_button.setGeometry(QtCore.QRect(0, 10, 120, 40))
+        self.clear_input_button.setStyleSheet("background-color: rgb(255, 85, 127);\n"
+"color: rgb(255, 255, 255);\n"
+"font: 12pt \"微软雅黑\";")
+        self.clear_input_button.setObjectName("clear_input_button")
         self.horizontalLayout_4.addWidget(self.frame_3)
         self.frame_6 = QtWidgets.QFrame(Form)
-        self.frame_6.setMinimumSize(QtCore.QSize(120, 50))
-        self.frame_6.setMaximumSize(QtCore.QSize(120, 50))
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.frame_6.sizePolicy().hasHeightForWidth())
+        self.frame_6.setSizePolicy(sizePolicy)
+        self.frame_6.setMinimumSize(QtCore.QSize(0, 50))
         self.frame_6.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame_6.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame_6.setObjectName("frame_6")
         self.run_button = QtWidgets.QPushButton(self.frame_6)
         self.run_button.setGeometry(QtCore.QRect(0, 10, 120, 40))
-        self.run_button.setMinimumSize(QtCore.QSize(120, 40))
-        self.run_button.setMaximumSize(QtCore.QSize(120, 40))
         self.run_button.setStyleSheet("background-color: rgb(85, 85, 255);\n"
 "color: rgb(255, 255, 255);\n"
 "font: 12pt \"微软雅黑\";")
         self.run_button.setObjectName("run_button")
         self.horizontalLayout_4.addWidget(self.frame_6)
-        self.frame_5 = QtWidgets.QFrame(Form)
-        self.frame_5.setMinimumSize(QtCore.QSize(0, 50))
-        self.frame_5.setMaximumSize(QtCore.QSize(16777215, 50))
-        self.frame_5.setFrameShape(QtWidgets.QFrame.StyledPanel)
-        self.frame_5.setFrameShadow(QtWidgets.QFrame.Raised)
-        self.frame_5.setObjectName("frame_5")
-        self.horizontalLayout_4.addWidget(self.frame_5)
         self.frame_8 = QtWidgets.QFrame(Form)
-        self.frame_8.setMinimumSize(QtCore.QSize(120, 50))
-        self.frame_8.setMaximumSize(QtCore.QSize(120, 50))
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.frame_8.sizePolicy().hasHeightForWidth())
+        self.frame_8.setSizePolicy(sizePolicy)
+        self.frame_8.setMinimumSize(QtCore.QSize(0, 50))
         self.frame_8.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame_8.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame_8.setObjectName("frame_8")
         self.analysis_recommend_button = QtWidgets.QPushButton(self.frame_8)
         self.analysis_recommend_button.setGeometry(QtCore.QRect(0, 10, 120, 40))
-        self.analysis_recommend_button.setMinimumSize(QtCore.QSize(120, 40))
-        self.analysis_recommend_button.setMaximumSize(QtCore.QSize(120, 40))
         self.analysis_recommend_button.setStyleSheet("background-color: rgb(85, 85, 255);\n"
 "color: rgb(255, 255, 255);\n"
 "font: 12pt \"微软雅黑\";")
         self.analysis_recommend_button.setObjectName("analysis_recommend_button")
         self.horizontalLayout_4.addWidget(self.frame_8)
-        self.frame_7 = QtWidgets.QFrame(Form)
-        self.frame_7.setMinimumSize(QtCore.QSize(0, 50))
-        self.frame_7.setMaximumSize(QtCore.QSize(16777215, 50))
-        self.frame_7.setFrameShape(QtWidgets.QFrame.StyledPanel)
-        self.frame_7.setFrameShadow(QtWidgets.QFrame.Raised)
-        self.frame_7.setObjectName("frame_7")
-        self.horizontalLayout_4.addWidget(self.frame_7)
         self.frame_4 = QtWidgets.QFrame(Form)
-        self.frame_4.setMinimumSize(QtCore.QSize(120, 50))
-        self.frame_4.setMaximumSize(QtCore.QSize(120, 50))
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.frame_4.sizePolicy().hasHeightForWidth())
+        self.frame_4.setSizePolicy(sizePolicy)
+        self.frame_4.setMinimumSize(QtCore.QSize(0, 50))
         self.frame_4.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame_4.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame_4.setObjectName("frame_4")
         self.log_button = QtWidgets.QPushButton(self.frame_4)
         self.log_button.setGeometry(QtCore.QRect(0, 10, 120, 40))
-        self.log_button.setMinimumSize(QtCore.QSize(120, 40))
-        self.log_button.setMaximumSize(QtCore.QSize(120, 40))
         self.log_button.setStyleSheet("background-color: rgb(85, 85, 255);\n"
 "color: rgb(255, 255, 255);\n"
 "font: 12pt \"微软雅黑\";")
         self.log_button.setObjectName("log_button")
         self.horizontalLayout_4.addWidget(self.frame_4)
-        self.frame_9 = QtWidgets.QFrame(Form)
-        self.frame_9.setMinimumSize(QtCore.QSize(0, 50))
-        self.frame_9.setMaximumSize(QtCore.QSize(16777215, 50))
-        self.frame_9.setFrameShape(QtWidgets.QFrame.StyledPanel)
-        self.frame_9.setFrameShadow(QtWidgets.QFrame.Raised)
-        self.frame_9.setObjectName("frame_9")
-        self.horizontalLayout_4.addWidget(self.frame_9)
-        self.frame_10 = QtWidgets.QFrame(Form)
-        self.frame_10.setMinimumSize(QtCore.QSize(120, 50))
-        self.frame_10.setMaximumSize(QtCore.QSize(120, 50))
-        self.frame_10.setFrameShape(QtWidgets.QFrame.StyledPanel)
-        self.frame_10.setFrameShadow(QtWidgets.QFrame.Raised)
-        self.frame_10.setObjectName("frame_10")
-        self.log_button_2 = QtWidgets.QPushButton(self.frame_10)
-        self.log_button_2.setGeometry(QtCore.QRect(0, 10, 120, 40))
-        self.log_button_2.setMinimumSize(QtCore.QSize(120, 40))
-        self.log_button_2.setMaximumSize(QtCore.QSize(120, 40))
-        self.log_button_2.setStyleSheet("background-color: rgb(85, 85, 255);\n"
+        self.verticalLayout.addLayout(self.horizontalLayout_4)
+        self.horizontalLayout_6 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_6.setObjectName("horizontalLayout_6")
+        self.frame_7 = QtWidgets.QFrame(Form)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.frame_7.sizePolicy().hasHeightForWidth())
+        self.frame_7.setSizePolicy(sizePolicy)
+        self.frame_7.setMinimumSize(QtCore.QSize(0, 50))
+        self.frame_7.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_7.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_7.setObjectName("frame_7")
+        self.format_xml_button = QtWidgets.QPushButton(self.frame_7)
+        self.format_xml_button.setGeometry(QtCore.QRect(0, 0, 120, 40))
+        self.format_xml_button.setStyleSheet("background-color: rgb(85, 85, 255);\n"
 "color: rgb(255, 255, 255);\n"
 "font: 12pt \"微软雅黑\";")
-        self.log_button_2.setObjectName("log_button_2")
-        self.horizontalLayout_4.addWidget(self.frame_10)
-        self.verticalLayout.addLayout(self.horizontalLayout_4)
+        self.format_xml_button.setObjectName("format_xml_button")
+        self.horizontalLayout_6.addWidget(self.frame_7)
+        self.frame_5 = QtWidgets.QFrame(Form)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.frame_5.sizePolicy().hasHeightForWidth())
+        self.frame_5.setSizePolicy(sizePolicy)
+        self.frame_5.setMinimumSize(QtCore.QSize(0, 50))
+        self.frame_5.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_5.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_5.setObjectName("frame_5")
+        self.check_vip_button = QtWidgets.QPushButton(self.frame_5)
+        self.check_vip_button.setGeometry(QtCore.QRect(0, 0, 120, 40))
+        self.check_vip_button.setStyleSheet("background-color: rgb(85, 85, 255);\n"
+"color: rgb(255, 255, 255);\n"
+"font: 12pt \"微软雅黑\";")
+        self.check_vip_button.setObjectName("check_vip_button")
+        self.horizontalLayout_6.addWidget(self.frame_5)
+        self.frame_11 = QtWidgets.QFrame(Form)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.frame_11.sizePolicy().hasHeightForWidth())
+        self.frame_11.setSizePolicy(sizePolicy)
+        self.frame_11.setMinimumSize(QtCore.QSize(0, 50))
+        self.frame_11.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_11.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_11.setObjectName("frame_11")
+        self.horizontalLayout_6.addWidget(self.frame_11)
+        self.frame_12 = QtWidgets.QFrame(Form)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.frame_12.sizePolicy().hasHeightForWidth())
+        self.frame_12.setSizePolicy(sizePolicy)
+        self.frame_12.setMinimumSize(QtCore.QSize(0, 50))
+        self.frame_12.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_12.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_12.setObjectName("frame_12")
+        self.horizontalLayout_6.addWidget(self.frame_12)
+        self.frame_13 = QtWidgets.QFrame(Form)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.frame_13.sizePolicy().hasHeightForWidth())
+        self.frame_13.setSizePolicy(sizePolicy)
+        self.frame_13.setMinimumSize(QtCore.QSize(0, 50))
+        self.frame_13.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_13.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_13.setObjectName("frame_13")
+        self.horizontalLayout_6.addWidget(self.frame_13)
+        self.verticalLayout.addLayout(self.horizontalLayout_6)
         self.formLayout.setLayout(0, QtWidgets.QFormLayout.SpanningRole, self.verticalLayout)
 
         self.retranslateUi(Form)
@@ -213,8 +302,10 @@ class Ui_Form(object):
         self.label_3.setText(_translate("Form", "推荐壁纸路径"))
         self.service_url_2.setText(_translate("Form", "RadioButton"))
         self.service_url_3.setText(_translate("Form", "RadioButton"))
-        self.reset_button.setText(_translate("Form", "重置"))
+        self.reset_button.setText(_translate("Form", "删除xml"))
+        self.clear_input_button.setText(_translate("Form", "清空输入"))
         self.run_button.setText(_translate("Form", "处理壁纸"))
         self.analysis_recommend_button.setText(_translate("Form", "解析推荐壁纸"))
-        self.log_button.setText(_translate("Form", "Log-处理壁纸"))
-        self.log_button_2.setText(_translate("Form", "Log-推荐壁纸"))
+        self.log_button.setText(_translate("Form", "Log文件夹"))
+        self.format_xml_button.setText(_translate("Form", "格式化xml"))
+        self.check_vip_button.setText(_translate("Form", "检查vip"))

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>840</width>
-    <height>480</height>
+    <width>900</width>
+    <height>540</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -158,13 +158,13 @@ font: 12pt &quot;微软雅黑&quot;;</string>
          <property name="minimumSize">
           <size>
            <width>0</width>
-           <height>80</height>
+           <height>120</height>
           </size>
          </property>
          <property name="maximumSize">
           <size>
            <width>16777215</width>
-           <height>80</height>
+           <height>120</height>
           </size>
          </property>
          <property name="styleSheet">
@@ -182,29 +182,68 @@ font: 12pt &quot;微软雅黑&quot;;</string>
             <x>20</x>
             <y>0</y>
             <width>720</width>
-            <height>40</height>
+            <height>60</height>
            </rect>
           </property>
           <property name="styleSheet">
-           <string notr="true">font: 12pt &quot;微软雅黑&quot;;
-color: rgb(85, 85, 255);</string>
+           <string notr="true">QRadioButton{
+	font: 12pt &quot;微软雅黑&quot;;
+}
+QRadioButton::checked{
+	color: rgb(85, 85, 255);
+}
+QRadioButton::unchecked{
+	color: rgb(150, 150, 150);
+}
+QRadioButton::indicator {
+    width:24px;
+    height:24px;
+	border-radius:12px;
+}
+QRadioButton::indicator::checked{
+	background-color:rgb(85, 85, 255);
+}
+QRadioButton::indicator::unchecked{
+	background-color:rgb(200, 200, 200);
+}</string>
           </property>
           <property name="text">
            <string>RadioButton</string>
+          </property>
+          <property name="autoExclusive">
+           <bool>true</bool>
           </property>
          </widget>
          <widget class="QRadioButton" name="service_url_3">
           <property name="geometry">
            <rect>
             <x>20</x>
-            <y>40</y>
+            <y>60</y>
             <width>720</width>
-            <height>40</height>
+            <height>60</height>
            </rect>
           </property>
           <property name="styleSheet">
-           <string notr="true">font: 12pt &quot;微软雅黑&quot;;
-color: rgb(85, 85, 255);</string>
+           <string notr="true">QRadioButton{
+	font: 12pt &quot;微软雅黑&quot;;
+}
+QRadioButton::checked{
+	color: rgb(85, 85, 255);
+}
+QRadioButton::unchecked{
+	color: rgb(150, 150, 150);
+}
+QRadioButton::indicator {
+    width:24px;
+    height:24px;
+	border-radius:12px;
+}
+QRadioButton::indicator::checked{
+	background-color:rgb(85, 85, 255);
+}
+QRadioButton::indicator::unchecked{
+	background-color:rgb(200, 200, 200);
+}</string>
           </property>
           <property name="text">
            <string>RadioButton</string>
@@ -218,15 +257,15 @@ color: rgb(85, 85, 255);</string>
       <layout class="QHBoxLayout" name="horizontalLayout_4">
        <item>
         <widget class="QFrame" name="frame_2">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
          <property name="minimumSize">
           <size>
-           <width>120</width>
-           <height>50</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>120</width>
+           <width>0</width>
            <height>50</height>
           </size>
          </property>
@@ -245,42 +284,24 @@ color: rgb(85, 85, 255);</string>
             <height>40</height>
            </rect>
           </property>
-          <property name="minimumSize">
-           <size>
-            <width>120</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>120</width>
-            <height>40</height>
-           </size>
-          </property>
           <property name="styleSheet">
            <string notr="true">background-color: rgb(255, 85, 127);
 color: rgb(255, 255, 255);
 font: 12pt &quot;微软雅黑&quot;;</string>
           </property>
           <property name="text">
-           <string>重置</string>
+           <string>删除xml</string>
           </property>
          </widget>
         </widget>
        </item>
        <item>
         <widget class="QFrame" name="frame_3">
-         <property name="minimumSize">
-          <size>
-           <width>0</width>
-           <height>50</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>16777215</width>
-           <height>50</height>
-          </size>
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
          </property>
          <property name="frameShape">
           <enum>QFrame::StyledPanel</enum>
@@ -288,19 +309,40 @@ font: 12pt &quot;微软雅黑&quot;;</string>
          <property name="frameShadow">
           <enum>QFrame::Raised</enum>
          </property>
+         <widget class="QPushButton" name="clear_input_button">
+          <property name="enabled">
+           <bool>true</bool>
+          </property>
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>10</y>
+            <width>120</width>
+            <height>40</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background-color: rgb(255, 85, 127);
+color: rgb(255, 255, 255);
+font: 12pt &quot;微软雅黑&quot;;</string>
+          </property>
+          <property name="text">
+           <string>清空输入</string>
+          </property>
+         </widget>
         </widget>
        </item>
        <item>
         <widget class="QFrame" name="frame_6">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
          <property name="minimumSize">
           <size>
-           <width>120</width>
-           <height>50</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>120</width>
+           <width>0</width>
            <height>50</height>
           </size>
          </property>
@@ -319,18 +361,6 @@ font: 12pt &quot;微软雅黑&quot;;</string>
             <height>40</height>
            </rect>
           </property>
-          <property name="minimumSize">
-           <size>
-            <width>120</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>120</width>
-            <height>40</height>
-           </size>
-          </property>
           <property name="styleSheet">
            <string notr="true">background-color: rgb(85, 85, 255);
 color: rgb(255, 255, 255);
@@ -343,38 +373,16 @@ font: 12pt &quot;微软雅黑&quot;;</string>
         </widget>
        </item>
        <item>
-        <widget class="QFrame" name="frame_5">
+        <widget class="QFrame" name="frame_8">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
          <property name="minimumSize">
           <size>
            <width>0</width>
-           <height>50</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>16777215</width>
-           <height>50</height>
-          </size>
-         </property>
-         <property name="frameShape">
-          <enum>QFrame::StyledPanel</enum>
-         </property>
-         <property name="frameShadow">
-          <enum>QFrame::Raised</enum>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QFrame" name="frame_8">
-         <property name="minimumSize">
-          <size>
-           <width>120</width>
-           <height>50</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>120</width>
            <height>50</height>
           </size>
          </property>
@@ -393,18 +401,6 @@ font: 12pt &quot;微软雅黑&quot;;</string>
             <height>40</height>
            </rect>
           </property>
-          <property name="minimumSize">
-           <size>
-            <width>120</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>120</width>
-            <height>40</height>
-           </size>
-          </property>
           <property name="styleSheet">
            <string notr="true">background-color: rgb(85, 85, 255);
 color: rgb(255, 255, 255);
@@ -417,38 +413,16 @@ font: 12pt &quot;微软雅黑&quot;;</string>
         </widget>
        </item>
        <item>
-        <widget class="QFrame" name="frame_7">
+        <widget class="QFrame" name="frame_4">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
          <property name="minimumSize">
           <size>
            <width>0</width>
-           <height>50</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>16777215</width>
-           <height>50</height>
-          </size>
-         </property>
-         <property name="frameShape">
-          <enum>QFrame::StyledPanel</enum>
-         </property>
-         <property name="frameShadow">
-          <enum>QFrame::Raised</enum>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QFrame" name="frame_4">
-         <property name="minimumSize">
-          <size>
-           <width>120</width>
-           <height>50</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>120</width>
            <height>50</height>
           </size>
          </property>
@@ -467,40 +441,112 @@ font: 12pt &quot;微软雅黑&quot;;</string>
             <height>40</height>
            </rect>
           </property>
-          <property name="minimumSize">
-           <size>
-            <width>120</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>120</width>
-            <height>40</height>
-           </size>
-          </property>
           <property name="styleSheet">
            <string notr="true">background-color: rgb(85, 85, 255);
 color: rgb(255, 255, 255);
 font: 12pt &quot;微软雅黑&quot;;</string>
           </property>
           <property name="text">
-           <string>Log-处理壁纸</string>
+           <string>Log文件夹</string>
           </property>
          </widget>
         </widget>
        </item>
+      </layout>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout_6">
        <item>
-        <widget class="QFrame" name="frame_9">
+        <widget class="QFrame" name="frame_7">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
          <property name="minimumSize">
           <size>
            <width>0</width>
            <height>50</height>
           </size>
          </property>
-         <property name="maximumSize">
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Raised</enum>
+         </property>
+         <widget class="QPushButton" name="format_xml_button">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>120</width>
+            <height>40</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background-color: rgb(85, 85, 255);
+color: rgb(255, 255, 255);
+font: 12pt &quot;微软雅黑&quot;;</string>
+          </property>
+          <property name="text">
+           <string>格式化xml</string>
+          </property>
+         </widget>
+        </widget>
+       </item>
+       <item>
+        <widget class="QFrame" name="frame_5">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
           <size>
-           <width>16777215</width>
+           <width>0</width>
+           <height>50</height>
+          </size>
+         </property>
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Raised</enum>
+         </property>
+         <widget class="QPushButton" name="check_vip_button">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>120</width>
+            <height>40</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background-color: rgb(85, 85, 255);
+color: rgb(255, 255, 255);
+font: 12pt &quot;微软雅黑&quot;;</string>
+          </property>
+          <property name="text">
+           <string>检查vip</string>
+          </property>
+         </widget>
+        </widget>
+       </item>
+       <item>
+        <widget class="QFrame" name="frame_11">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
            <height>50</height>
           </size>
          </property>
@@ -513,16 +559,16 @@ font: 12pt &quot;微软雅黑&quot;;</string>
         </widget>
        </item>
        <item>
-        <widget class="QFrame" name="frame_10">
+        <widget class="QFrame" name="frame_12">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
          <property name="minimumSize">
           <size>
-           <width>120</width>
-           <height>50</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>120</width>
+           <width>0</width>
            <height>50</height>
           </size>
          </property>
@@ -532,36 +578,28 @@ font: 12pt &quot;微软雅黑&quot;;</string>
          <property name="frameShadow">
           <enum>QFrame::Raised</enum>
          </property>
-         <widget class="QPushButton" name="log_button_2">
-          <property name="geometry">
-           <rect>
-            <x>0</x>
-            <y>10</y>
-            <width>120</width>
-            <height>40</height>
-           </rect>
-          </property>
-          <property name="minimumSize">
-           <size>
-            <width>120</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>120</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">background-color: rgb(85, 85, 255);
-color: rgb(255, 255, 255);
-font: 12pt &quot;微软雅黑&quot;;</string>
-          </property>
-          <property name="text">
-           <string>Log-推荐壁纸</string>
-          </property>
-         </widget>
+        </widget>
+       </item>
+       <item>
+        <widget class="QFrame" name="frame_13">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>50</height>
+          </size>
+         </property>
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Raised</enum>
+         </property>
         </widget>
        </item>
       </layout>
