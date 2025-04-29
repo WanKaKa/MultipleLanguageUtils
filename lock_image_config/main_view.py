@@ -128,8 +128,12 @@ class MainWindow(QWidget, main_ui.Ui_Form):
 
     def check_vip(self):
         log_file = open(path.get_cache_path() + path.CHECK_VIP_TXT, mode='w', encoding='utf-8')
-        core.check_vip(utils.analysis_input_path(self.work_image_path), log_file)
-        log_file.close()
+        if core.check_vip(utils.analysis_input_path(self.work_image_path), log_file):
+            log_file.close()
+            QMessageBox.information(self, '提示', 'vip正常')
+        else:
+            log_file.close()
+            QMessageBox.information(self, '提示', 'vip异常')
 
     def analysis_recommend_image(self):
         if self.tip_input():

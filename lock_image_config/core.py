@@ -193,6 +193,7 @@ def check_vip(work_image_path, log_file=None):
     utils.print_log(log_file, "检查vip--开始")
     utils.print_log(log_file, "\n" * 4)
 
+    check_vip_not_error = True
     skin_recommend_path = work_image_path + "/xml/skin_recommend.xml"
     recommend_vip_item_list = {}
     others_vip_item_list = {}
@@ -244,6 +245,7 @@ def check_vip(work_image_path, log_file=None):
             vip_error = False
             for name in natsorted(recommend_vip_item_list[key], alg=ns.PATH):
                 if name not in others_vip_item_list[key]:
+                    check_vip_not_error = False
                     vip_error = True
                     utils.print_log(log_file, name)
             if not vip_error:
@@ -251,6 +253,7 @@ def check_vip(work_image_path, log_file=None):
             utils.print_log(log_file, "\n" * 4)
 
     utils.print_log(log_file, "检查vip--结束")
+    return check_vip_not_error
 
 
 def create_wallpaper_item(skin_name, index):
