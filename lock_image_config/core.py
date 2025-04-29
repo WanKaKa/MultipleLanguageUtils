@@ -172,7 +172,7 @@ def create_wallpaper_item(skin_name, index):
 
 def create_wallpaper_item_xml(wallpaper_item):
     item_str = "    <" + xml_pro.TAG_ITEM + "\n"
-    item_str += "        " + xml_pro.TAG_ITEM + "=" + "\"" + str(wallpaper_item.id) + "\"\n"
+    item_str += "        " + xml_pro.TAG_ID + "=" + "\"" + str(wallpaper_item.id) + "\"\n"
     item_str += "        " + xml_pro.TAG_DOWNLOAD_URL + "=" + "\"" + wallpaper_item.download_url + "\"\n"
     item_str += "        " + xml_pro.TAG_FROM + "=" + "\"" + wallpaper_item.from_type + "\"\n"
     item_str += "        " + xml_pro.TAG_THUMB + "=" + "\"" + wallpaper_item.thumb + "\"\n"

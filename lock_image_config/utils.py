@@ -2,6 +2,7 @@ import os
 import shutil
 import sys
 
+import pylnk3
 from PyQt5 import QtWidgets
 
 
@@ -52,5 +53,8 @@ def analysis_input_path(text_edit):
     if isinstance(text_edit, QtWidgets.QLineEdit):
         input_path = text_edit.text().strip("\n")
     if input_path.startswith("file:///"):
-        return input_path[len("file:///"):]
+        input_path = input_path[len("file:///"):]
+    if input_path.endswith(".lnk"):
+        lnk = pylnk3.parse(input_path)
+        return lnk.path
     return input_path

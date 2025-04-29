@@ -29,7 +29,6 @@ class MainWindow(QWidget, main_ui.Ui_Form):
 
     def init_view(self):
         _translate = QtCore.QCoreApplication.translate
-        self.service_url_1.setText(_translate("Form", ""))
         self.service_url_2.setText(_translate("Form", "https://lockscreenencrypt.oss-us-west-1.aliyuncs.com/"))
         self.service_url_3.setText(_translate("Form", "https://lockscreentabencrypt.oss-us-west-1.aliyuncs.com/"))
         self.reset_button.clicked.connect(self.reset_work)
@@ -78,9 +77,7 @@ class MainWindow(QWidget, main_ui.Ui_Form):
             QMessageBox.information(self, '提示', '工作路径为空!')
             return True
         self.select_service_url = None
-        if self.service_url_1.isChecked():
-            self.select_service_url = self.service_url_1.text()
-        elif self.service_url_2.isChecked():
+        if self.service_url_2.isChecked():
             self.select_service_url = self.service_url_2.text()
         elif self.service_url_3.isChecked():
             self.select_service_url = self.service_url_3.text()
