@@ -221,33 +221,38 @@ def check_vip(work_image_path, log_file=None):
         for key in recommend_vip_item_list.keys():
             recommend_name_str = ""
             others_name_str = ""
-            utils.print_log(log_file, "推荐")
-            for name in natsorted(recommend_vip_item_list[key], alg=ns.PATH):
-                recommend_name_str += name.ljust(30, " ")
-                if len(recommend_name_str) >= 150:
+            utils.print_log(log_file, "推荐中的VIP数据:")
+            recommend_vip_item_list_child = recommend_vip_item_list.get(key)
+            if recommend_vip_item_list_child:
+                for name in natsorted(recommend_vip_item_list_child, alg=ns.PATH):
+                    recommend_name_str += name.ljust(30, " ")
+                    if len(recommend_name_str) >= 150:
+                        utils.print_log(log_file, recommend_name_str)
+                        recommend_name_str = ""
+                if recommend_name_str:
                     utils.print_log(log_file, recommend_name_str)
-                    recommend_name_str = ""
-            if recommend_name_str:
-                utils.print_log(log_file, recommend_name_str)
             utils.print_log(log_file, "")
 
-            utils.print_log(log_file, key)
-            for name in natsorted(others_vip_item_list[key], alg=ns.PATH):
-                others_name_str += name.ljust(30, " ")
-                if len(others_name_str) >= 150:
+            utils.print_log(log_file, "%s中的VIP数据:" % key)
+            others_vip_item_list_child = others_vip_item_list.get(key)
+            if others_vip_item_list_child:
+                for name in natsorted(others_vip_item_list_child, alg=ns.PATH):
+                    others_name_str += name.ljust(30, " ")
+                    if len(others_name_str) >= 150:
+                        utils.print_log(log_file, others_name_str)
+                        others_name_str = ""
+                if others_name_str:
                     utils.print_log(log_file, others_name_str)
-                    others_name_str = ""
-            if others_name_str:
-                utils.print_log(log_file, others_name_str)
             utils.print_log(log_file, "")
 
-            utils.print_log(log_file, "异常")
+            utils.print_log(log_file, "状态:")
             vip_error = False
-            for name in natsorted(recommend_vip_item_list[key], alg=ns.PATH):
-                if name not in others_vip_item_list[key]:
-                    check_vip_not_error = False
-                    vip_error = True
-                    utils.print_log(log_file, name)
+            if recommend_vip_item_list_child:
+                for name in natsorted(recommend_vip_item_list_child, alg=ns.PATH):
+                    if others_vip_item_list_child and name not in others_vip_item_list_child:
+                        check_vip_not_error = False
+                        vip_error = True
+                        utils.print_log(log_file, name)
             if not vip_error:
                 utils.print_log(log_file, "vip资源正常")
             utils.print_log(log_file, "\n" * 4)
