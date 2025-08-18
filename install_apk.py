@@ -33,6 +33,7 @@ projects_details = [
     ["APPLocker", "D:\\Work\\ASProjects\\", "\\app", "tool.app.safe.applocker"],
     ["APPLockerGrid", "D:\\Work\\ASProjects\\", "\\app", "locker.app.safe.applocker"],
     ["AppLockerTab", "D:\\Work\\ASProjects\\", "\\app", "applocker.password.safe.fingerprint.locker"],
+    ["AppLockerMenu", "D:\\Work\\ASProjects\\", "\\app", "applock.fingerprint.safelock.password.lockapps"],
     ["Pedometer", "D:\\Work\\ASProjects\\", "\\app", "tool.fitness.step.counter.pedometer"],
     ["PdfReader", "D:\\Work\\ASProjects\\", "\\app", "tool.office.ebook.reader.pdfreader"],
 ]
