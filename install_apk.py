@@ -38,7 +38,7 @@ projects_details = [
     ["PdfReader", "D:\\Work\\ASProjects\\", "\\app", "tool.office.ebook.reader.pdfreader"],
 ]
 # 安装成功后，拷贝apk和txt的路径
-copy_files_dir = "C:/Users/DELL/Desktop/release/"
+copy_files_dir = "D:/Users/Administrator/Desktop/release"
 
 
 def init_main_menu():
