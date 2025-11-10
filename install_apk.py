@@ -12,6 +12,8 @@ projects_details = [
     ["WebBrowserTabAS", "D:\\Work\\ASProjects\\", "\\WebBrowser", "com.explore.web.browser"],
     ["WebBrowserSlideAS", "D:\\Work\\ASProjects\\", "\\WebBrowser", "secure.explorer.web.browser"],
     ["WebBrowserThemeAS", "D:\\Work\\ASProjects\\", "\\WebBrowser", "privacy.explorer.fast.safe.browser"],
+    ["WebBrowserGrid", "D:\\Work\\ASProjects\\", "\\WebBrowser", "browser.private.fast.safe.webbrowser"],
+
     ["LockScreenGridAS", "D:\\Work\\ASProjects\\", "\\app", "tool.keypad.locker.lockscreen"],
     ["LockScreenTabAS", "D:\\Work\\ASProjects\\", "\\app", "keypad.locker.wallpaper.lockscreen"],
     ["BarcodeTabAS", "D:\\Work\\ASProjects\\", "\\BarcodeTab", "tool.qr.scanner.barcode.scanner"],
@@ -38,7 +40,7 @@ projects_details = [
     ["PdfReader", "D:\\Work\\ASProjects\\", "\\app", "tool.office.ebook.reader.pdfreader"],
 ]
 # 安装成功后，拷贝apk和txt的路径
-copy_files_dir = "D:/Users/Administrator/Desktop/release"
+copy_files_dir = "D:/Users/Administrator/Desktop/release/"
 
 
 def init_main_menu():
