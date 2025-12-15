@@ -96,6 +96,7 @@ class MainWidget(QWidget):
             "punch_complete.png",
             "punch_complete_2.png",
             "punch_complete_3.png",
+            "punch_complete_4.png",
         }
 
         self.timing_hour = 20
