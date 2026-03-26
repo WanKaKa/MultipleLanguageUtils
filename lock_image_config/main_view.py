@@ -1,4 +1,5 @@
 import os
+import traceback
 
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QTextCursor
@@ -71,6 +72,7 @@ class MainWindow(QWidget, main_ui.Ui_Form):
             except Exception as e:
                 modify_success = False
                 utils.print_log(log_file, str(e))
+                traceback.print_exc()
                 self.progress_callback(100, 100)
             log_file.close()
             QMessageBox.information(self, '提示', '壁纸配置修改成功!' if modify_success else "壁纸配置修改失败")
@@ -154,13 +156,21 @@ class MainWindow(QWidget, main_ui.Ui_Form):
             log_file = open(path.get_cache_path() + path.ANALYSIS_RECOMMEND_LOG_NAME, mode='w', encoding='utf-8')
             self.init_progress_dialog()
             core.select_service_url = self.select_service_url
-            analysis_recommend.run(service_image_path, work_image_path,
-                                   recommend_image_path, log_file=log_file, callback=self.progress_callback)
+
+            try:
+                modify_success = True
+                analysis_recommend.run(service_image_path, work_image_path,
+                                       recommend_image_path, log_file=log_file, callback=self.progress_callback)
+            except Exception as e:
+                modify_success = False
+                utils.print_log(log_file, str(e))
+                traceback.print_exc()
+                self.progress_callback(100, 100)
             log_file.close()
-            QMessageBox.information(self, '提示', '推荐壁纸处理成功!')
+            QMessageBox.information(self, '提示', '推荐壁纸处理成功!' if  modify_success else '推荐壁纸处理失败!')
 
     def progress_callback(self, *args, **kwargs):
         if self.progress_dialog and isinstance(self.progress_dialog, QProgressDialog):
             if kwargs and "label" in kwargs:
                 self.progress_dialog.setLabelText(kwargs["label"])
-            self.progress_dialog.setValue(min(100, args[0] / args[1] * 100))
+            self.progress_dialog.setValue(min(100, int(args[0] / args[1] * 100)))

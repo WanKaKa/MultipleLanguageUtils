@@ -1,4 +1,5 @@
 import os
+import traceback
 import xml.dom.minidom
 import entity
 
@@ -45,4 +46,5 @@ def analysis_wallpaper_xml(path):
         return item_list
     except Exception as e:
         print(e)
+        traceback.print_exc()
     return None
