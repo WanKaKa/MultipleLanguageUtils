@@ -1,7 +1,7 @@
 import os
 import traceback
 import xml.dom.minidom
-import entity
+from lock_image_config import entity_pro
 
 TAG_SKIN = "skin"
 
@@ -25,7 +25,7 @@ def analysis_wallpaper_xml(path):
         # 解析gift数据
         gift_item_list = root.getElementsByTagName(TAG_ITEM)
         for item in gift_item_list:
-            wallpaper_item = entity.WallpaperItem()
+            wallpaper_item = entity_pro.WallpaperItem()
 
             wallpaper_item.id = item.getAttribute(TAG_ID)
             wallpaper_item.download_url = item.getAttribute(TAG_DOWNLOAD_URL)

@@ -4,8 +4,8 @@ import shutil
 
 from natsort import natsorted, ns
 from lock_image_config import utils
-import entity
-import xml_pro
+from lock_image_config import entity_pro
+from lock_image_config import xml_pro
 
 FILTER_DIR_LIST = [".git", "skin_thumb", "xml", "version.xml"]
 
@@ -266,7 +266,7 @@ def create_wallpaper_item(skin_name, index):
     thumb = select_service_url + "skin_thumb/" + skin_name + "/" + skin_name + "_" + int2str(index)
     url = "skin_img/" + skin_name + "/" + skin_name + "_" + int2str(index) + ".ijs"
 
-    wallpaper_item = entity.WallpaperItem()
+    wallpaper_item = entity_pro.WallpaperItem()
     wallpaper_item.download_url = download_url
     wallpaper_item.from_type = "net"
     wallpaper_item.thumb = thumb

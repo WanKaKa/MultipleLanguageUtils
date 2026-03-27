@@ -8,7 +8,7 @@ import numpy as np
 from lock_image_config import utils
 from lock_image_config import core
 
-import xml_pro
+from lock_image_config import xml_pro
 
 recommend_image_list = []
 

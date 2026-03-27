@@ -1,4 +1,4 @@
-import xml_pro
+from lock_image_config import xml_pro
 
 
 class WallpaperItem:
