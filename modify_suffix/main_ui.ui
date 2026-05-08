@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1035</width>
-    <height>542</height>
+    <height>640</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -242,13 +242,13 @@ font: 12pt &quot;微软雅黑&quot;;</string>
          <property name="minimumSize">
           <size>
            <width>120</width>
-           <height>50</height>
+           <height>60</height>
           </size>
          </property>
          <property name="maximumSize">
           <size>
            <width>120</width>
-           <height>50</height>
+           <height>60</height>
           </size>
          </property>
          <property name="frameShape">
@@ -294,13 +294,13 @@ font: 12pt &quot;微软雅黑&quot;;</string>
          <property name="minimumSize">
           <size>
            <width>120</width>
-           <height>50</height>
+           <height>60</height>
           </size>
          </property>
          <property name="maximumSize">
           <size>
            <width>120</width>
-           <height>50</height>
+           <height>60</height>
           </size>
          </property>
          <property name="frameShape">
@@ -347,13 +347,13 @@ font: 12pt &quot;微软雅黑&quot;;
          <property name="minimumSize">
           <size>
            <width>120</width>
-           <height>50</height>
+           <height>60</height>
           </size>
          </property>
          <property name="maximumSize">
           <size>
            <width>120</width>
-           <height>50</height>
+           <height>60</height>
           </size>
          </property>
          <property name="frameShape">
@@ -399,13 +399,13 @@ font: 12pt &quot;微软雅黑&quot;;</string>
          <property name="minimumSize">
           <size>
            <width>120</width>
-           <height>50</height>
+           <height>60</height>
           </size>
          </property>
          <property name="maximumSize">
           <size>
            <width>120</width>
-           <height>50</height>
+           <height>60</height>
           </size>
          </property>
          <property name="frameShape">
@@ -448,10 +448,16 @@ font: 12pt &quot;微软雅黑&quot;;</string>
        </item>
        <item>
         <widget class="QFrame" name="frame_13">
+         <property name="minimumSize">
+          <size>
+           <width>120</width>
+           <height>60</height>
+          </size>
+         </property>
          <property name="maximumSize">
           <size>
            <width>120</width>
-           <height>50</height>
+           <height>60</height>
           </size>
          </property>
          <property name="frameShape">
@@ -497,13 +503,13 @@ font: 12pt &quot;微软雅黑&quot;;</string>
          <property name="minimumSize">
           <size>
            <width>120</width>
-           <height>50</height>
+           <height>60</height>
           </size>
          </property>
          <property name="maximumSize">
           <size>
            <width>120</width>
-           <height>50</height>
+           <height>60</height>
           </size>
          </property>
          <property name="frameShape">
@@ -542,7 +548,7 @@ color: rgb(255, 255, 255);
 font: 12pt &quot;微软雅黑&quot;;</string>
           </property>
           <property name="text">
-           <string>删除Frame</string>
+           <string>删除文件</string>
           </property>
          </widget>
         </widget>
@@ -552,13 +558,13 @@ font: 12pt &quot;微软雅黑&quot;;</string>
          <property name="minimumSize">
           <size>
            <width>120</width>
-           <height>50</height>
+           <height>60</height>
           </size>
          </property>
          <property name="maximumSize">
           <size>
            <width>120</width>
-           <height>50</height>
+           <height>60</height>
           </size>
          </property>
          <property name="frameShape">
@@ -598,374 +604,6 @@ font: 12pt &quot;微软雅黑&quot;;</string>
           </property>
           <property name="text">
            <string>重命名文件</string>
-          </property>
-         </widget>
-        </widget>
-       </item>
-      </layout>
-     </item>
-     <item>
-      <layout class="QHBoxLayout" name="horizontalLayout_10">
-       <item>
-        <widget class="QFrame" name="frame_7">
-         <property name="minimumSize">
-          <size>
-           <width>120</width>
-           <height>50</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>120</width>
-           <height>50</height>
-          </size>
-         </property>
-         <property name="frameShape">
-          <enum>QFrame::StyledPanel</enum>
-         </property>
-         <property name="frameShadow">
-          <enum>QFrame::Raised</enum>
-         </property>
-         <widget class="QPushButton" name="log_remove_suffix">
-          <property name="geometry">
-           <rect>
-            <x>0</x>
-            <y>10</y>
-            <width>120</width>
-            <height>40</height>
-           </rect>
-          </property>
-          <property name="minimumSize">
-           <size>
-            <width>120</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>120</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">background-color: rgb(255, 255, 255);
-color: rgb(0, 0, 0);
-font: 12pt &quot;微软雅黑&quot;;</string>
-          </property>
-          <property name="text">
-           <string>Log-一键去</string>
-          </property>
-         </widget>
-        </widget>
-       </item>
-       <item>
-        <widget class="QFrame" name="frame_3">
-         <property name="minimumSize">
-          <size>
-           <width>120</width>
-           <height>50</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>120</width>
-           <height>50</height>
-          </size>
-         </property>
-         <property name="frameShape">
-          <enum>QFrame::StyledPanel</enum>
-         </property>
-         <property name="frameShadow">
-          <enum>QFrame::Raised</enum>
-         </property>
-         <widget class="QPushButton" name="log_add_suffix">
-          <property name="geometry">
-           <rect>
-            <x>0</x>
-            <y>10</y>
-            <width>120</width>
-            <height>40</height>
-           </rect>
-          </property>
-          <property name="minimumSize">
-           <size>
-            <width>120</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>120</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">background-color: rgb(255, 255, 255);
-color: rgb(0, 0, 0);
-font: 12pt &quot;微软雅黑&quot;;</string>
-          </property>
-          <property name="text">
-           <string>Log-一键加</string>
-          </property>
-         </widget>
-        </widget>
-       </item>
-       <item>
-        <widget class="QFrame" name="frame_5">
-         <property name="minimumSize">
-          <size>
-           <width>120</width>
-           <height>50</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>120</width>
-           <height>50</height>
-          </size>
-         </property>
-         <property name="frameShape">
-          <enum>QFrame::StyledPanel</enum>
-         </property>
-         <property name="frameShadow">
-          <enum>QFrame::Raised</enum>
-         </property>
-         <widget class="QPushButton" name="log_modify_suffix">
-          <property name="geometry">
-           <rect>
-            <x>0</x>
-            <y>10</y>
-            <width>120</width>
-            <height>40</height>
-           </rect>
-          </property>
-          <property name="minimumSize">
-           <size>
-            <width>120</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>120</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">background-color: rgb(255, 255, 255);
-color: rgb(0, 0, 0);
-font: 12pt &quot;微软雅黑&quot;;</string>
-          </property>
-          <property name="text">
-           <string>Log-修改</string>
-          </property>
-         </widget>
-        </widget>
-       </item>
-       <item>
-        <widget class="QFrame" name="frame_9">
-         <property name="minimumSize">
-          <size>
-           <width>120</width>
-           <height>50</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>120</width>
-           <height>50</height>
-          </size>
-         </property>
-         <property name="frameShape">
-          <enum>QFrame::StyledPanel</enum>
-         </property>
-         <property name="frameShadow">
-          <enum>QFrame::Raised</enum>
-         </property>
-         <widget class="QPushButton" name="log_bandizip">
-          <property name="geometry">
-           <rect>
-            <x>0</x>
-            <y>10</y>
-            <width>120</width>
-            <height>40</height>
-           </rect>
-          </property>
-          <property name="minimumSize">
-           <size>
-            <width>120</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>120</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">background-color: rgb(255, 255, 255);
-color: rgb(0, 0, 0);
-font: 12pt &quot;微软雅黑&quot;;</string>
-          </property>
-          <property name="text">
-           <string>Log-压缩</string>
-          </property>
-         </widget>
-        </widget>
-       </item>
-       <item>
-        <widget class="QFrame" name="frame_14">
-         <property name="maximumSize">
-          <size>
-           <width>120</width>
-           <height>50</height>
-          </size>
-         </property>
-         <property name="frameShape">
-          <enum>QFrame::StyledPanel</enum>
-         </property>
-         <property name="frameShadow">
-          <enum>QFrame::Raised</enum>
-         </property>
-         <widget class="QPushButton" name="log_bandizip_de">
-          <property name="geometry">
-           <rect>
-            <x>0</x>
-            <y>10</y>
-            <width>120</width>
-            <height>40</height>
-           </rect>
-          </property>
-          <property name="minimumSize">
-           <size>
-            <width>120</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>120</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">background-color: rgb(255, 255, 255);
-color: rgb(0, 0, 0);
-font: 12pt &quot;微软雅黑&quot;;</string>
-          </property>
-          <property name="text">
-           <string>Log-解压</string>
-          </property>
-         </widget>
-        </widget>
-       </item>
-       <item>
-        <widget class="QFrame" name="frame_10">
-         <property name="minimumSize">
-          <size>
-           <width>120</width>
-           <height>50</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>120</width>
-           <height>50</height>
-          </size>
-         </property>
-         <property name="frameShape">
-          <enum>QFrame::StyledPanel</enum>
-         </property>
-         <property name="frameShadow">
-          <enum>QFrame::Raised</enum>
-         </property>
-         <widget class="QPushButton" name="log_delete_frame">
-          <property name="enabled">
-           <bool>true</bool>
-          </property>
-          <property name="geometry">
-           <rect>
-            <x>0</x>
-            <y>10</y>
-            <width>120</width>
-            <height>40</height>
-           </rect>
-          </property>
-          <property name="minimumSize">
-           <size>
-            <width>120</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>120</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">background-color: rgb(255, 255, 255);
-color: rgb(0, 0, 0);
-font: 12pt &quot;微软雅黑&quot;;</string>
-          </property>
-          <property name="text">
-           <string>Log-删除</string>
-          </property>
-         </widget>
-        </widget>
-       </item>
-       <item>
-        <widget class="QFrame" name="frame_12">
-         <property name="minimumSize">
-          <size>
-           <width>120</width>
-           <height>50</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>120</width>
-           <height>50</height>
-          </size>
-         </property>
-         <property name="frameShape">
-          <enum>QFrame::StyledPanel</enum>
-         </property>
-         <property name="frameShadow">
-          <enum>QFrame::Raised</enum>
-         </property>
-         <widget class="QPushButton" name="log_modify_name">
-          <property name="enabled">
-           <bool>true</bool>
-          </property>
-          <property name="geometry">
-           <rect>
-            <x>0</x>
-            <y>10</y>
-            <width>120</width>
-            <height>40</height>
-           </rect>
-          </property>
-          <property name="minimumSize">
-           <size>
-            <width>120</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>120</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">background-color: rgb(255, 255, 255);
-color: rgb(0, 0, 0);
-font: 12pt &quot;微软雅黑&quot;;</string>
-          </property>
-          <property name="text">
-           <string>Log-重命名</string>
           </property>
          </widget>
         </widget>

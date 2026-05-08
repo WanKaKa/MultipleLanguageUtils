@@ -2,44 +2,99 @@ import os
 import shutil
 import threading
 
+import magic
 from PyQt5.QtWidgets import QWidget, QMessageBox
 from PyQt5 import QtGui
 from filetype import filetype
 
 from modify_suffix import main_ui, utils, path_ex, database
 
-MIME_TYPE_DICT = {
-    '424D': 'bmp',
-    'FFD8FF': 'jpg',
-    '2E524D46': 'rm',
-    '4D546864': 'mid',
-    '89504E47': 'png',
-    '47494638': 'gif',
-    '49492A00': 'tif',
-    '41433130': 'dwg',
-    '38425053': 'psd',
-    '2142444E': 'pst',
-    'FF575043': 'wpd',
-    'AC9EBD8F': 'qdf',
-    'E3828596': 'pwl',
-    '504B0304': 'zip',
-    '52617221': 'rar',
-    '57415645': 'wav',
-    '41564920': 'avi',
-    '2E7261FD': 'ram',
-    '000001BA': 'mpg',
-    '000001B3': 'mpg',
-    '6D6F6F76': 'mov',
-    '7B5C727466': 'rtf',
-    '3C3F786D6C': 'xml',
-    '68746D6C3E': 'html',
-    'D0CF11E0': 'doc/xls',
-    '255044462D312E': 'pdf',
-    'CFAD12FEC5FD746F': 'dbx',
-    '3026B2758E66CF11': 'asf',
-    '5374616E64617264204A': 'mdb',
-    '252150532D41646F6265': 'ps/eps',
-    '44656C69766572792D646174653A': 'eml'
+mime_map = {
+    # ========== 文本类 ==========
+    "text/plain": ".txt",
+    "text/html": ".html",
+    "text/css": ".css",
+    "text/xml": ".xml",
+    "text/csv": ".csv",
+    "text/tab-separated-values": ".tsv",
+    "text/javascript": ".js",
+    "text/markdown": ".md",
+    "text/rtf": ".rtf",
+
+    # ========== 图片类 ==========
+    "image/jpeg": ".jpg",
+    "image/png": ".png",
+    "image/gif": ".gif",
+    "image/bmp": ".bmp",
+    "image/tiff": ".tiff",
+    "image/webp": ".webp",
+    "image/svg+xml": ".svg",
+    "image/x-icon": ".ico",
+
+    # ========== 音频类 ==========
+    "audio/mpeg": ".mp3",
+    "audio/wav": ".wav",
+    "audio/flac": ".flac",
+    "audio/ogg": ".ogg",
+    "audio/aac": ".aac",
+    "audio/x-ms-wma": ".wma",
+    "audio/x-m4a": ".m4a",
+
+    # ========== 视频类 ==========
+    "video/mp4": ".mp4",
+    "video/x-msvideo": ".avi",
+    "video/x-ms-asf": ".asf",
+    "video/x-ms-wmv": ".wmv",
+    "video/3gpp": ".3gp",
+    "video/quicktime": ".mov",
+    "video/webm": ".webm",
+    "video/mpeg": ".mpeg",
+
+    # ========== Office 文档 ==========
+    "application/msword": ".doc",
+    "application/vnd.openxmlformats-officedocument.wordprocessingml.document": ".docx",
+    "application/vnd.ms-excel": ".xls",
+    "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": ".xlsx",
+    "application/vnd.ms-powerpoint": ".ppt",
+    "application/vnd.openxmlformats-officedocument.presentationml.presentation": ".pptx",
+    "application/vnd.visio": ".vsd",
+    "application/onenote": ".one",
+
+    # ========== PDF / 电子书 ==========
+    "application/pdf": ".pdf",
+    "application/epub+zip": ".epub",
+    "application/x-mobipocket-ebook": ".mobi",
+
+    # ========== 压缩包 ==========
+    "application/zip": ".zip",
+    "application/x-rar-compressed": ".rar",
+    "application/x-7z-compressed": ".7z",
+    "application/x-gzip": ".gz",
+    "application/x-tar": ".tar",
+    "application/x-bzip2": ".bz2",
+
+    # ========== 可执行 / 系统 ==========
+    "application/x-msdownload": ".exe",
+    "application/x-dosexec": ".exe",
+    "application/x-ms-installer": ".msi",
+    "application/x-shockwave-flash": ".swf",
+
+    # ========== 字体 ==========
+    "font/ttf": ".ttf",
+    "font/otf": ".otf",
+    "font/woff": ".woff",
+    "font/woff2": ".woff2",
+
+    # ========== 常见数据 / 配置 ==========
+    "application/json": ".json",
+    "application/zip-compressed": ".zip",
+    "application/x-sqlite3": ".sqlite",
+    "application/x-lua": ".lua",
+    "application/x-python": ".py",
+    "application/x-java": ".java",
+
+    # ========== 你要的 trk（放在最后，避免覆盖） ==========
+    "application/octet-stream": ".trk"
 }
 
 
@@ -75,14 +130,6 @@ class MainWindow(QWidget, main_ui.Ui_Form):
         self.bandizip_de.clicked.connect(self.bandizip_de_click)
         self.delete_frame.clicked.connect(self.delete_frame_click)
         self.modify_name.clicked.connect(self.modify_name_click)
-
-        self.log_remove_suffix.clicked.connect(lambda: os.system(path_ex.get_cache_path() + path_ex.LOG_REMOVE_SUFFIX))
-        self.log_add_suffix.clicked.connect(lambda: os.system(path_ex.get_cache_path() + path_ex.LOG_ADD_SUFFIX))
-        self.log_modify_suffix.clicked.connect(lambda: os.system(path_ex.get_cache_path() + path_ex.LOG_MODIFY_SUFFIX))
-        self.log_bandizip.clicked.connect(lambda: os.system(path_ex.get_cache_path() + path_ex.LOG_BANDIZIP))
-        self.log_bandizip_de.clicked.connect(lambda: os.system(path_ex.get_cache_path() + path_ex.LOG_BANDIZIP_DE))
-        self.log_delete_frame.clicked.connect(lambda: os.system(path_ex.get_cache_path() + path_ex.LOG_DELETE_FRAME))
-        self.log_modify_name.clicked.connect(lambda: os.system(path_ex.get_cache_path() + path_ex.LOG_MODIFY_NAME))
 
     def init_ui(self):
         data = database.get_json_data()
@@ -150,6 +197,10 @@ class MainWindow(QWidget, main_ui.Ui_Form):
     def modify_suffix_click(self):
         log_file = open(path_ex.get_cache_path() + path_ex.LOG_MODIFY_SUFFIX, mode='w', encoding='utf-8')
         self.get_input_value_list(log_file)
+        if len(self.old_suffix) == 0 and len(self.new_suffix) == 0:
+            QMessageBox.information(self, '提示', '"旧后缀""新后缀"不能同时都为空')
+            return
+
         self.modify_suffix_task(self.work_path, self.old_suffix, self.new_suffix, log_file)
         log_file.close()
         QMessageBox.information(self, '提示', '成功')
@@ -165,13 +216,19 @@ class MainWindow(QWidget, main_ui.Ui_Form):
     def delete_frame_click(self):
         log_file = open(path_ex.get_cache_path() + path_ex.LOG_DELETE_FRAME, mode='w', encoding='utf-8')
         self.get_input_value_list(log_file)
-        self.delete_frame_task(self.work_path, log_file)
+        if len(self.input_001_value) == 0:
+            QMessageBox.information(self, '提示', '"旧文件名"不能为空')
+            return
+        self.delete_frame_task(self.work_path, self.input_001_value, log_file)
         log_file.close()
         QMessageBox.information(self, '提示', '成功')
 
     def modify_name_click(self):
         log_file = open(path_ex.get_cache_path() + path_ex.LOG_MODIFY_NAME, mode='w', encoding='utf-8')
         self.get_input_value_list(log_file)
+        if len(self.input_001_value) == 0 or len(self.input_002_value) == 0:
+            QMessageBox.information(self, '提示', '"旧文件名""新文件名"不能为空')
+            return
         self.modify_name_task(self.work_path, self.input_001_value, self.input_002_value, log_file)
         log_file.close()
         QMessageBox.information(self, '提示', '成功')
@@ -215,6 +272,10 @@ class MainWindow(QWidget, main_ui.Ui_Form):
                     log_file.write("后缀名空的文件 = %s\n" % old_file)
                     print("后缀名空的文件 = %s\n" % old_file)
                     mime_type = get_file_type(old_file)
+                    if mime_type is None:
+                        log_file.write("无法识别文件后缀：%s\n" % old_file)
+                        print("无法识别文件后缀：%s\n" % old_file)
+                        continue
                     if "." not in mime_type:
                         mime_type = "." + mime_type
                     log_file.write("文件类型 = %s\n" % mime_type)
@@ -230,14 +291,14 @@ class MainWindow(QWidget, main_ui.Ui_Form):
 
                     shutil.move(old_file, new_file)
 
-    def delete_frame_task(self, dir_path, log_file):
+    def delete_frame_task(self, dir_path, filter_value, log_file):
         file_list = os.listdir(dir_path)
         for file in file_list:
             old_file = os.path.join(dir_path, file)
             if os.path.isdir(old_file):
-                self.delete_frame_task(old_file, log_file)
+                self.delete_frame_task(old_file, filter_value, log_file)
             else:
-                if "frame" in file:
+                if filter_value in file:
                     log_file.write("%s\n" % old_file)
                     print("%s\n" % old_file)
                     os.remove(old_file)
@@ -339,8 +400,14 @@ class MainWindow(QWidget, main_ui.Ui_Form):
 
 
 def get_file_type(file_path):
-    kind = filetype.guess(file_path)
-    if kind:
-        return kind.extension
-    else:
-        return 'unknown'
+    try:
+        kind = filetype.guess(file_path)
+        if kind:
+            return kind.extension
+        else:
+            mime = magic.from_file(file_path, mime=True)
+            if mime:
+                return mime_map[mime]
+    except Exception as e:
+        print("错误:%s" % e)
+    return None
