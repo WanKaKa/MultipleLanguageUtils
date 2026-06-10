@@ -5,7 +5,11 @@ import sys
 import zipfile
 from pathlib import Path
 
-from version import APP_EXE_NAME, APP_VERSION, CACHE_DIR_NAME
+try:
+    from bundle_meta import APP_EXE_NAME, APP_VERSION, BUNDLE_SHA256, CACHE_DIR_NAME
+except ImportError:
+    from version import APP_EXE_NAME, APP_VERSION, CACHE_DIR_NAME
+    BUNDLE_SHA256 = ''
 
 
 def _bundle_path():
@@ -16,21 +20,38 @@ def _bundle_path():
     return base / 'bundle.zip'
 
 
-def _cache_dir():
+def _cache_root():
     local_app_data = os.environ.get('LOCALAPPDATA')
     if not local_app_data:
         local_app_data = str(Path.home() / 'AppData' / 'Local')
     return Path(local_app_data) / 'IJoySoft' / CACHE_DIR_NAME
 
 
+def _cache_dir():
+    return _cache_root() / APP_VERSION
+
+
+def _bundle_hash_file(cache_dir):
+    return cache_dir / 'bundle.sha256'
+
+
 def _is_cache_ready(cache_dir):
-    version_file = cache_dir / 'version.txt'
     app_exe = cache_dir / f'{APP_EXE_NAME}.exe'
-    return (
-        version_file.exists()
-        and version_file.read_text(encoding='utf-8').strip() == APP_VERSION
-        and app_exe.exists()
-    )
+    hash_file = _bundle_hash_file(cache_dir)
+    if not app_exe.exists() or not hash_file.exists():
+        return False
+    if not BUNDLE_SHA256:
+        return True
+    return hash_file.read_text(encoding='utf-8').strip() == BUNDLE_SHA256
+
+
+def _cleanup_old_caches(keep_dir):
+    cache_root = _cache_root()
+    if not cache_root.exists():
+        return
+    for child in cache_root.iterdir():
+        if child.is_dir() and child.resolve() != keep_dir.resolve():
+            shutil.rmtree(child, ignore_errors=True)
 
 
 def _extract_bundle(cache_dir):
@@ -39,13 +60,15 @@ def _extract_bundle(cache_dir):
         raise FileNotFoundError(f'未找到内置资源包: {bundle}')
 
     if cache_dir.exists():
-        shutil.rmtree(cache_dir)
+        shutil.rmtree(cache_dir, ignore_errors=True)
     cache_dir.mkdir(parents=True, exist_ok=True)
 
     with zipfile.ZipFile(bundle) as archive:
         archive.extractall(cache_dir)
 
-    (cache_dir / 'version.txt').write_text(APP_VERSION, encoding='utf-8')
+    if BUNDLE_SHA256:
+        _bundle_hash_file(cache_dir).write_text(BUNDLE_SHA256, encoding='utf-8')
+    _cleanup_old_caches(cache_dir)
 
 
 def _launch_app(app_exe):

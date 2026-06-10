@@ -38,6 +38,7 @@ captures/
 venv/
 
 __pycache__/
+image_to_webp/bundle_meta.py
 
 *.exe
 *.spec
