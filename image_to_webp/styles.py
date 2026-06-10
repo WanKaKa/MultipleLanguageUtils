@@ -40,6 +40,16 @@ QWidget#sidebar {
     background-color: #ffffff;
     border: 1px solid #e2e8f0;
     border-radius: 16px;
+    font-size: 14px;
+}
+
+QWidget#sidebar QLabel#brandTitle {
+    font-size: 20px;
+}
+
+QWidget#sidebar QLabel#brandSubtitle {
+    font-size: 13px;
+    padding-bottom: 0;
 }
 
 QLabel#brandTitle {
@@ -56,7 +66,7 @@ QLabel#brandSubtitle {
 }
 
 QLabel#sectionTitle {
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 700;
     color: #64748b;
     letter-spacing: 1px;
@@ -83,36 +93,36 @@ QLabel#statusBadge {
     color: #3730a3;
     border: 1px solid #c7d2fe;
     border-radius: 20px;
-    padding: 6px 14px;
-    font-size: 14px;
+    padding: 4px 10px;
+    font-size: 13px;
     font-weight: 600;
 }
 
 QLabel#hintLabel {
     color: #475569;
-    font-size: 13px;
+    font-size: 12px;
 }
 
 QLabel#qualityValue {
-    font-size: 32px;
+    font-size: 26px;
     font-weight: 700;
     color: #4338ca;
-    min-width: 52px;
+    min-width: 46px;
 }
 
 QLabel#qualityUnit {
-    font-size: 13px;
+    font-size: 12px;
     color: #475569;
-    padding-top: 10px;
+    padding-top: 2px;
 }
 
 QLineEdit {
     background-color: #ffffff;
     color: #0f172a;
     border: 1px solid #cbd5e1;
-    border-radius: 10px;
-    padding: 10px 12px;
-    font-size: 14px;
+    border-radius: 8px;
+    padding: 6px 10px;
+    font-size: 13px;
     selection-background-color: #c7d2fe;
 }
 
@@ -134,9 +144,9 @@ QPushButton {
     background-color: #ffffff;
     color: #1e293b;
     border: 1px solid #cbd5e1;
-    border-radius: 10px;
-    padding: 10px 14px;
-    font-size: 14px;
+    border-radius: 8px;
+    padding: 6px 12px;
+    font-size: 13px;
     font-weight: 600;
 }
 
@@ -160,7 +170,7 @@ QPushButton#ghostButton {
     background-color: #f8fafc;
     border: 1px solid #e2e8f0;
     color: #334155;
-    font-size: 14px;
+    font-size: 13px;
 }
 
 QPushButton#ghostButton:hover {
@@ -176,10 +186,10 @@ QPushButton#primaryButton {
     );
     color: #ffffff;
     border: none;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 700;
-    padding: 12px 18px;
-    border-radius: 12px;
+    padding: 8px 14px;
+    border-radius: 10px;
 }
 
 QPushButton#primaryButton:hover {
@@ -201,17 +211,17 @@ QPushButton#primaryButton:disabled {
 QListWidget {
     background-color: #ffffff;
     border: 1px solid #e2e8f0;
-    border-radius: 10px;
-    padding: 6px;
+    border-radius: 8px;
+    padding: 4px;
     outline: none;
     color: #1e293b;
-    font-size: 14px;
+    font-size: 13px;
 }
 
 QListWidget::item {
-    border-radius: 8px;
-    padding: 11px 12px;
-    margin: 2px 0;
+    border-radius: 6px;
+    padding: 7px 10px;
+    margin: 1px 0;
 }
 
 QListWidget::item:selected {
@@ -257,9 +267,9 @@ QSpinBox {
     background-color: #ffffff;
     color: #312e81;
     border: 1px solid #cbd5e1;
-    border-radius: 10px;
-    padding: 8px;
-    font-size: 15px;
+    border-radius: 8px;
+    padding: 4px 6px;
+    font-size: 13px;
     font-weight: 700;
 }
 
@@ -268,14 +278,14 @@ QSpinBox:focus {
 }
 
 QCheckBox {
-    spacing: 10px;
+    spacing: 8px;
     color: #1e293b;
-    font-size: 14px;
+    font-size: 13px;
 }
 
 QCheckBox::indicator {
-    width: 20px;
-    height: 20px;
+    width: 18px;
+    height: 18px;
     image: url({checkbox_unchecked});
     border: none;
     background: transparent;
@@ -308,11 +318,11 @@ QProgressBar::chunk {
 QTextEdit {
     background-color: #ffffff;
     border: 1px solid #e2e8f0;
-    border-radius: 10px;
-    padding: 10px;
+    border-radius: 8px;
+    padding: 6px;
     color: #334155;
     font-family: "Cascadia Mono", "Consolas", "Microsoft YaHei", monospace;
-    font-size: 13px;
+    font-size: 12px;
 }
 
 QWidget#previewPane {

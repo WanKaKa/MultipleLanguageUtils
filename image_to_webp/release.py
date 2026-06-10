@@ -1,6 +1,6 @@
 import os
 
-release_version = "PNG转WebP_1.0.0"
+release_version = "转Webp_1.0.1"
 
 if __name__ == '__main__':
     os.system(
