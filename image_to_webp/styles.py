@@ -300,8 +300,9 @@ QCheckBox::indicator:checked {
 QProgressBar {
     background-color: #e2e8f0;
     border: none;
-    border-radius: 8px;
-    height: 8px;
+    border-radius: 4px;
+    min-height: 8px;
+    max-height: 8px;
     text-align: center;
     color: #475569;
     font-size: 12px;
@@ -312,7 +313,7 @@ QProgressBar::chunk {
         x1:0, y1:0, x2:1, y2:0,
         stop:0 #6366f1, stop:1 #38bdf8
     );
-    border-radius: 8px;
+    border-radius: 4px;
 }
 
 QTextEdit {
