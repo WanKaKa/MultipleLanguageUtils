@@ -2,6 +2,7 @@ import os
 import tkinter
 import getpass
 import shutil
+import zipfile
 
 log_file_name = "modify_suffix.log"
 
@@ -65,9 +66,18 @@ def bandizip(dir_path, log_file):
     for file in file_list:
         old_file = os.path.join(dir_path, file)
         if os.path.isdir(old_file):
-            value = "bandizip.exe c " + old_file + "/" + file + ".zip " + old_file
+            zip_path = os.path.join(old_file, file + '.zip')
+            try:
+                with zipfile.ZipFile(zip_path, 'w', zipfile.ZIP_DEFLATED) as archive:
+                    for name in os.listdir(old_file):
+                        file_path = os.path.join(old_file, name)
+                        if os.path.isfile(file_path) and file_path != zip_path:
+                            archive.write(file_path, name)
+                value = '压缩 %s -> %s' % (old_file, zip_path)
+            except Exception as e:
+                value = '压缩失败 %s: %s' % (old_file, e)
             print(value)
-            os.system(value)
+            log_file.write('%s\n' % value)
 
 
 def start_delete():

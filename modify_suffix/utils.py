@@ -1,8 +1,8 @@
 import os
 import shutil
 import sys
+import zipfile
 
-import pylnk3
 from PyQt5 import QtWidgets
 
 
@@ -10,7 +10,7 @@ def resource_path(relative_path):
     if getattr(sys, 'frozen', False):
         base_path = sys._MEIPASS
     else:
-        base_path = os.path.abspath(".")
+        base_path = os.path.dirname(os.path.abspath(__file__))
     return os.path.join(base_path, relative_path)
 
 
@@ -46,6 +46,35 @@ def delete_dir(dir_path):
                 shutil.rmtree(file_path)
 
 
+def is_zip_filename(filename):
+    return filename.lower().endswith('.zip')
+
+
+def directory_has_zip(dir_path):
+    for name in os.listdir(dir_path):
+        file_path = os.path.join(dir_path, name)
+        if os.path.isfile(file_path) and is_zip_filename(name):
+            return True
+    return False
+
+
+def folder_zip_path(dir_path, folder_name):
+    return os.path.join(dir_path, folder_name + '.zip')
+
+
+def zip_directory(dir_path, zip_path):
+    with zipfile.ZipFile(zip_path, 'w', zipfile.ZIP_DEFLATED) as archive:
+        for name in os.listdir(dir_path):
+            file_path = os.path.join(dir_path, name)
+            if os.path.isfile(file_path) and file_path != zip_path:
+                archive.write(file_path, name)
+
+
+def unzip_to_directory(zip_path, dir_path):
+    with zipfile.ZipFile(zip_path, 'r') as archive:
+        archive.extractall(dir_path)
+
+
 def analysis_input_path(text_edit):
     input_path = None
     if isinstance(text_edit, QtWidgets.QTextEdit):
@@ -54,7 +83,8 @@ def analysis_input_path(text_edit):
         input_path = text_edit.text().strip("\n")
     if input_path.startswith("file:///"):
         input_path = input_path[len("file:///"):]
-    if input_path.endswith(".lnk"):
+    if input_path.endswith('.lnk'):
+        import pylnk3
         lnk = pylnk3.parse(input_path)
         return lnk.path
     return input_path
