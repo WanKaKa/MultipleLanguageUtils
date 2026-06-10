@@ -1,7 +1,6 @@
 import os
 import sys
 
-import pylnk3
 from PyQt5.QtWidgets import QLineEdit
 
 
@@ -24,6 +23,7 @@ def resolve_path(path):
     path = os.path.normpath(path)
     if path.lower().endswith('.lnk') and os.path.isfile(path):
         try:
+            import pylnk3
             lnk = pylnk3.parse(path)
             if lnk.path:
                 return os.path.normpath(lnk.path)

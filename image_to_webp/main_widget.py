@@ -2,7 +2,6 @@ import os
 import threading
 from io import BytesIO
 
-from PIL import Image
 from PyQt5.QtCore import Qt, pyqtSignal, QTimer
 from PyQt5.QtGui import QPixmap, QIntValidator
 from PyQt5.QtWidgets import (
@@ -17,6 +16,15 @@ from image_to_webp.utils import DropLineEdit, resolve_path
 SUPPORTED_EXTENSIONS = {'.png', '.jpg', '.jpeg'}
 DEFAULT_QUALITY = 80
 DEFAULT_SMALL_SCALE_PERCENT = 25
+_Image = None
+
+
+def _get_image():
+    global _Image
+    if _Image is None:
+        from PIL import Image
+        _Image = Image
+    return _Image
 
 
 def collect_image_files(path):
@@ -53,6 +61,7 @@ def encode_webp_bytes(img, quality):
 
 
 def convert_to_webp(src_path, dst_path, quality, scale_percent=100, target_size=None):
+    Image = _get_image()
     with Image.open(src_path) as img:
         img = prepare_image(img)
         if target_size is not None:
@@ -568,6 +577,7 @@ class MainWidget(QWidget):
 
     def _preview_task(self, src_path, quality):
         try:
+            Image = _get_image()
             orig_size = os.path.getsize(src_path)
             orig_pixmap = QPixmap(src_path)
             with Image.open(src_path) as img:
@@ -720,6 +730,7 @@ class MainWidget(QWidget):
             self._update_small_controls_enabled()
             return
         try:
+            Image = _get_image()
             with Image.open(preview_path) as img:
                 width, height = img.size
             self._orig_dimensions = (width, height)
@@ -834,6 +845,7 @@ class MainWidget(QWidget):
                         small_skip_count += 1
                         self.log_signal.emit(f'[跳过] {small_dst_path} 已存在')
                     else:
+                        Image = _get_image()
                         with Image.open(src_path) as img:
                             orig_width, orig_height = img.size
                         small_width, small_height = calc_small_size_for_axis(
