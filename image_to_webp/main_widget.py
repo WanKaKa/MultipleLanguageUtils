@@ -16,6 +16,7 @@ from image_to_webp.utils import DropLineEdit, resolve_path
 SUPPORTED_EXTENSIONS = {'.png', '.jpg', '.jpeg'}
 DEFAULT_QUALITY = 80
 DEFAULT_SMALL_SCALE_PERCENT = 25
+SMALL_WEBP_QUALITY_RATIO = 0.75
 _Image = None
 
 
@@ -76,6 +77,10 @@ def convert_to_webp(src_path, dst_path, quality, scale_percent=100, target_size=
 
 def small_webp_path(dst_dir, base_name):
     return os.path.join(dst_dir, base_name + '_small.webp')
+
+
+def small_webp_quality(quality):
+    return max(0, min(100, round(quality * SMALL_WEBP_QUALITY_RATIO)))
 
 
 def calc_small_size(width, height, scale_percent):
@@ -855,15 +860,16 @@ class MainWidget(QWidget):
                             self._small_fixed_width,
                             self._small_fixed_height,
                         )
+                        small_quality = small_webp_quality(quality)
                         convert_to_webp(
                             src_path,
                             small_dst_path,
-                            quality,
+                            small_quality,
                             target_size=(small_width, small_height),
                         )
                         self.log_signal.emit(
                             f'[成功] {src_path} -> {small_dst_path} '
-                            f'(Q:{quality}, {small_width}×{small_height})'
+                            f'(Q:{small_quality}, {small_width}×{small_height})'
                         )
                         small_success_count += 1
                         file_converted = True
